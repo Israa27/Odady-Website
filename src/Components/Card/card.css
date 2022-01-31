@@ -1,0 +1,58 @@
+.card{
+    margin-top: 20px;
+   width: 300px !important;
+   border-radius: 10px;
+   border: none;
+   display: flex;
+   align-items: center;
+   box-shadow: 0px 0px 4px 2px #eee;
+   margin-right: 15px;
+}
+.card-body {
+    flex: 1 1 auto;
+    padding: 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.card .card-btn{
+    color: #ec4833;
+    align-self: end;
+    font-size: 23px;
+    
+}
+.fa-heart{
+    margin-top: -25px;
+    margin-left: 20px;
+}
+.card img{
+    width: 160px;
+    margin-top: -20px; ;
+}
+.card .span{font-size: 17px;}
+.card .card-span,.card-span1{
+    text-align: center;
+    line-height: 1.6;
+}
+.card-span1{color: rgb(223, 111, 111);}
+.card .card-add-to-btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+    width: 100%;
+    height: 40px;
+    border: none;
+    background-color: #ed6515;
+    color: #ffff;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 5px;
+}
+@media (max-width:1024px){
+    .card img{width: 100px;}
+}
+@media (max-width:913px){
+.card { width: 335px !important}
+}

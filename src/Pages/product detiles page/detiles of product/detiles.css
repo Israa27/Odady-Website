@@ -1,0 +1,72 @@
+
+.informatin-of-product h5{margin-bottom: 15px;}
+.informatin-of-product p
+,.detile{
+    font-size: 18px;
+    color: #6d6d6d;
+    margin-bottom: 15px;
+}
+.informatin-of-product span{
+    margin-right: 10px;
+}
+.company{font-weight: bold; color: black;}
+.btn-add-to-cart{margin-top: 40px;margin-bottom: 20px;}
+.btn-add-to-cart button{
+    background-color: #EC7D23;
+    width: 445px;
+    height: 50px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 3px;
+    color: #fff;
+    margin-left: 5px;
+    box-shadow: 0px 0px 6px 0px #b7b7b778;
+}
+.btn-add-to-cart input{
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 3px;
+    color: #fff;
+    background-color: #EC7D23;
+    height: 50px;
+    width: 88px;
+    text-align: center;
+    line-height: 50px;
+    box-shadow: 0px 0px 6px 0px #b7b7b778;
+    padding: 10px;
+}
+
+input[type=number]::-webkit-outer-spin-button, 
+input[type=number]::-webkit-inner-spin-button {
+ -webkit-appearance: inner-spin-button !important;
+  width: 25px;
+  height:51px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  border: none;
+  
+}
+input:focus{outline: none;}
+
+.btn-add-to-wishlist button{
+    width: 340px;
+    margin-left: 5px;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 3px;
+    color: #fff;
+    background-color: #65615E;
+    height: 50px;
+}
+.btn-add-to-wishlist select{
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 3px;
+    color: rgb(63, 62, 62);
+    background-color: #F6F5F5;
+    height: 50px;
+    width: 190px;
+    text-align: center;
+    padding: 10px;
+}

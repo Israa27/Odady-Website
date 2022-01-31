@@ -1,0 +1,49 @@
+.transferPolicy-content
+{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 50px;
+    margin-top: 20px;
+
+}
+h4{
+    margin-top: 60px!important;
+    margin-bottom: 20px !important;
+}
+.transferPolicy-text{
+    width: 65%;
+    margin-bottom: 15px;
+}
+.transferPolicy-text span{
+    font-weight: 400;
+    font-size: 17px;
+    color: #5b5a5a !important;
+    align-self: flex-start;
+    margin-bottom: 15px;
+
+}
+.transferPolicy-text p{
+    width: 100%;
+    color: #797878 !important;
+    font-size: 17px;
+    white-space: pre-line;
+    margin-top: 10px;
+    margin-right: 20px;
+}
+.transferPolicy-text ul{margin-bottom: 15px;    align-self: flex-start;}
+.transferPolicy-text ul li{ 
+    position: relative;
+    margin-right: 35px;
+    font-size: 17px;
+    color: #797878 !important
+}
+ul li::before {
+    content: "";
+    position: absolute;
+    background-color: rgb(255, 145, 0);
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    top: 10px;
+    right: -15px;
+}

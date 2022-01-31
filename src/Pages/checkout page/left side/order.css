@@ -1,0 +1,134 @@
+.order-total-amount{
+    display: flex;
+    flex-direction: column;
+    width:500px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 1px 1px 4px 3px #e5e5e5;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+   
+
+.order-total-amount h4{
+    color: #4f4f4f;
+    align-self: start;
+}
+.order-span1 p,span {
+    color: #f39200;
+    font-weight: 700;
+}
+.order-span2{
+    color: #4f4f4f !important;
+    font-weight: 500;
+    margin-top: -10px !important;
+}
+.order-radio-btn{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.radio-btn p ,.order-span2{
+    font-weight: 500;
+    margin-right: 15px;
+    margin-top: 20px;
+
+    
+}
+.radio{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 20px;
+    position: relative;
+    margin-bottom: 10px;
+}
+[type='radio']{
+    opacity: 0;
+    margin-right: 10px;
+}
+[type='radio'] + label::before{
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: #e5e5e5;
+    border-radius: 50%;
+    top: 6px;
+   
+    right: -5px;
+}
+[type='radio']:checked+ label::after{
+    content: '';
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    background-color: #f39200;
+    border-radius: 50%;
+    top: 10px;
+    right: -1px;
+}
+
+
+.order-temporary-amount{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    align-items: center;
+
+}
+
+ p{
+    color: #373736;
+    font-size: 17px;
+}
+ p{
+    color: #2c2c2c;
+    font-weight: 600;
+    position: relative;  
+    margin-top: 12px;
+}
+hr{
+    width: 450px;
+    height: 2px;
+    background-color: #edebeb;
+}
+
+.order-btn-amount{
+    background-color: #ec7d23;
+    color: #fff;
+    border: none;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    height: 50px;
+    align-self: center;
+    margin-top: 40px;
+    box-shadow: 2px 5px 4px 2px #938e8e40;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.checkbox-btn{
+    display: flex;
+    flex-direction: column;
+    margin-right: 15px;
+}
+.check-btn{
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    font-size: 15px;
+}
+[type='checkbox']{
+width: 20px;
+height: 20px;
+margin-left: 15px;
+}
+@media (max-width:912px){
+    .radio{justify-content: flex-start;}
+    .radio-btn p, .order-span2{margin-top: 20px;}
+}
+
+@media(max-width: 415px){
+    .order-total-amount{width: 360px;}
+}

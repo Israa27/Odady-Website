@@ -1,0 +1,6 @@
+.nav-tabs .nav-item.show .nav-link, .nav-tabs .nav-link.active{
+    border-bottom: 3px solid sandybrown !important;
+    border-color: none;
+}
+.nav{height: 45px !important;}
+.nav-link{color: #252525 !important; font-weight: 700;}

@@ -1,0 +1,27 @@
+.grid-img{
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row-reverse
+}
+.show-img{
+    width: 100px;
+    height: 100px;
+    border-radius: 2px;
+    box-shadow: 1px 1px 6px 2px #eee;
+    margin-bottom: 10px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+.show-img img{width: 50px;}
+.main-img{
+    box-shadow: 1px 1px 6px 2px #eee;
+    width: 450px;
+    height: 432px;
+    border-radius: 5px;
+    align-items: center;
+    display: flex;
+    margin-left: 15px;
+    justify-content: center;
+}
+.main-img img{width: 250px;}

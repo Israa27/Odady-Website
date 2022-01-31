@@ -1,0 +1,18 @@
+import React from 'react';
+import { Tab,Tabs,Sonnet, Container } from 'react-bootstrap';
+import './tab.css';
+export default function TabInf() {
+  return <Container>
+  <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example" className="mb-3">
+  <Tab eventKey="الوصف" title="الوصف">
+    <p>Sonnet </p>
+  </Tab>
+  <Tab eventKey="معلومات اضافية" title="معلومات اضافية">
+  <p>Sonnet </p>
+  </Tab>
+  <Tab eventKey="contact" title="مراجعات (0)" >
+  <p>Sonnet </p>
+  </Tab>
+</Tabs>
+</Container>
+}

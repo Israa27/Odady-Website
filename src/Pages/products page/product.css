@@ -1,0 +1,16 @@
+.list-items{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 30px ;
+    margin-top: 30px;
+}
+.filter-items{
+    margin-top: 30px;
+}
+.filter-items select{
+    border: 2px solid #eee;
+    height: 45px;
+    padding: 5px;
+    border-radius: 5px;   
+}

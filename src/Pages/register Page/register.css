@@ -1,0 +1,92 @@
+.register-card{
+    width: 50%;
+    display: flex;
+    flex-direction: row-reverse !important;
+    justify-content: space-between;
+    margin: 80px auto;
+    box-shadow: 0px 0px 10px 4px #eeeeee85;
+    
+   
+
+}
+.register-card .register-img{
+    background-color: #ec7d2391;
+    width: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+}
+.register-card .register-img img{
+    width: 100%; 
+    position: absolute;
+    right: -80px;
+}
+.register-form{
+    width: 72%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+}
+.register-form label{ 
+    font-size: 12px;
+    color: #a3a3a3;
+    margin-bottom: 5px;
+    font-weight: 500;
+    padding-right: 2px;
+}
+.register-form input ,.register-form select{
+    width: 250px;
+    height: 35px !important;
+    border-radius: 3px;
+    border: 2px solid #eee;
+    margin-bottom: 15px;
+    padding: 0px 4px;
+}
+.register-form input[type=number]::-webkit-outer-spin-button, 
+input[type=number]::-webkit-inner-spin-button {
+ opacity: 0;
+}
+.register-form input:focus ,select:focus{
+    outline: 1px solid #ec7d2391;
+    border: none;
+}
+.register-checkbox{
+    
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.register-checkbox input{
+    width: 13px;
+    height: 13px;
+    margin-left: 5px;
+
+}
+.register-btn{
+    width: 164px;
+    background-color: #ec7d23b5 !important;
+    border-radius: 3px !important;
+    height: 30px;
+    font-size: 17px !important;
+    color: #fff !important;
+    font-weight: 400 !important;
+    box-shadow: 0px 0px 7px 3px #dfdddd85;
+}
+
+@media (max-width:992px){
+    .register-card .register-img img {right: 0px;}
+}
+@media (max-width:768px) {
+    .register-card{justify-content: center;flex-wrap: wrap;}
+    .register-form{align-self: start;}
+    .register-card .register-img,.register-card .register-img img {
+        width: 100%;
+        position: initial;
+    }
+       
+}
