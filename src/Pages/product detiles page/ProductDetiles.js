@@ -8,10 +8,13 @@ import ProductImages from './images of product/ProductImages';
 import './productDetiles.css';
 import RelatedProducts from './Related Products/RelatedProducts';
 import TabInf from './tabs information/TabInf';
+import { useSelector } from 'react-redux';
 export default function ProductDetiles() {
+  const product=useSelector((state)=> state.product_id.item);
+
   return <div>
       <Navbar />
-      <SecondaryNav/>
+      <SecondaryNav name={product.title}/>
       <section className='product-detiles' >
         <Container className='flex items-center justify-between'>
           <Detiles />
@@ -21,7 +24,7 @@ export default function ProductDetiles() {
       <section className='tabs'>
         <TabInf />
       </section>
-      <section>
+      <section className='related-products'>
         <RelatedProducts />
       </section>
       <Footer />

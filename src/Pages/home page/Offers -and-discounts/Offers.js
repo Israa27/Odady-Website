@@ -4,7 +4,9 @@ import img1 from '../../../Assets/images/img2.jpg';
 import img2 from '../../../Assets/images/img1.jpg';
 import ProductCard from '../../../Components/Card/ProductCard';
 import { Container } from 'react-bootstrap';
-export default function Offers({props}) {
+import { useSelector } from 'react-redux';
+export default function Offers() {
+    const {items,status}=useSelector(state=> state.products);
     return (
         <section className='offers'>
         <Container>
@@ -31,11 +33,11 @@ export default function Offers({props}) {
               </div>
           </div>
           <div className='products'>
-          {props.slice(0, 4).map((item)=>{
-                
-                return <ProductCard name={item.name} image={item.image} price={item.price} key={item.id} />
+          {items.slice(0, 4).map((item)=>{
+              
+              return <ProductCard products={item} id={item.id} name={item.title} image={item.image} price={item.price} key={item.id} />
 
-              })}
+            })}
           </div>
           </Container>
         </section>

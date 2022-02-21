@@ -3,15 +3,23 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
+import "react-toastify/dist/ReactToastify.css";
 import {BrowserRouter} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Context from './contexts/Cart/Context';
+import  store from './redux/store';
+import { Provider } from 'react-redux';
+import { ToastContainer } from 'react-toastify';
+
 ReactDOM.render(
   <BrowserRouter>
+  <ToastContainer />
   <React.StrictMode>
-    <Context>
-    <App />
-    </Context>
+   
+    <Provider store={store}>
+      
+       <App />
+    </Provider>
+   
   </React.StrictMode>
   </BrowserRouter>,
   document.getElementById('root')

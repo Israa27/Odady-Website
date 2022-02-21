@@ -27,15 +27,16 @@
     align-items: center;
     flex-wrap: wrap;
     justify-content: end;
-    height: 420px;
+    height: 460px;
 }
-.login-input-form{
-    display: flex;
-    flex-direction: row-reverse;
+.login-input-form,.login-input-form .input-group{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important
   
 }
 .login-input-form input{
-    width: 350px;
+    width: 350px !important;
     border: 2px solid #eee;
     height: 45px;
     margin-bottom: 20px;
@@ -45,22 +46,24 @@
 }
 .login-input-form input:focus{
     border: none;
-    outline: 2px solid #EC7D23;
+    outline: 2px solid #ffa56c;
     border-radius: 5px;
     
     
 }
 .login-input-form .login-input-icon{
     height: 45px;
-    background-color: #EC7D23;
+    background-color: #ffa56c;
     width: 50px;
-    border-radius: 0px 5px 5px 0px;
+    border-radius: 0px 5px 5px 0px !important;
+    border: none;
     margin-left: -1px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-a{
+
+.login-content a{
     font-size: 17px;
     align-self: self-start;
     margin-bottom: 17px;
@@ -69,9 +72,10 @@ a{
 }
 .login-form .login-btn{
     width: 400px;
-    background-color: #EC7D23 !important;
+    background-color: #ffa56c !important;
     border-radius: 5px;
     height: 50px;
+    border: none;
     font-size: 20px;
     color: #fff;
     font-weight: 400;

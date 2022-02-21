@@ -1,0 +1,57 @@
+.profile-cart{
+    background-color: #fff;
+    box-shadow: 0px 0px 7px 2px #eeeeee8c;
+    border-radius: 5px;
+    display: flex;
+    margin-top: 40px;
+}
+.nav-right{
+    width: 350px;
+    background-color: #fff;
+    height: 600px;
+    display: flex;
+    align-items: flex-start;
+    margin-top: 29px;
+    border-left: 2px solid #eee;
+    flex-direction: column;
+}
+
+.meun{
+    margin-top: 40px;
+}
+.meun ul li{
+    height: 60px;
+    width: 362px;
+    padding: 10px 25px;
+    margin-right: -13px;
+}
+.meun ul li:hover{
+    background-color: #fdd8b8;
+    transition: 0.5s all ease-in-out;
+   
+}
+
+.meun ul li a {
+    color: #535157;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: 500 !important
+}
+.meun ul li:hover a,.meun ul li:hover i{
+    color:#fff;
+    transition: 0.5s all ease-in-out;
+}
+.meun ul li i{
+color: #535157;
+margin-left: 10px;
+}
+.meun ul hr{
+    width: 362px !important;
+    margin-right: -13px;
+    height: 2px !important;
+    background-color: #bfbcbc !important;
+    margin: 0px  -14px 0px 0px!important;
+}
+.meun ul li:hover hr{
+    display: none !important;
+}

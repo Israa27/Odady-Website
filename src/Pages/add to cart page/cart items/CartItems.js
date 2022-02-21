@@ -1,29 +1,35 @@
-import React from 'react'
-import img from '../../../Assets/images/cardimg.png';
-import { CartState } from '../../../contexts/Cart/Context';
+import React, { useEffect } from 'react'
 import './cartItems.css';
+import img from '../../../Assets/images/undefined.png';
+import { useSelector,useDispatch } from 'react-redux';
+import { decreaseQty, removeFromCart,addToCart, getTotalPrice } from '../../../redux/cartSlice';
 export default function CartItems() {
-  const{
-    state:{cart},
-    dispatch,
-  }=CartState();
-
+  const cart=useSelector((state)=> state.cart);
+  console.log()
+  const dispatch = useDispatch();
+  useEffect(()=>{
+      dispatch(getTotalPrice())
+  },[cart,dispatch]);
     return (
         <div className="cart-items">
-          {cart.map((cartitem)=>(
+          {cart.cartItems.length===0 ?(
+            <div className='cart-empty'>
+              <img src={img} alt="cart-empty"/>
+              <h5>السلة الفارغة قم بأضافة منتجات الى سلة  </h5 >
+              </div>
+          ):(<div>
+         
+          {cart.cartItems.map((item)=>(
           
-          <div key={cartitem.id} className="carts">
+          <div key={item.id} className="carts">
           <div className="item-del">
             <div className="img-item">
-              <img src={cartitem.image} alt='' />
+              <img src={item.image} alt={item.title} />
             </div>
             <div className="text">
-              <p className='title'>دريل تخريم كهربائي ١٠ ملم ٥٥٠ واط ، طوبة اوتوماتيك</p>
+              <p className='title'>{item.title}</p>
               <div className="btn-cart">
-                  <button className='btn-add' onClick={()=>{dispatch({
-                        type:"REMOVE-FROM-CART",
-                        payload:cartitem
-                      })}} > 
+                  <button className='btn-add' onClick={()=> dispatch(removeFromCart(item))} > 
                     <i className="far fa-trash-alt"></i>حذف المنتج </button>
                   <button className='btn-add'> <i className="fas fa-heart"></i> اضافة الى رغباتي</button>
               </div>
@@ -31,24 +37,19 @@ export default function CartItems() {
           </div>
           <div className="qty-price">
           <div class='qty'>
-            <button className="qty-btn"
-                        onClick={()=>{dispatch({
-                        type:"ADD-TO-CART",
-                        payload:cartitem
-                      })}} >+</button>
+            <button className="qty-btn" onClick={()=> dispatch(addToCart(item))} >+</button>
 
-            <span className="qty-span">{cartitem.qty}</span>
-            <button className="qty-btn" 
-            onClick={()=>{dispatch({
-                        type:"REMOVE-FROM-CART",
-                        payload:cartitem
-                      })}}>-</button>
+            <span className="qty-span">{item.qty}</span>
+            <button className="qty-btn" onClick={()=> dispatch(decreaseQty(item))}  >-</button>
           </div>
-           <span className="price">{cartitem.price} دينار</span>
+           <span className="price">{item.price * item.qty} دينار</span>
           </div>
         </div>
           ))}
+          </div>
+          )}
         </div> 
+        
       
     )
 }

@@ -2,14 +2,26 @@ import React from 'react'
 import { Container,Navbar,NavDropdown} from 'react-bootstrap';
 import './navbar.css';
 import logo from '../../Assets/images/logo.png';
-import { CartState } from '../../contexts/Cart/Context';
 import { useNavigate } from 'react-router-dom';
-export default function Navber({props}) {
-  const navigate = useNavigate()
-  const{
-    state:{cart},
-    dispatch,
-  }=CartState();
+import { getTotalPrice } from '../../redux/cartSlice';
+import { getTotal } from '../../redux/wishlistSlice';
+import { useSelector ,useDispatch} from 'react-redux';
+import { useEffect } from 'react';
+import { userLogout } from "../../Helpers/api/userLogin";
+export default function Navber() {
+  const navigate = useNavigate();
+  const logOut = () => {
+    localStorage.removeItem("token");
+    userLogout();
+    navigate('/');
+  }
+  const cart=useSelector((state)=> state.cart);
+  const wishlist=useSelector((state)=> state.wishlist);
+  const dispatch = useDispatch();
+  useEffect(()=>{
+      dispatch(getTotalPrice())
+      dispatch(getTotal());
+  },[cart,wishlist,dispatch]);
 
 
     return (
@@ -23,11 +35,12 @@ export default function Navber({props}) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
         <div className='navbar-icons'>
-                <button className='navbar-btns' onClick={()=>{navigate('/cart')}} ><span className='badge'>{cart.length}</span> <i class="far fa-heart"></i><a className='link-nav'>قائمة الرغبات</a></button>
-                <button  className='navbar-btns' onClick={()=>{navigate('/cart')}} ><span className='badge'>{cart.length}</span> <i class="fas fa-shopping-cart"></i><a className='link-nav'>عربة التسوق</a></button>
+                <button className='navbar-btns' onClick={()=>{navigate('/wishlist')}} ><span className='badge'>{wishlist.qty}</span> <i className="far fa-heart"></i><a className='link-nav'>قائمة الرغبات</a></button>
+                <button  className='navbar-btns' onClick={()=>{navigate('/cart')}} ><span className='badge'>{cart.qty}</span> <i className="fas fa-shopping-cart"></i><a className='link-nav'>عربة التسوق</a></button>
                 <NavDropdown  title={<i class="far fa-user"></i>} className='navbar-btns' id="basic-nav-dropdown">
                   <NavDropdown.Item className='items' onClick={()=>{navigate('/login')}}>تسجيل الدخول <i className="fas fa-sign-in-alt"></i></NavDropdown.Item>
                   <NavDropdown.Item className='items' onClick={()=>{navigate('/register')}}>انشاء حساب  <i className="fas fa-user-plus"></i></NavDropdown.Item>
+                  <NavDropdown.Item className='items' onClick={logOut}>تسجيل خروج<i class="fas fa-sign-out-alt"></i></NavDropdown.Item>
                 </NavDropdown>
             </div>
            

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Suspense} from 'react'
 import './home.css';
 import Navber from '../../Components/Navbar/Navber';
 import Footer  from '../../Components/Footer/Footer';
@@ -8,24 +8,30 @@ import Categories from './Categories section/Categories';
 import BestSelling from './best-selling/BestSelling';
 import NewlyProducts from './newly-added/NewlyProducts';
 import Offers from './Offers -and-discounts/Offers';
-import {CartState} from '../../contexts/Cart/Context';
+import  SpinnerLoading from '../../Components/spinner/SpinnerLoading';
+import { useSelector } from 'react-redux';
 export default function Home() {
-    const{
-        state:{products},
-}= CartState()
-    console.log(products)
+    const {items,status}=useSelector(state=> state.products);
     return (
+       
         <div>
+        {status ==="pending" ?(<SpinnerLoading/>):
+        (<>
            <Navber />
            <Navs />
            <SlideShow />
-           <BestSelling props={products}
+           <BestSelling 
            />
            <Categories />
-           <NewlyProducts props={products}/>
-           <Offers  props={products}/>
+          
+           <NewlyProducts />
+          
+           <Offers  />
           
            <Footer /> 
+          </>
+       
+        )}
         </div>
     )
 }
