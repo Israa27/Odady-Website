@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container,Navbar,NavDropdown} from 'react-bootstrap';
 import './navbar.css';
 import logo from '../../Assets/images/logo.png';
@@ -8,6 +8,7 @@ import { getTotal } from '../../redux/wishlistSlice';
 import { useSelector ,useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 import { userLogout } from "../../Helpers/api/userLogin";
+import { searchProducts } from '../../redux/products/productsSlice';
 export default function Navber() {
   const navigate = useNavigate();
   const logOut = () => {
@@ -22,10 +23,17 @@ export default function Navber() {
       dispatch(getTotalPrice())
       dispatch(getTotal());
   },[cart,wishlist,dispatch]);
-
-
+  
+  const[keyword,setKeyWord]=useState('');
+  const hadleSearch =(e)=>{
+    e.preventDefault();
+    dispatch(searchProducts(keyword))
+    navigate('/products')
+    setKeyWord('')
+   
+  }
     return (
-    <Navbar  className="navbar" expand="lg" >
+    <Navbar  className="navbar" expand="xl" >
     <Container className="navbar-container">
       <Navbar.Brand href="#home">
             <div className='navbar-logo'>
@@ -37,18 +45,19 @@ export default function Navber() {
         <div className='navbar-icons'>
                 <button className='navbar-btns' onClick={()=>{navigate('/wishlist')}} ><span className='badge'>{wishlist.qty}</span> <i className="far fa-heart"></i><a className='link-nav'>قائمة الرغبات</a></button>
                 <button  className='navbar-btns' onClick={()=>{navigate('/cart')}} ><span className='badge'>{cart.qty}</span> <i className="fas fa-shopping-cart"></i><a className='link-nav'>عربة التسوق</a></button>
-                <NavDropdown  title={<i class="far fa-user"></i>} className='navbar-btns' id="basic-nav-dropdown">
+                <NavDropdown  title={ <i className="far fa-user"></i> } className='navbar-btns' id="basic-nav-dropdown">
                   <NavDropdown.Item className='items' onClick={()=>{navigate('/login')}}>تسجيل الدخول <i className="fas fa-sign-in-alt"></i></NavDropdown.Item>
                   <NavDropdown.Item className='items' onClick={()=>{navigate('/register')}}>انشاء حساب  <i className="fas fa-user-plus"></i></NavDropdown.Item>
-                  <NavDropdown.Item className='items' onClick={logOut}>تسجيل خروج<i class="fas fa-sign-out-alt"></i></NavDropdown.Item>
+                  <NavDropdown.Item className='items' onClick={()=>{navigate('/profile_user')}}>معلومات المستخدم  <i className="fas fa-user-cog"></i></NavDropdown.Item>
+                  <NavDropdown.Item className='items' onClick={logOut}>تسجيل خروج<i className="fas fa-sign-out-alt"></i></NavDropdown.Item>
                 </NavDropdown>
             </div>
            
           
-            <div className='navbar-search-input ' >
-              <input  type='text'placeholder='.... ابحث عن شى ' />
-              <button className='navbar-search-btn'><i className="fas fa-search"></i></button>
-            </div>
+            <form className='navbar-search-input ' onSubmit={hadleSearch} >
+              <input  type='text'placeholder=' ابحث عن شى....' value={keyword} onChange={(e)=> setKeyWord(e.target.value)}/>
+              <button type='submit' className='navbar-search-btn'><i className="fas fa-search"></i></button>
+            </form>
             
           
         </Navbar.Collapse>
