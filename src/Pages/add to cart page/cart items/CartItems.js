@@ -10,18 +10,19 @@ export default function CartItems() {
   useEffect(()=>{
       dispatch(getTotalPrice())
   },[cart,dispatch]);
+  
     return (
-        <div className="cart-items">
+        <div className="card-items">
           {cart.cartItems.length===0 ?(
-            <div className='cart-empty'>
-              <img src={img} alt="cart-empty"/>
+            <div className='card-empty'>
+              <img src={img} alt="card-empty"/>
               <h5>السلة الفارغة قم بأضافة منتجات الى سلة  </h5 >
               </div>
           ):(<div>
          
           {cart.cartItems.map((item)=>(
           
-          <div key={item.id} className="carts">
+          <div key={item.id} className="cart">
           <div className="item-del">
             <div className="img-item">
               <img src={item.image} alt={item.title} />
@@ -42,7 +43,7 @@ export default function CartItems() {
             <span className="qty-span">{item.qty}</span>
             <button className="qty-btn" onClick={()=> dispatch(decreaseQty(item))}  >-</button>
           </div>
-           <span className="price">{item.price * item.qty} دينار</span>
+           <span className="price">{(item.price * item.qty).toFixed(2)} دينار</span>
           </div>
         </div>
           ))}

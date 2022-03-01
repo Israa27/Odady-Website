@@ -1,7 +1,8 @@
-import { createSlice ,createAsyncThunk} from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
-import { addTocart,removeFromcart } from '../Helpers/api/cart';
+import { createCart } from '../Helpers/api/cart';
 const initialState ={
+  status:'',
   cartItems:localStorage.getItem('cartItems')?JSON.parse(localStorage.getItem('cartItems')):[],
   qty:0,
   totalPrice:0,
@@ -13,28 +14,35 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCart(state,action){
+    addToCart (state,action){
       const itemIndex= state.cartItems.findIndex(
         (item)=>item.id === action.payload.id );
+      
        
       if(itemIndex >= 0){
         state.cartItems[itemIndex] = {
           ...state.cartItems[itemIndex],
           qty: state.cartItems[itemIndex].qty + 1,
-          
-        };
+        
+        }
+       
+       createCart( state.cartItems[itemIndex], state.cartItems[itemIndex].qty)
+       console.log(state.cartItems,state.cartItems.qty)
         toast.info("تم زيادة الكمية ",{position:'bottom-left'})
         
       }
       else{
         const productNot={...action.payload,qty:1};
         state.cartItems.push(productNot)
+        createCart(state.cartItems,state.cartItems.qty)
+        console.log(state.cartItems)
         toast.error(`تم اضافة ${action.payload.title} الى سلة المشتريات `,{position:'bottom-left'});
        
       };
-      localStorage.setItem('cartItems',JSON.stringify(state.cartItems))
-     
+      
+
     },
+
     removeFromCart(state,action){
       state.cartItems.map((cartItem) => {
         if (cartItem.id === action.payload.id) {
@@ -48,7 +56,9 @@ export const cartSlice = createSlice({
             position: "bottom-left",
           });
         }
-        localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+        
+        localStorage.setItem('cartItems',JSON.stringify(state.cartItems))
+       
         return state;
       });
     },
@@ -71,6 +81,7 @@ export const cartSlice = createSlice({
             toast.error(`تم حذف العنصر من سلة المشتريات ${action.payload.title} `,{position:'bottom-left'});
             
         }
+        
         localStorage.setItem('cartItems',JSON.stringify(state.cartItems))
        
     },

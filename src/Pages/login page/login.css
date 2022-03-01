@@ -81,3 +81,11 @@
     font-weight: 400;
 }
 
+.is-invalid~.invalid-feedback, .is-invalid~.invalid-tooltip,
+ .was-validated :invalid~.invalid-feedback,
+ .was-validated :invalid~.invalid-tooltip{
+    margin-top: -17px !important;
+    border-top-left-radius: 4px !important;
+    border-bottom-left-radius: 4px !important;
+}
+.input-group>:not(:first-child):not(.dropdown-menu):not(.valid-tooltip):not(.valid-feedback):not(.invalid-tooltip):not(.invalid-feedback) a{margin-right: 30px;}

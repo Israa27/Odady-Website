@@ -5,6 +5,7 @@ import Navber from '../../Components/Navbar/Navber';
 import SecondaryNav from '../../Components/secondary navbar/SecondaryNav';
 import Footer from '../../Components/Footer/Footer';
 import img from '../../Assets/images/undefined.png';
+import './wishlist.css';
 import { addToWishList,removeFromWishList,decreaseQty,getTotal} from '../../redux/wishlistSlice';
 export default function Wishlist() {
   const wishlist=useSelector((state)=> state.wishlist);
@@ -14,12 +15,12 @@ export default function Wishlist() {
   },[wishlist,dispatch]);
     return (
         <div>
-        <Navber />
+        
         <SecondaryNav name='قائمة رغباتي'/>
         <div className="content-wishlist"> 
-        <div className="cart-items">
+        <div className="wishlist-cart-items">
           {wishlist.wishListItems.length===0 ?(
-            <div className='cart-empty'>
+            <div className='wishlist-cart-empty'>
               <img src={img} alt="cart-empty"/>
               <h5>السلة الفارغة قم بأضافة منتجات الى سلة  </h5 >
               </div>
@@ -27,14 +28,14 @@ export default function Wishlist() {
          
           {wishlist.wishListItems.map((item)=>(
           
-          <div key={item.id} className="carts">
+          <div key={item.id} className="wishlist-carts">
           <div className="item-del">
             <div className="img-item">
               <img src={item.image} alt={item.title} />
             </div>
             <div className="text">
               <p className='title'>{item.title}</p>
-              <div className="btn-cart">
+              <div className="btn-wishlist">
                   <button className='btn-add' onClick={()=> dispatch(removeFromWishList(item))} > 
                     <i className="far fa-trash-alt"></i>حذف المنتج </button>
                   <button className='btn-add'> <i className="fas fa-heart"></i> اضافة الى رغباتي</button>
@@ -56,7 +57,7 @@ export default function Wishlist() {
           )}
         </div> 
         </div> 
-        <Footer />
+       
         </div>
       
     )

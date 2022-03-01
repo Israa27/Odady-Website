@@ -17,3 +17,6 @@
     color: #706c6c;
     margin-left: 25px;
 }
+@media (max-width:412px) {
+    .secondary-navs .secondary-navs-btn a {font-size: 14px;}
+}

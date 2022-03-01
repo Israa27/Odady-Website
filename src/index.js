@@ -11,6 +11,7 @@ import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
 ReactDOM.render(
+  
   <BrowserRouter>
   <ToastContainer />
   <React.StrictMode>

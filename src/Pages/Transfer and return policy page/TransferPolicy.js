@@ -6,7 +6,7 @@ import './transferPolicy.css';
 export default function TransferPolicy() {
     return (
         <div>
-            <Navbar />
+           
             <Container>
         <div className='transferPolicy-content'>
             <h4>سياسة النقل والإرجاع</h4>
@@ -37,7 +37,7 @@ export default function TransferPolicy() {
            </div>
                
         </Container>
-            <Footer />
+           
         </div>
     )
 }

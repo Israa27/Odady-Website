@@ -1,12 +1,12 @@
 import {getUserFail,getUserSuccess,getUserPending} from './userSlice';
-import { getUser} from '../Helpers/api/userLogin';
+import { getUser} from '../../Helpers/api/userLogin';
 export const getUserProfile=()=>async(dispatch)=>{
     try{
         dispatch(getUserPending());
         const data =  await getUser();
     
-        if(data)
-           return dispatch(getUserSuccess(data));
+        if(data.user && data.user._id)
+           return dispatch(getUserSuccess(data.user));
         
         dispatch(getUserFail("User Not Found"))
     }

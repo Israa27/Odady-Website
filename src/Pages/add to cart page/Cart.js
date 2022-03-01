@@ -10,7 +10,8 @@ import SecondaryNav from '../../Components/secondary navbar/SecondaryNav';
 export default function Cart() {
     return (
         <div>
-        <Navbar />
+   
+       
         <SecondaryNav name='سلة المشتريات'/>
         <div className="contents">  
          <CartItems />  
@@ -20,7 +21,7 @@ export default function Cart() {
         
 
         
-        <Footer />
+        
 </div>
        
     )

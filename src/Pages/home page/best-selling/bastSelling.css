@@ -36,6 +36,8 @@
 }
 
 @media(max-width: 415px){
+    .header h5{font-size: 13px;}
+    .header button {margin-top: 38px !important;}
     .best-selling {margin-bottom: 1200px;}
     .products {grid-template-columns: 1fr;}
 

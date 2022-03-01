@@ -1,0 +1,24 @@
+.about-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 75px;
+}
+.about-img{width: 400px;}
+.about-text{
+    width: 40%;
+    margin-top: 20px;
+}
+.about-text p{
+    font-weight: bold !important;
+    margin-bottom: 5px;
+}
+.about-text span{
+    color: #838383c7;
+    line-height: 1.8;
+
+}
+@media (max-width:540px){
+    .about-text { width: 80%;}
+}

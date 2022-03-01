@@ -40,15 +40,15 @@ export default function OrderForm() {
               <p>الشحن</p>
               <div className='radio'>
                   <input type='radio'id='radio1'  value='5' onChange={(e)=>setValue(e.target.value)} checked={value === '5'} required/>
-                  <label  for ='radio1'>داخل بغداد : 5000 دينار</label>
+                  <label  htmlFor ='radio1'>داخل بغداد : 5000 دينار</label>
                </div>
                <div className='radio'>
                   <input type='radio' id='radio2'  value='8' onChange={(e)=>setValue(e.target.value)} checked={value === '8'} required/>
-                  <label for ='radio2'> باقي المحافظات : 8000 دينار</label>
+                  <label htmlFor ='radio2'> باقي المحافظات : 8000 دينار</label>
                 </div>
                 <div className='radio'>
                   <input type='radio' id='radio3' value='0' onChange={(e)=>setValue(e.target.value)} checked={value === '0'} required/>
-                  <label  for ='radio3'>الشحن المجاني</label>
+                  <label  htmlFor ='radio3'>الشحن المجاني</label>
                 </div>
                 <span className='order-span2'>سيتم تحديث الخيارات الشحن اثناء السداد</span>
                 <hr/>    
@@ -61,11 +61,11 @@ export default function OrderForm() {
           <div className="radio-btn">
               <div className='radio'>
                   <input type='radio'id='radio4' value='chash' onChange={(e)=>setCheck(e.target.value)} checked={check === 'chash'}  required />
-                  <label  for ='radio4'>الدفع نقدًا عند الاستلام </label>
+                  <label  htmlFor ='radio4'>الدفع نقدًا عند الاستلام </label>
                </div>
                <div className='radio'>
                   <input type='radio' id='radio5' value='chash2' onChange={(e)=>setCheck(e.target.value)} checked={check === 'chash2'} />
-                  <label for ='radio5'>الدفع عند التسليم مباشرة.</label>
+                  <label htmlFor ='radio5'>الدفع عند التسليم مباشرة.</label>
                 </div>
               
   
@@ -75,11 +75,11 @@ export default function OrderForm() {
           <div className="checkbox-btn">
               <div className='check-btn'>
                   <input type='checkbox' id='radio4' />
-                  <label  for ='radio4'>أرغب في تلقي رسائل بريدإلكتروني حصرية مع خصومات ومعلومات عن المنتج  </label>
+                  <label  htmlFor='radio4'>أرغب في تلقي رسائل بريدإلكتروني حصرية مع خصومات ومعلومات عن المنتج  </label>
                </div>
                <div className='check-btn'>
                   <input type='checkbox' id='radio5' />
-                  <label for ='radio5'>لقد قرأت ووافقت على </label>
+                  <label htmlFor='radio5'>لقد قرأت ووافقت على </label>
                 </div>
                 <span className='order-span2'>سيتم استخدام بياناتك الشخصية لمعالجة طلبك ودعم تجربتك في هذا الموقع، ولأغراض أخرى تم توضيحها في سياسة الخصوصية لدينا</span>
               
@@ -89,7 +89,7 @@ export default function OrderForm() {
           </div>
 
 
-          <button className="btn-amount">تأكيد الطلب</button>
+          <button type ='subimt' className="order-btn-amount">تأكيد الطلب</button>
         </div>
   </div>
 }

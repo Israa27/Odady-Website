@@ -3,15 +3,15 @@
     justify-content: center;
     margin-top: 26px
 }
-.pagination-item li {
+.pagination-item li ,.pagination-item button{
     list-style: none;
     width: 40px;
     height: 40px;
     align-self: center;
     font-size: 20px;
-    background-color: #b7b3ae;
+    background-color: #524c52;
     margin: 15px 5px;
-    border-radius: 3px;
+    border-radius: 50%;
     text-align: center;
     line-height: 40px;
     cursor: pointer;
@@ -19,21 +19,8 @@
     font-weight: 600;
     box-shadow: 0px 0px 2px 2px #f9f6f6;
 }
-.pagination-item button{
-    width:125px;
-    height: 40px;
-    align-self: center;
-    font-size: 20px;
-    background-color: #b7b3ae;
-    margin: 15px 5px;
-    border-radius: 3px;
-    text-align: center;
-    line-height: 40px;
-    color: #fff;
-    font-weight: 600;
-    box-shadow: 0px 0px 2px 2px #f9f6f6
-}
+
 .pagination-item li.active{
-    background-color: black;
+    background-color: #ff853c;
     color: #fff;
 }

@@ -19,7 +19,7 @@ export default function ResetPassword() {
 
  
   return (
-   <div class='reset-content'>
+   <div className='reset-content'>
     
     <Formik
         validationSchema={schema}
@@ -31,11 +31,11 @@ export default function ResetPassword() {
         onSubmit={async(values) => {
             const password=values.password
             const confirmPassword=values.confirmPawssord
-            if(password === confirmPassword) {
-                console.log(password)
-                dispatch(updatePassword({password}))
+           
+                //console.log(password)
+                //dispatch(updatePassword({password}))
                 navigate('/login')
-            }
+            
         } 
     }
     >

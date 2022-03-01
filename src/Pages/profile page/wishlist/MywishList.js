@@ -10,27 +10,27 @@ export default function MywishList() {
       dispatch(getTotal())
   },[wishlist,dispatch]);
     return (
-        <div>
-       
-        <div className="content-mywishlist"> 
-        <div className="mywishlist-items">
+        <div className='my-wishlist'>
+        <h5>عدد المنتجات ({wishlist.wishListItems.length})</h5>
+        <div className="content-wishlist"> 
+        <div className="my-wishlist-cart-items">
           {wishlist.wishListItems.length===0 ?(
-            <div className='mywishlist-cart-empty'>
+            <div className='wishlist-cart-empty'>
               <img src={img} alt="cart-empty"/>
-              <h5>لا يوجد منتجات</h5 >
+              <h5>السلة الفارغة قم بأضافة منتجات الى سلة  </h5 >
               </div>
           ):(<div>
          
           {wishlist.wishListItems.map((item)=>(
           
-          <div key={item.id} className="carts">
+          <div key={item.id} className="wishlist-carts">
           <div className="item-del">
             <div className="img-item">
               <img src={item.image} alt={item.title} />
             </div>
             <div className="text">
               <p className='title'>{item.title}</p>
-              <div className="btn-cart">
+              <div className="btn-wishlist">
                   <button className='btn-add' onClick={()=> dispatch(removeFromWishList(item))} > 
                     <i className="far fa-trash-alt"></i>حذف المنتج </button>
                   <button className='btn-add'> <i className="fas fa-heart"></i> اضافة الى رغباتي</button>

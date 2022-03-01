@@ -6,7 +6,7 @@ import './privacy.css';
 export default function Privacy() {
     return (
         <div>
-           <Navbar /> 
+          
            <Container>
                <div className='privacy-content'>
                    <h4>سياسة الخصوصية</h4>
@@ -57,7 +57,7 @@ export default function Privacy() {
                    </div>
                </div>
            </Container>
-           <Footer />
+           
         </div>
     )
 }

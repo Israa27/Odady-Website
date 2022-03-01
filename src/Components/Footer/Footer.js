@@ -23,7 +23,7 @@ export default function Footer() {
               </div>
               <div className='footer-links'>
                 <h5>المزيد</h5>
-                <Link className="link" to ='/'>معلومات عنا</Link >
+                <Link className="link" to ='/about'>معلومات عنا</Link >
                 <Link className="link" to ='/contact'>اتصل بنا</Link>     
               </div>
 
@@ -35,22 +35,22 @@ export default function Footer() {
                 <h5>وسائل الدفع</h5>
                 <div className='cash'>
                     <div className='cash-box'>
-                    <img src={Asia} img/>
+                    <img src={Asia} alt='' />
                     </div>
                     <div className='cash-box'>
-                    <img src={zain} img/>
+                    <img src={zain} alt='' />
                     </div>
                     <div className='cash-box'>
-                    <img src={cash} img/>
+                    <img src={cash} alt=' '/>
                     </div>    
               </div>  
               </div>
               </div>
               <div className='footer-icons'>
-              <i class="fab fa-facebook-square"></i>
-              <i class="fab fa-whatsapp-square"></i>
-              <i class="fab fa-instagram-square"></i>
-              <i class="fab fa-youtube-square"></i>
+              <i className="fab fa-facebook-square"></i>
+              <i className="fab fa-whatsapp-square"></i>
+              <i className="fab fa-instagram-square"></i>
+              <i className="fab fa-youtube-square"></i>
               </div>
               <div className='footer-copy-write'>
                   <p>حقوق النشر © لعام 2021 محفوظة لموقع عُدَدي للتسوق الإلكتروني</p>

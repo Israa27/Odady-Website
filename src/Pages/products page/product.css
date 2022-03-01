@@ -9,8 +9,24 @@
     margin-top: 30px;
 }
 .filter-items select{
-    border: 2px solid #eee;
+    border: 2px solid #f6f5f5;
+    background-color: #f6f5f5;
     height: 45px;
     padding: 5px;
+    margin-right:12px;
     border-radius: 5px;   
+}
+@media (max-width:1280px){
+    .list-items{justify-content: flex-start;}
+}
+@media (max-width:1024px){
+    .card {width: 290px !important;}
+}
+@media (max-width:912px){
+}
+@media (max-width:540px){
+    
+}
+@media (max-width:280px){
+
 }

@@ -1,19 +1,48 @@
 import axios from "axios"
-const URL='https://fakestoreapi.com';
-const RegisterURL='https://61edf167634f2f00170ced9e.mockapi.io/odday/api/ragister';
-const loginURL =URL + '/auth/login';
-const logoutURL=URL +'user/logout';
-const userProfileURL=URL + '/users';
-const newAccessTokenURL=URL +'token';
+import {BASE_URL} from '../Constants';
+const RegisterURL=BASE_URL+'/signup';
+const loginURL =BASE_URL+'/signin';
+const logoutURL=BASE_URL+'user/logout';
+const updateURL=BASE_URL;
+const userProfileURL=BASE_URL;
+const newAccessTokenURL=BASE_URL +'token';
 
-export const userRegister=dataForm => {
+const token = JSON.parse(localStorage.getItem("token"));
+axios.interceptors.request.use(
+  config=>{
+    config.headers.Authorization= `Bearer ${token}`;
+    return config
+  }
+)
+export const userRegister=({
+  firstname,
+  lastname,
+  email,
+  phoneNumber,
+  password,
+  governorate,
+  city,
+  nearest,
+ 
+}) => {
   return new Promise(async(resolve,reject)=>{
     try{
-        const res= await axios.post(RegisterURL,dataForm);
+        const res= await axios.post(RegisterURL,{
+          
+            first_name:firstname,
+            last_name:lastname,
+            email:email,
+            phone_number:phoneNumber,
+            password1:password,
+            Governorate:governorate,
+            city:city,
+            closest_point:nearest,
+           
+        
+        });
         resolve(res.data);
         if (res.status === 201){
-            let data = res.data;
-            localStorage.setItem('user', JSON.stringify(data))
+          resolve(res.data);
             
         }
 
@@ -23,17 +52,23 @@ export const userRegister=dataForm => {
     }
   })
 }
-export const userLogin=dataForm => {
+export const Login=({email,password}) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const res = await axios.post(loginURL, dataForm);
-      console.log(res)
+      const res = await axios.post(loginURL,{
+        email:email,
+        password:password
+      });
+      
+     
       resolve(res.data);
 
       if (res.status === 200 ) {
-        let data=res.data.token;
-        console.log(res.status);
+        const data= res.data.token.access;
+        console.log(res.data.token.access)
+
         localStorage.setItem("token",JSON.stringify(data));
+      
       }
     } catch (error) {
       reject(error);
@@ -56,11 +91,54 @@ export const userLogout=async() => {
 }
 
 
+export const userUpdate=({
+  firstname,
+  lastname,
+  phoneNumber,
+  governorate,
+  city,
+  nearest,
+ 
+}) => {
+  return new Promise(async(resolve,reject)=>{
+    try{
+     
+        
+        if (!token) {
+          reject("Token not found!");
+        } 
+        const res= await axios.put(updateURL,{
+          
+            first_name:firstname,
+            last_name:lastname,
+            phone_number:phoneNumber,
+            Governorate:governorate,
+            city:city,
+            closest_point:nearest,
+          },
+          {headers:{ 
+            'Content-Type' : 'application/json',
+            'Accept' : 'application/json',
+            'Authorization' : token
+          }
+        });
+
+        if (res.status === 201){
+          resolve(res.data);
+            
+        }
+
+    }catch(error){
+        console.log(error.message);
+        reject(error)
+    }
+  })
+}
+
 
 export const getUser=() => {
   return new Promise(async (resolve, reject) => {
     try {
-      const token = JSON.parse(localStorage.getItem("token"));
 
       if (!token) {
         reject("Token not found!");
@@ -69,10 +147,11 @@ export const getUser=() => {
       const res = await axios.get(userProfileURL, {
         headers: {
           Authorization: token,
-        },
+        }
       });
 
       resolve(res.data);
+      localStorage.setItem("user",JSON.stringify(res.data));
     } catch (error) {
       console.log(error);
       reject(error.message);

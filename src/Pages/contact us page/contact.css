@@ -32,19 +32,25 @@
     color: #555;
 }
 .contact-card span{color: #f39200 !important;}
-.contact {align-items: center;}
-.contact i {
-    background-color: #444;
+.contact { background-color: #444;
     width: 70px;
     height: 70px;
     text-align: center;
     line-height: 70px;
     font-size: 30px;
-    color: #fff !important;
     border-radius: 50%;
     position: absolute;
     top: -35px;
-    right: 140px
+    right: 40%;
+    transition: all 0.5s ease-in-out;
+}
+.contact:hover{
+    background-color: #f39200;
+    color: #797878;
+    
+}
+.contact i {
+    color: #fff !important;
 }
 .contact-icon{
     text-align: center;
@@ -55,14 +61,21 @@
 .contact-icon i{
     margin: 3px;
     color: #444 !important;
+    transition: all 0.5s ease-in-out;
 }
-@media (max-width:912px) {
-    .contact-div{
-        flex-direction: column;
-    }
-    .contact-card{
-        margin-bottom: 50px;
-    }
+.contact-icon i:hover{color: #f39200 !important;}
+@media (max-width:1024px){
+    .contact-card {width: 290px;}
+    .contact {top: -40px;    right: 35%;}
 
-
+}
+    
+@media (max-width:920px){
+    .contact-div {flex-direction: column;  }
+    .contact-card {margin-bottom: 20px;}
+    
+}
+@media (max-width:820px) {
+    .contact-card {height: 300px}
+    .contact {position: unset;margin-top: -20px;margin-bottom: 20px;}
 }

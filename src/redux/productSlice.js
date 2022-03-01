@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { useEffect } from "react";
+
 
 const initialState = {
   items: [],
@@ -17,7 +17,7 @@ export const productsFetch = createAsyncThunk(
         'https://fakestoreapi.com/products'
      
        );
-         
+       
        return response.data;
      
 

@@ -1,7 +1,7 @@
 import axios from "axios"
-const URL='http://localhost:3000/v1/';
-const passwordURL=URL +'user/reset-password';
-const updatePasswordURL = URL + "user/reset-password";
+import {BASE_URL} from '../Constants';
+const passwordURL=BASE_URL +'user/reset-password';
+const updatePasswordURL = BASE_URL + "user/reset-password";
 
 export const sendPassword=(email) => {
   return new Promise(async(resolve,reject)=>{

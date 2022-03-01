@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from '../../redux/cartSlice';
 import { useState } from 'react';
 import { addToWishList } from '../../redux/wishlistSlice';
-import { useNavigate,useParams} from 'react-router-dom';
-import { productFetch} from '../../redux/singleProductSlice';
-import { addTocart } from '../../Helpers/api/cart';
+import { Link, useNavigate,useParams} from 'react-router-dom';
+import { getProductDetails } from '../../redux/products/productsSlice';
+
 export default function ProductCard({id,product,name,image, price}) {
 
   const[state,setstate]=useState(false);
@@ -16,8 +16,10 @@ export default function ProductCard({id,product,name,image, price}) {
   const dispatch=useDispatch();
   
   const hadleAddToCart=(product)=>{
-    dispatch(addToCart(product))
-    addTocart()
+    dispatch(addToCart(product));
+   
+
+  
 
   }
   
@@ -26,8 +28,8 @@ export default function ProductCard({id,product,name,image, price}) {
     setstate(true)
   };
   const hadleChangeImg=(product_id)=>{
-    dispatch(productFetch(product_id));
-    navigate('/product_detiles');
+    dispatch(getProductDetails(product_id));
+    console.log(product_id)
   }
  
 
@@ -35,18 +37,18 @@ export default function ProductCard({id,product,name,image, price}) {
     return (
        
           <Card className='card'>
-            <button className='card-btn' onClick={()=>hadleChange(product)} >{state ? <i className="fas fa-heart"></i>:<i className="far fa-heart"></i>
+            <button className='card-btn' onClick={()=> dispatch(hadleChange(product))}>{state ? <i className="fas fa-heart"></i>:<i className="far fa-heart"></i>
             }
             </button>
-            
-            <Card.Img variant="top"onClick={()=>hadleChangeImg(id) } src={image} alt={name} />
-          
+            <Link to={`/product_detiles/${id}`}>
+             <Card.Img variant="top"onClick={()=>hadleChangeImg(id) } src={image} alt={name} />
+            </Link>
             <Card.Body>
             <Card.Title className="card-span">{name} </Card.Title>
             <Card.Text className="card-span1">
-                    {price}
+                    {price} دينار
             </Card.Text>
-             <button className='card-add-to-btn' onClick={()=> dispatch(addToCart(product))}>اضف الى السلة</button>
+             <button className='card-add-to-btn' onClick={()=>hadleAddToCart(product)}>اضف الى السلة</button>
             </Card.Body>
           </Card>
         

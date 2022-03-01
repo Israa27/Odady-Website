@@ -2,8 +2,13 @@ import React from 'react'
 import './account.css';
 import * as yup from 'yup';
 import { Formik } from 'formik';
+import { userUpdate} from '../../../Helpers/api/userLogin';
+import { useDispatch } from 'react-redux';
+import {updateAccountPending,updateAccountSuccess,updateAccountFail} from '../../../redux/updateAccountSlice'
 import {Form ,InputGroup,Button} from 'react-bootstrap';
 export default function Account() {
+
+  const dispatch =useDispatch();
   const schema = yup.object().shape({
     firstname: yup.string().required('هذا الحقل مطلوب'),
     lastname: yup.string().required('هذا الحقل مطلوب'),
@@ -11,7 +16,7 @@ export default function Account() {
     password:yup.string().matches(/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/,'كلمة المرور غير صالحة').min(8).required('هذا الحقل مطلوب'),
     phoneNumber:yup.number().required('هذا الحقل مطلوب'),
     governorate: yup.string().required('هذا الحقل مطلوب'),
-    region: yup.string().required('هذا الحقل مطلوب'),
+    city: yup.string().required('هذا الحقل مطلوب'),
     nearest: yup.string().required('هذا الحقل مطلوب'),
     nate:yup.string()
     
@@ -31,18 +36,53 @@ export default function Account() {
                     password:'',
                     phoneNumber:'',
                     governorate :'',
-                    region:'',
+                    city:'',
                     nearest:'',
                     
                     
                 }}
                 onSubmit={async(values) => {
-                    
+                    let firstname=values.firstname,
+                        lastname=values.lastname,
+                        email=values.email,
+                        phoneNumber=values.phoneNumber,
+                        password=values.password,
+                        governorate=values.governorate,
+                        city=values.city,
+                        nearest=values.nearest;
                         
-                      
-                      
+                     if(!values){return alert("يرجى ادخال البيانات ")}
+                     
+                     dispatch(updateAccountPending());
+                     
+                     try{
+                       const isAuth= await userUpdate(
+                           { 
+                             firstname,
+                             lastname,
+                        
+                             phoneNumber,
+                             password,
+                             governorate,
+                             city,
+                             nearest,
+                            
+                         });
+                       if(isAuth.status === 'error'){
+                         return dispatch(updateAccountFail(isAuth.message));
+                 
+                       }
+                       dispatch(updateAccountSuccess());
+                       
+                       
+                     }
+                     catch(error){
+                       dispatch(updateAccountFail(error.message));
+                 
+                     }
                    
-                }}
+                
+             }}
                 >
             {({
                
@@ -92,43 +132,7 @@ export default function Account() {
                     </InputGroup>
                     </Form.Group>
                     </div >
-                    <div className='accunt-name'>
-                    <Form.Group className='accunt-label' controlId="validationFormik02">
-                    <Form.Label>عنوان البريد الالكتروني</Form.Label>
-                    <InputGroup hasValidation>
-                       
-                        <Form.Control
-                        type="email"
-                        aria-describedby="inputGroupPrepend"
-                        name="email"
-                        value={values.email}
-                        onChange={handleChange}
-                        isInvalid={!!errors.email}
-                        />
-                        <Form.Control.Feedback type="invalid">
-                        {errors.email}
-                        </Form.Control.Feedback>
-                    </InputGroup>
-                    </Form.Group>
-
-                    <Form.Group className='accunt-label' controlId="validationFormik03">
-                    <Form.Label>عنوان البريد الالكتروني</Form.Label>
-                    <InputGroup hasValidation>
-                       
-                        <Form.Control
-                        type="password"
-                        aria-describedby="inputGroupPrepend"
-                        name="password"
-                        value={values.password}
-                        onChange={handleChange}
-                        isInvalid={!!errors.password}
-                        />
-                        <Form.Control.Feedback type="invalid">
-                        {errors.password}
-                        </Form.Control.Feedback>
-                    </InputGroup>
-                    </Form.Group>
-                    </div>
+                    
                     <div className='accunt-name'>
                     <Form.Group className='accunt-label' controlId="validationFormik04">
                     <Form.Label>رقم الهاتف</Form.Label>
@@ -186,13 +190,13 @@ export default function Account() {
                     <Form.Label>المنطقة</Form.Label>
                     <Form.Control
                         type="text"
-                        name="region"
-                        value={values.region}
+                        name="city"
+                        value={values.city}
                         onChange={handleChange}
-                        isInvalid={!!errors.region}
+                        isInvalid={!!errors.city}
                     />
                     <Form.Control.Feedback type="invalid">
-                        {errors.region}
+                        {errors.city}
                     </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group className='accunt-label' controlId="validationFormik07">

@@ -5,7 +5,9 @@ import './profile.css'
 import Account from './account user/Account';
 import MyOrder from './myorder/MyOrder';
 import MywishList from './wishlist/MywishList'
+import { useSelector } from 'react-redux';
 export default function Profile() {
+   const user= JSON.parse(localStorage.getItem("user"));
     const location = useLocation()
     const renderContent = (routeName) => {
       console.log(routeName)
@@ -16,7 +18,7 @@ export default function Profile() {
           return <MyOrder/>
         case '/mywishlist':
           return <MywishList />
-      
+       
     }};
   return (
    
@@ -26,12 +28,16 @@ export default function Profile() {
        
        <div className='nav-right' >
            <div className='user'>
-               <h4>Name User</h4>
+             <div>
+               <img src=''/>
+             </div>
+               <h4>{user.first_name} {user.last_name}</h4>
+               <span className='email'>{user.email}</span>
            </div>
            <div className='meun'>
                <ul>
-               <li><Link to='/'><i className="fas fa-user-plus"></i> الصفحة الرئيسة </Link></li><hr/>
-                   <li><Link to='/account'><i className="fas fa-user-plus"></i> حسابي </Link></li><hr/>
+               <li><Link to='/'><i className="fas fa-home"></i> الصفحة الرئيسة </Link></li><hr/>
+                   <li><Link to='/account'><i className="fas fa-user-edit"></i> تعديل الحساب </Link></li><hr/>
                    <li><Link  to='/myorder'><i className="fas fa-shopping-cart"></i> طلباتي  </Link></li><hr/>
                    <li><Link  to='/mywishlist'> <i className="far fa-heart"></i> قائمة رغباتي </Link></li>
                    

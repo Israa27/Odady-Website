@@ -55,3 +55,6 @@ margin-left: 10px;
 .meun ul li:hover hr{
     display: none !important;
 }
+.email{
+    color: #535157 !important;
+}

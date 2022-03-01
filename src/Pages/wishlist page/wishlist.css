@@ -1,0 +1,193 @@
+.content-wishlist{
+    margin-right: 170px;
+    display: flex !important;
+    flex-direction: row;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.wishlist-cart-items{
+    width: 800px !important;
+    border-radius: 5px !important;
+    box-shadow: 1px 1px 4px 3px #e5e5e5 !important;
+    margin-left: 30px !important;
+    margin-right: -70px
+}
+.wishlist-cart-items h2{
+    color: #342c2d;
+    margin: 25px 0 15px 25px;
+}
+
+.wishlist-carts{
+    border-radius: 5px;
+    margin-top: 65px;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-bottom: 60px;
+    height: 245px;
+    position: relative;
+   
+}
+.wishlist-carts::after{
+    content: '';
+    position: absolute;
+    top: 280px;
+    width: 95%;
+    height: 2px;
+    background-color: #ededed;
+}
+.item-del {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    gap: 50px;
+    justify-content: space-around;
+    width: 70%;
+}
+.img-item{
+    width: 160px;
+    height: 160px;
+    margin-right: 35px;
+}
+
+.text{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+.item-del .text p{
+    font-size: 18px;
+    font-weight: 500;
+    color: #555;
+    width: 65%;
+}
+.item-del .text span{
+    font-size: 19px;
+    font-weight: 400;
+    color: #555
+}
+.item-del .btn-cart{margin-top: 75px;}
+.item-del .btn-wishlist button{
+    color: #6c757d;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    background: none;
+    margin-left: 20px;
+
+}
+.item-del .fa-trash-alt{
+    margin-left: 8px;
+}
+.btn-add .fa-heart{margin: 0 !important;}
+.btn-add .fa-heart:hover{color: red;}
+.qty-price{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.qty{
+display: flex;
+}
+.qty .qty-btn{
+    width: 38px;
+    height: 31px;
+    font-size: 26px;
+    background-color: #ebebeb;
+    border-radius: 0px 5px 5px 0px;
+    color: #444;
+    line-height: 31px;
+    cursor: pointer;
+    margin-left: -14px;
+    z-index: 3;
+    box-shadow: 0px 0px 3px 0px #706b6b42;
+}
+.qty .qty-btn:last-of-type{
+    border-radius: 5px 0px 0px 5px;
+    margin-right: -6px;
+}
+.qty .qty-span{
+    width: 65px;
+    height: 31px;
+    line-height: 31px;
+    font-size: 18px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 4px;
+    color: #444;
+    box-shadow: 0px 0px 3px 0px #706b6b42;
+}
+.price{
+    font-size: 18px;
+    font-weight: 500;
+    color: #ec7d23;
+    margin-bottom: 73px;
+    align-self: flex-start;
+}
+.wishlist-cart-empty{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.wishlist-cart-empty img{
+    width: 400px;
+    opacity: 0.4;
+}
+.wishlist-cart-empty h5{
+    margin-top: 10px;
+    color: #555;
+}
+@media (max-width:1024px) {
+img-item img {
+    width: 70%;
+    height: 70%;
+}
+}
+
+@media (max-width:821px) {
+    .wishlist-contents {flex-direction: column ;justify-content: center;align-items: center;}
+    .wishlist-cart-items{width: 600px !important;margin-bottom: 30px}
+    .price {margin-bottom: 88px;}
+    .item-del .btn-wishlist button {margin-top: 60px;}
+    .total-amount-price {width: 590px ;}
+}
+@media (max-width:540px){
+
+}
+@media(max-width: 415px){
+    .content-wishlist {justify-content: flex-end;}
+    .wishlist-carts {
+        width: 225px;
+        border-radius: 5px;
+        margin-top: 65px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center
+    }
+    .item-del {
+        display: flex !important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .img-item{height: 100px;margin-top: 60px;}
+    .img-item img{width: 88px;align-self: flex-end; margin-top: 60px;}
+    .text {display: flex;flex-direction: column;align-items: center;}
+    .wishlist-cart-empty h5 {font-size: 10px;}
+    
+    .item-del .text p {font-size: smaller;width: fit-content;}
+    .btn-wishlist{display: flex;}
+    .btn-wishlist {display: flex;flex-direction: column;align-items: flex-start}
+
+    .item-del .btn-wishlist button {font-size: 12px;margin-top: 10px}
+
+    .qty-price {display: flex;flex-direction: column;align-items: stretch;margin-top: 18px;}
+    .qty { margin-top: 15px;}
+    .price {margin-top: 10px;}
+    .wishlist-carts::after {width: 80%;}
+}

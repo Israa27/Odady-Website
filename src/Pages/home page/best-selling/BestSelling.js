@@ -2,10 +2,22 @@ import React from 'react'
 import { Container } from 'react-bootstrap';
 import ProductCard from '../../../Components/Card/ProductCard';
 import './bastSelling.css';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
+import { useLocation, useNavigate } from 'react-router';
+import { viweAllProducts } from '../../../redux/showAllSlice';
+
 export default function BestSelling() {
-  const {items,status}=useSelector(state=> state.products);
-  console.log(items.products)
+  const items=useSelector((state)=> state.product.best_seller_products);
+ 
+  const navigate=useNavigate();
+  const dispatch=useDispatch();
+  const showAllProducts =(e)=>{
+    dispatch(viweAllProducts(e.target.value))
+    navigate('/products') 
+  
+    
+}
+  
   return (
     
       <section className='best-selling'>
@@ -13,15 +25,15 @@ export default function BestSelling() {
           <div className=' header'>
            
             <h5>المنتجات الاكثر مبيعا</h5>
-            <button>  عرض المزيد <i className="fas fa-chevron-left"></i></button>
+            <button onClick={showAllProducts} value="best_seller=true" >  عرض المزيد <i className="fas fa-chevron-left"></i></button>
             
           </div>
       
        
          <div className='products'>
-         {items.slice(0, 4).map((item)=>{
+         {items.slice(0,4).map((item)=>{
               
-              return <ProductCard product={item} id={item.id} name={item.title} image={item.image} price={item.price} key={item.id} />
+              return <ProductCard product={item} id={item.id} name={item.name} image={item.ProductImage} price={item.price} key={item.id} />
 
             })}
             

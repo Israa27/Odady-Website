@@ -2,17 +2,22 @@ import React from 'react'
 import './form.css';
 import * as yup from 'yup';
 import { Formik } from 'formik';
-import { Row,Form ,InputGroup,FloatingLabel,Col } from 'react-bootstrap';
+import {Form ,InputGroup,Button} from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { postOrder } from '../../../Helpers/api/order';
+import {orderPending,orderSuccess,orderFail} from '../../../redux/order/orderSlice'
+
+
 export default function InformationUser() {
-   
+    const dispatch=useDispatch();
     const schema = yup.object().shape({
         firstname: yup.string().required('هذا الحقل مطلوب'),
         lastname: yup.string().required('هذا الحقل مطلوب'),
         email: yup.string().matches(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "البريد الكتروني غير صحيح ").required('هذا الحقل مطلوب'),
-        password:yup.string().matches(/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/,'كلمة المرور غير صالحة').min(8).required('هذا الحقل مطلوب'),
+        password:yup.string().min(8).required('هذا الحقل مطلوب'),
         phoneNumber:yup.number().required('هذا الحقل مطلوب'),
         governorate: yup.string().required('هذا الحقل مطلوب'),
-        region: yup.string().required('هذا الحقل مطلوب'),
+        city: yup.string().required('هذا الحقل مطلوب'),
         nearest: yup.string().required('هذا الحقل مطلوب'),
         nate:yup.string()
         
@@ -28,20 +33,54 @@ export default function InformationUser() {
                 onSubmit={console.log}
                 initialValues={{
                     firstname: '',
-                    lastname: '',
+                    lastname:'',
                     email:'',
                     password:'',
                     phoneNumber:'',
                     governorate :'',
-                    region:'',
+                    city:'',
                     nearest:'',
-                    
-                    
+                   
                 }}
                 onSubmit={async(values) => {
-                    
+                       let firstname=values.firstname,
+                           lastname=values.lastname,
+                           email=values.email,
+                           phoneNumber=values.phoneNumber,
+                           password=values.password,
+                           governorate=values.governorate,
+                           city=values.city,
+                           nearest=values.nearest;
+                           
+                        if(!values){return alert("يرجى ادخال البيانات ")}
                         
-                      
+                        dispatch(orderPending());
+                        
+                        try{
+                          const isAuth= await postOrder(
+                              { 
+                                firstname,
+                                lastname,
+                                email,
+                                phoneNumber,
+                                password,
+                                governorate,
+                                city,
+                                nearest,
+                               
+                            });
+                          if(isAuth.status === 'error'){
+                            return dispatch(orderFail(isAuth.message));
+                    
+                          }
+                          dispatch(orderSuccess());
+                          
+                          
+                        }
+                        catch(error){
+                          dispatch(orderFail(error.message));
+                    
+                        }
                       
                    
                 }}
@@ -113,7 +152,7 @@ export default function InformationUser() {
                     </Form.Group>
 
                     <Form.Group className='input-label' controlId="validationFormik03">
-                    <Form.Label>عنوان البريد الالكتروني</Form.Label>
+                    <Form.Label>كلمة المرور</Form.Label>
                     <InputGroup hasValidation>
                        
                         <Form.Control
@@ -217,6 +256,7 @@ export default function InformationUser() {
                         style={{ height: '100px' }}
                         />
                     </Form.Group>
+                    <Button className='register-btn' type="submit" >إنشاء حساب</Button>
         </Form>
       )}
     </Formik>

@@ -81,7 +81,7 @@
     margin-top: 12px;
 }
 hr{
-    width: 330px !important;
+    width: 100% !important;
     height: 2px;
     background-color: #d4d3d3 !important;
 }
@@ -100,14 +100,15 @@ hr{
     border-radius: 5px;
     cursor: pointer;
 }
+.btn-change{
+    background-color: #e5e5e5;
+}
 @media (max-width:820px){
-    .total-amount-price{
-        width: 700px;
-    }
+    .total-amount-price {width: 600px;}
 }
 @media (max-width:540px){
-    .total-amount-price{width: 400px;}
+    .total-amount-price{width: 450px !important }
 }
 @media(max-width: 415px){
-    .total-amount-price{width: 370px;}
+    .total-amount-price {width: 300px !important;}
 }

@@ -26,14 +26,14 @@ export default function PaginationPage({pages,currentPage,setCurrentPage}) {
         }
       };
   return <div className='pagination-item'>
-      <button onClick={handleNextbtn}>التالية</button>
+      <button onClick={handleNextbtn}><i className="fas fa-angle-double-right"></i></button>
       {pages.map(number=>{
           return<li className={currentPage == number ?'active' : null} key={number}id={number} onClick={handleClick}>{number}</li>
           
       })
 
       }
-       <button onClick={handlePrevbtn}>السابقة</button>
+       <button onClick={handlePrevbtn}><i className="fas fa-angle-double-left"></i></button>
   </div>
     
 

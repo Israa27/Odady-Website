@@ -1,5 +1,5 @@
 .register-card{
-    width: 50%;
+    width: 60%;
     display: flex;
     flex-direction: row-reverse !important;
     justify-content: space-between;
@@ -7,16 +7,15 @@
     box-shadow: 0px 0px 10px 4px #eeeeee85; 
 
 }
-.register-card .register-img{
+.register-card .register-bg{
     background-color: #ec7d2391;
-    width: 250px;
+    width: 350px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
     position: relative;
 }
-.register-card .register-img img{
-    width: 100%; 
+.register-card .register-bg .register-img{
     position: absolute;
     right: -80px;
 }
@@ -27,6 +26,7 @@
     align-items: flex-start;
     padding: 20px;
 }
+
 .register-form label{ 
     font-size: 15px;
     color: #a3a3a3;
@@ -35,7 +35,7 @@
     padding-right: 2px;
 }
 .register-form input ,.register-form select{
-    width: 250px !important;
+    width: 330px !important;
     height: 40px !important;
     border-radius: 3px;
     border: 2px solid #eee;
@@ -77,23 +77,46 @@ input[type=number]::-webkit-inner-spin-button {
 }
 
 .invalid-feedback {
-    margin-bottom: 15px !important;
-    margin-top: -10px !important;
+    margin-bottom: 20px !important;
+    margin-top: 0px !important;
     width: 80% !important;
 
 }
 .input-group>.form-control, .input-group>.form-select{
     flex: none !important;
 }
-@media (max-width:992px){
-    .register-card .register-img img {right: 0px;}
+@media (max-width:1024px){
+.register-card {width: 60%;display: flex;flex-direction: column !important;align-items: center;}
+.register-card .register-bg {
+    background-color: #ec7d2391;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 314px;
+    
 }
-@media (max-width:768px) {
-    .register-card{justify-content: center;flex-wrap: wrap;}
-    .register-form{align-self: start;}
-    .register-card .register-img,.register-card .register-img img {
-        width: 100%;
-        position: initial;
+
+.register-card .register-bg .register-img {width: 340px;position:unset !important}
+.register-form input, .register-form select,.register-name .input-label input {width: 375px ;}
+.register-checkbox input {
+    width: 19px !important;
+    height: 19px !important;
+}
+}
+@media (max-width:992px){
+.register-card {align-items: flex-start !important}
+.register-checkbox input {
+    width: 19px !important;
+    height: 19px !important;
+} 
+    
+}
+@media (max-width:415px) {
+    
+    .register-checkbox input {
+        width: 19px !important;
+        height: 19px !important;
     }
+    .register-checkbox label{width: 129px;font-size: 11px;}
        
 }

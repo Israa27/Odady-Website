@@ -12,12 +12,13 @@ export default function Register() {
     const navigate = useNavigate();
     const dispatch=useDispatch();
     const schema = yup.object().shape({
-        username: yup.string().required('هذا الحقل مطلوب'),
+        firstname: yup.string().required('هذا الحقل مطلوب'),
+        lastname: yup.string().required('هذا الحقل مطلوب'),
         email: yup.string().matches(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "البريد الكتروني غير صحيح ").required('هذا الحقل مطلوب'),
-        password:yup.string().matches(/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/,'كلمة المرور غير صالحة').min(8).required('هذا الحقل مطلوب'),
+        password:yup.string().min(8).required('هذا الحقل مطلوب'),
         phoneNumber:yup.number().required('هذا الحقل مطلوب'),
         governorate: yup.string().required('هذا الحقل مطلوب'),
-        region: yup.string().required('هذا الحقل مطلوب'),
+        city: yup.string().required('هذا الحقل مطلوب'),
         nearest: yup.string().required('هذا الحقل مطلوب'),
         checkbox: yup.bool().required('هذا الحقل مطلوب').oneOf([true]),
         
@@ -28,45 +29,53 @@ export default function Register() {
     return (
         <div>
             <div className='register-card'>
-                <div className='register-img'>
+                <div className='register-bg'>
+                  <div className='register-img'>
                     <img src={img} alt='' />
+                   </div>
                 </div>
               
               <Formik
                 validationSchema={schema}
                 onSubmit={console.log}
                 initialValues={{
-                    username: '',
+                    firstname: '',
+                    lastname:'',
                     email:'',
                     password:'',
                     phoneNumber:'',
                     governorate :'',
-                    region:'',
+                    city:'',
                     nearest:'',
-                    checkbox: false,
+                    checkbox:false,
+                   
                 }}
                 onSubmit={async(values) => {
-                       let username=values.username,
+                       let firstname=values.firstname,
+                           lastname=values.lastname,
                            email=values.email,
                            phoneNumber=values.phoneNumber,
                            password=values.password,
                            governorate=values.governorate,
-                           nearest=values.nearest,
-                           checkbox=values.checkbox;
-                        if (!values){
-                          return alert("يرجى ادخال البيانات ")
-                        }
+                           city=values.city,
+                           nearest=values.nearest;
+                           
+                        if(!values){return alert("يرجى ادخال البيانات ")}
+                        
                         dispatch(registerPending());
+                        
                         try{
                           const isAuth= await userRegister(
                               { 
-                                username,
+                                firstname,
+                                lastname,
                                 email,
                                 phoneNumber,
                                 password,
                                 governorate,
+                                city,
                                 nearest,
-                                checkbox
+                               
                             });
                           if(isAuth.status === 'error'){
                             return dispatch(registerFail(isAuth.message));
@@ -95,23 +104,43 @@ export default function Register() {
                 errors,
             }) => (
                 <Form noValidate className='register-form' onSubmit={handleSubmit}>
-                    <Form.Group  controlId="validationFormikUsername">
-                    <Form.Label>اسم المستخدم</Form.Label>
+                   
+                     <Form.Group className='input-register-name'  controlId="validationFormikUsername01">
+                    <Form.Label>الاسم الاول</Form.Label>
                     <InputGroup hasValidation>
                        
                         <Form.Control
                         type="text"
                         aria-describedby="inputGroupPrepend"
-                        name="username"
-                        value={values.username}
+                        name="firstname"
+                        value={values.firstname}
                         onChange={handleChange}
-                        isInvalid={!!errors.username}
+                        isInvalid={!!errors.firstname}
                         />
                         <Form.Control.Feedback type="invalid">
-                        {errors.username}
+                        {errors.firstname}
                         </Form.Control.Feedback>
                     </InputGroup>
                     </Form.Group>
+
+                    <Form.Group className='input-label'  controlId="validationFormikUsername02">
+                    <Form.Label>الاسم  الاخير</Form.Label>
+                    <InputGroup hasValidation>
+                       
+                        <Form.Control
+                        type="text"
+                        aria-describedby="inputGroupPrepend"
+                        name="lastname"
+                        value={values.lastname}
+                        onChange={handleChange}
+                        isInvalid={!!errors.lastname}
+                        />
+                        <Form.Control.Feedback type="invalid">
+                        {errors.lastname}
+                        </Form.Control.Feedback>
+                    </InputGroup>
+                    </Form.Group>
+                   
 
                     <Form.Group  controlId="validationFormik02">
                     <Form.Label>عنوان البريد الالكتروني</Form.Label>
@@ -177,6 +206,7 @@ export default function Register() {
                        value={values.governorate}
                        onChange={handleChange}
                        isInvalid={!!errors.governorate}>
+                        <option> </option>
                         <option >بغداد</option>
                         <option >كركوك</option>
                         <option>الانبار</option>
@@ -203,13 +233,13 @@ export default function Register() {
                     <Form.Label>المنطقة</Form.Label>
                     <Form.Control
                         type="text"
-                        name="region"
-                        value={values.region}
+                        name="city"
+                        value={values.city}
                         onChange={handleChange}
-                        isInvalid={!!errors.region}
+                        isInvalid={!!errors.city}
                     />
                     <Form.Control.Feedback type="invalid">
-                        {errors.region}
+                        {errors.city}
                     </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group  controlId="validationFormik07">

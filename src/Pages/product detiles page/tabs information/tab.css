@@ -4,3 +4,10 @@
 }
 .nav{height: 45px !important;}
 .nav-link{color: #252525 !important; font-weight: 700;}
+
+@media (max-width:280px){
+    .nav-tabs {
+        width: 100%;
+        font-size: 10px;
+    }
+}

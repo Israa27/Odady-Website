@@ -2,12 +2,12 @@ import React, {useEffect, useState} from 'react';
 import { Link, useLocation,useNavigate } from 'react-router-dom';
 import { Container,Form ,Button,InputGroup} from 'react-bootstrap';
 import './login.css';
-import { userLogin } from '../../Helpers/api/userLogin';
+import { Login } from '../../Helpers/api/userLogin';
 import {loginPending,loginSuccess,loginFail}  from '../../redux/loginSlice';
 import { useSelector ,useDispatch} from 'react-redux';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import { getUserProfile } from '../../redux/userAction';
+import { getUserProfile } from '../../redux/user/userAction';
 export default function LogIn() {
 
   const dispatch=useDispatch();
@@ -16,8 +16,8 @@ export default function LogIn() {
   const { isLoading, isAuth, error } = useSelector((state) => state.login);
 	let { from } = location.state || { from: { pathname: "/" } };
   const schema = yup.object().shape({
-    username: yup.string().required('هذا الحقل مطلوب'),
-    password:yup.string().matches(/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/,'كلمة المرور غير صالحة').min(8).required('هذا الحقل مطلوب'),
+    email: yup.string().matches(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "البريد الكتروني غير صحيح ").required('هذا الحقل مطلوب'),
+    password:yup.string().min(8).required('هذا الحقل مطلوب'),
  
     
 
@@ -34,19 +34,19 @@ export default function LogIn() {
                 validationSchema={schema}
                 onSubmit={console.log}
                 initialValues={{
-                    username: '',
+                    email: '',
                     password:'',
                   
                 }}
                 onSubmit={async(values) => {
-                  const username=values.username
+                  const email=values.email
                   const password=values.password
-                  if (!username || !password){
+                  if (!email || !password){
                     return alert("يرجى ادخال البيانات ")
                   }
                   dispatch(loginPending());
                   try{
-                    const isAuth= await userLogin({username,password});
+                    const isAuth= await Login({email,password});
                     if(isAuth.status === 'error'){
                       return dispatch(loginFail(isAuth.message));
               
@@ -86,16 +86,16 @@ export default function LogIn() {
                       </InputGroup.Text>
 
                       <Form.Control
-                        type="text"
+                        type="email"
                         placeholder="اسم المستخدم"
                         aria-describedby="inputGroupPrepend"
-                        name="username"
-                        value={values.username}
+                        name="email"
+                        value={values.email}
                         onChange={handleChange}
-                        isInvalid={!!errors.username}
+                        isInvalid={!!errors.email}
                       />
                       <Form.Control.Feedback type="invalid">
-                        {errors.username}
+                        {errors.email}
                       </Form.Control.Feedback>
                    </InputGroup>
                   </Form.Group>

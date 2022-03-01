@@ -1,6 +1,6 @@
 .card{
     margin-top: 20px;
-   width: 300px !important;
+   width: 300px ;
    border-radius: 10px;
    border: none;
    display: flex;
@@ -29,16 +29,14 @@
 .card img{
     width: 160px;
     height: 160px;
+    cursor: pointer;
    
 }
 .card .span{font-size: 17px;}
 .card .card-span,.card-span1{
     text-align: center;
     line-height: 1.6;
-    white-space: nowrap;
-    text-overflow: clip;
-    overflow: hidden;
-    width: 198px;
+    font-size: 17px;
 }
 .card-span1{color: rgb(223, 111, 111);}
 .card .card-add-to-btn{
@@ -54,10 +52,22 @@
     font-size: 17px;
     font-weight: 600;
     border-radius: 5px;
+    transition: 0.5s ease-out;
+}
+.card .card-add-to-btn:hover{
+    background-color: #444444;
+
 }
 @media (max-width:1024px){
+  
+    .card {width: 290px ;}
     .card img{width: 100px;}
+    .card .card-add-to-btn{width: 200px;}
 }
+
 @media (max-width:913px){
-.card { width: 335px !important}
+.card { width: 335px }
+}
+@media (max-width:540px){
+.card {width: 230px ;}
 }

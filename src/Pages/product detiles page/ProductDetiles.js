@@ -10,11 +10,11 @@ import RelatedProducts from './Related Products/RelatedProducts';
 import TabInf from './tabs information/TabInf';
 import { useSelector } from 'react-redux';
 export default function ProductDetiles() {
-  const product=useSelector((state)=> state.product_id.item);
+ 
 
   return <div>
-      <Navbar />
-      <SecondaryNav name={product.title}/>
+      
+      <SecondaryNav name='hi'/>
       <section className='product-detiles' >
         <Container className='flex items-center justify-between'>
           <Detiles />
@@ -27,6 +27,6 @@ export default function ProductDetiles() {
       <section className='related-products'>
         <RelatedProducts />
       </section>
-      <Footer />
+      
   </div>;
 }

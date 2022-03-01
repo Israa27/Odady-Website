@@ -6,6 +6,11 @@
     margin-bottom: 20px;
     font-weight: bold;
 }
+.invalid-feedback {
+    margin-bottom: 15px !important;
+    margin-top: 0px !important;
+    width: 80% !important;
+}
 .name{
   display: flex;
   width: 465px;
@@ -42,17 +47,37 @@ textarea{
     height: 200px;
     padding: 13px !important;
 }
-@media (max-width:913px){
-    .input-label input, .input-label select, textarea{width: 500px;}
+@media (max-width:1280px){
+.all-input {margin-right: 20px}
+}
+@media (max-width:1024px){
+    .input-label input, .input-label select, textarea{width:400px;}
+    .name .input-label input{width: 200px;}
+}
+
+@media (max-width:920px){
+    .all-input {margin-right: 30px;}
+    .all-content {justify-content: flex-start;align-items: self-start;}
+    .name {flex-direction: column;}
+    .input-label {margin-right: 15px;}
+    .name .input-label input {width: 275px !important;}
+    .input-label input, .input-label select, textarea{width: 275px !important;}
 
 }
 @media (max-width:820px) {
     .name .input-label input{width: 250px;}
 }
 
+@media(max-width: 540px){
+    
+    .name{flex-direction: column;}
+    .input-label input, .input-label select, textarea {width: 400px !important;}
+    .name .input-label input{width: 400px !important}
+}
 @media(max-width: 415px){
+    .input-label {margin-right: 70px;}
     .all-content{justify-content: center;}
     .name{flex-direction: column;}
-    .name .input-label input{width: 360px;}
+    .name .input-label input{width: 320px !important;}
     .input-label input, .input-label select, textarea{width: 360px;}
 }

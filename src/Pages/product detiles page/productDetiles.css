@@ -6,3 +6,9 @@
     margin-top: 170px;
     margin-bottom: 40px;
 }
+@media (max-width:1280px){
+    .main-img {width: 365px; }
+}
+@media (max-width:1024px){
+    .main-img {width: 365px; }
+}

@@ -7,11 +7,11 @@ import './Checout.css';
 import InformationUser from './right side/InformationUser';
 export default function Checkout() {
   return <div>
-    <Navbar />
+   
     <section className='all-content' >
       <InformationUser/>
       <OrderForm />
       </section>
-      <Footer />
+     
   </div>;
 }
