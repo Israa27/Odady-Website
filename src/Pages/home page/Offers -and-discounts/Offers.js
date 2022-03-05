@@ -6,7 +6,7 @@ import ProductCard from '../../../Components/Card/ProductCard';
 import { Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 export default function Offers() {
-    const {items,status}=useSelector(state=> state.products);
+    const items=useSelector((state)=> state.product.popular_products);
     return (
         <section className='offers'>
         <Container>
@@ -33,10 +33,9 @@ export default function Offers() {
               </div>
           </div>
           <div className='products'>
-          {items.slice(0, 4).map((item)=>{
+          {items.slice(0,4).map((item)=>{
               
-              return <ProductCard products={item} id={item.id} name={item.title} image={item.image} price={item.price} key={item.id} />
-
+              return <ProductCard product={item} id={item.id} name={item.name} image={item.images[0].image } price={item.price} key={item.id} />
             })}
           </div>
           </Container>

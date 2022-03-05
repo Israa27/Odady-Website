@@ -2,18 +2,20 @@ import React, { useState ,useEffect}  from 'react';
 import ProductCard from '../../Components/Card/ProductCard';
 import SecondaryNav from '../../Components/secondary navbar/SecondaryNav';
 import { Container } from 'react-bootstrap';
+import { BASE_URL } from '../../Helpers/Constants';
 import SpinnerLoading from '../../Components/spinner/SpinnerLoading'
+import img from '../../Assets/images/undefined.png';
 import './product.css';
-import { useSelector } from 'react-redux';
 import PaginationPage from './Pagination/PaginationPage';
+import {  useSelector,useDispatch } from 'react-redux';
 export default function Product() {
     
-    const products=useSelector((state)=> state.all.all_products);
+    const products=JSON.parse(localStorage.getItem("allProducts"));
     const status=useSelector((state)=> state.all);
 
 
     //sort 
-    const[sort,setSort]=useState(products);
+    const[sort,setSort]=useState([]);
     const[fliterProducts,setFilterProducts]=useState([]);
 
     //pagination
@@ -25,15 +27,12 @@ export default function Product() {
     };
     const indexOfLastItem=currentPage*itemPerPage;
     const indexOfFisrtItem=indexOfLastItem-itemPerPage;
-    const currentItems=fliterProducts.slice(indexOfFisrtItem,indexOfLastItem);
+    const filterItems=fliterProducts.slice(indexOfFisrtItem,indexOfLastItem);
   //pagination
 
 
  useEffect(()=>{
-  if (sort === "all"){
-    setFilterProducts(products)
-  }
-  else if (sort === "asc") {
+  if (sort === "asc") {
     const lowestPrice = products
       .map((product) => product)
       .sort((a, b) => a.price - b.price);;
@@ -60,18 +59,17 @@ export default function Product() {
          <Container>
           <div className='filter-items'>
             <select onChange={(e)=>setSort(e.target.value)}>
-              <option value='all' >الترتيب الافتراضي</option>
+              <option  >الترتيب الافتراضي</option>
               <option value='asc'>ترتيب حسب: الأدنى سعراً للأعلى</option>
               <option value='desc'>ترتيب حسب: الأعلى سعراً للأدنى</option>
             </select>
           </div>
-         <div className='list-items'>
+          <div className='list-items'>
     
-         {currentItems.map((item)=>{
-                
-                return <ProductCard product={item} id={item.id} name={item.name} image={item.ProductImage} price={item.price} key={item.id} />
-
-              })}
+          {filterItems.slice(0,4).map((item)=>{
+              
+              return <ProductCard product={item} id={item.id} name={item.name} image={item.images[0].image } price={item.price} key={item.id} />
+            })}
           
           </div>
           

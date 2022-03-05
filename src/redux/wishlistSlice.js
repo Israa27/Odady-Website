@@ -29,7 +29,7 @@ export const wishlistSlice = createSlice({
       else{
         const productNot={...action.payload,qty:1};
         state.wishListItems.push(productNot)
-        toast.error(`تم اضافة ${action.payload.title} الى قائمة الرغبات `,{position:'bottom-left'});
+        toast.error(`تم اضافة ${action.payload.name} الى قائمة الرغبات `,{position:'bottom-left'});
        
       };
       localStorage.setItem('wishList',JSON.stringify(state.wishListItems))
@@ -60,7 +60,7 @@ export const wishlistSlice = createSlice({
         if (state.wishListItems[itemIndex].qty > 1) {
           state.wishListItems[itemIndex].qty -= 1;
 
-          toast.error(`تم تقليل الكمية ${action.payload.title} `,{position:'bottom-left'});
+          toast.error(`تم تقليل الكمية ${action.payload.name} `,{position:'bottom-left'});
         }
         else if (state.wishListItems[itemIndex].qty === 1) {
           const nextwishListItems = state.wishListItems.filter(
@@ -68,7 +68,7 @@ export const wishlistSlice = createSlice({
           );
   
           state.wishListItems = nextwishListItems;
-            toast.error(`تم حذف العنصر من قائمة ${action.payload.title} `,{position:'bottom-left'});
+            toast.error(`تم حذف العنصر من قائمة ${action.payload.name} `,{position:'bottom-left'});
             
         }
         localStorage.setItem('wishList',JSON.stringify(state.wishListItems))

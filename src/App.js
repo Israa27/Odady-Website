@@ -8,6 +8,7 @@ import ForgetPassword from './Pages/forget password/ForgetPassword';
 import ResetPassword from './Pages/reset password/ResetPassword';
 import LogIn from './Pages/login page/LogIn';
 import Layouts from './layouts/Layouts'
+import { PrivateRoute } from './private route/PrivateRoute';
 
 
 function App() {
@@ -22,10 +23,13 @@ function App() {
           <Route exact path="/login" element={<LogIn />}/>
           <Route exact path="/products" element={<Layouts />}/>
           <Route exact path="/product_detiles" element={<Layouts />}/>
-          <Route exact path="/checkout" element={<Layouts />}/>
+          
+          <Route element={<PrivateRoute />}>
           <Route exact path="/cart" element={<Layouts />}/>
+          <Route exact path="/checkout" element={<Layouts/>}/>
           <Route exact path="/contact" element={<Layouts />}/>
           <Route exact path="/wishlist" element={<Layouts />}/>
+          </Route>
           <Route exact path="/privacy" element={<Layouts />}/>
           <Route exact path="/transfer" element={<Layouts />}/>
           <Route exact path="/profile_user" element={<Profile />}/>

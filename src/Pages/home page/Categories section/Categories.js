@@ -11,12 +11,12 @@ import img7 from '../../../Assets/images/7v.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSubCategory } from '../../../redux/catgoriesSlice';
 export default function Categories() {
-    const items=useSelector(state=> state.products.items);
+    //const items=useSelector(state=> state.products.items);
     const dispatch=useDispatch();
-    const[data,setData]=useState(items);
+    //const[data,setData]=useState(items);
     const location=useLocation();
     const showAllProducts =(e)=>{
-        //dispatch(viweAllProducts(e.target.value))
+      //  dispatch(viweAllProducts(e.target.value))
         console.log(e.target.value)
       
         
@@ -27,33 +27,33 @@ export default function Categories() {
            <div className='category-grid'>
                <div className='category-card'>
                    <img src={img1} alt=''/>
-                   <button >كوسرا</button>
+                   <button onClick={showAllProducts} value= ''>كوسرا</button>
                </div>
 
                <div className='category-card'>
                    <img src={img2} alt=''/>
-                   <button onClick={showAllProducts}  value='f333' component={Link} to='/products'>كوسرا شحن</button>
+                   <button onClick={showAllProducts}  value='كوسرا شحن' component={Link} to='/products'>كوسرا شحن</button>
                </div>
 
                <div className='category-card'>
                    <img src={img3} alt=''/>
-                   <button onClick={showAllProducts} value='fff' component={Link} to='/product'>منشار تخريم</button>
+                   <button onClick={showAllProducts} value='منشار تخريم' component={Link} to='/product'>منشار تخريم</button>
                </div>
                <div className='category-card'>
                    <img src={img4} alt=''/>
-                   <button onClick={showAllProducts}  value='f333' component={Link} to='/product'>مولدات</button>
+                   <button onClick={showAllProducts}  value='مولدات' component={Link} to='/product'>مولدات</button>
                </div>
                <div className='category-card'>
                    <img src={img5} alt=''/>
-                   <button onClick={showAllProducts}  value='f333' component={Link} to='/product'>دريل</button>
+                   <button onClick={showAllProducts}  value='دريل' component={Link} to='/product'>دريل</button>
                </div>
                <div className='category-card'>
                    <img src={img6} alt=''/>
-                   <button onClick={showAllProducts}   component={Link} to='/product'>ادوات لحام</button>
+                   <button onClick={showAllProducts}  value='ادوات لحام' component={Link} to='/product'>ادوات لحام</button>
                </div>
                <div className='category-card'>
                    <img src={img7} alt=''/>
-                   <button onClick={showAllProducts}  value='f333' component={Link} to='/product'>ماطورات</button>
+                   <button onClick={showAllProducts}  value='ماطورات' component={Link} to='/product'>ماطورات</button>
                </div>
            </div>
         </div>

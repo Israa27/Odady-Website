@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 export default function PaginationPage({pages,currentPage,setCurrentPage}) {
     const [pageNumberLimit, setpageNumberLimit] = useState(5);
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
-    const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
+    const [minPageNumberLimit, setminPageNumberLimit] = useState(1);
     const handleClick =(event)=>{
         setCurrentPage(Number(event.target.id))
     };

@@ -30,7 +30,8 @@
 
 }
 .search-input input:focus{
-    outline: none;
+    outline: none !important;
+    
 }
 .navbar-search-input .navbar-search-btn{ 
     position: absolute;

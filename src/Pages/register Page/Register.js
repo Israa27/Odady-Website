@@ -15,7 +15,7 @@ export default function Register() {
         firstname: yup.string().required('هذا الحقل مطلوب'),
         lastname: yup.string().required('هذا الحقل مطلوب'),
         email: yup.string().matches(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "البريد الكتروني غير صحيح ").required('هذا الحقل مطلوب'),
-        password:yup.string().min(8).required('هذا الحقل مطلوب'),
+        password:yup.string(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,'ثمانية أحرف كحد أدنى ، حرف كبير واحد على الأقل ، حرف صغير واحد ورقم واحد').matches().min(8,'ثمانية احرف كحد اقصى').required('هذا الحقل مطلوب'),
         phoneNumber:yup.number().required('هذا الحقل مطلوب'),
         governorate: yup.string().required('هذا الحقل مطلوب'),
         city: yup.string().required('هذا الحقل مطلوب'),
@@ -82,6 +82,7 @@ export default function Register() {
                     
                           }
                           dispatch(registerSuccess());
+                          navigate('/')
                           
                           
                         }
@@ -123,7 +124,7 @@ export default function Register() {
                     </InputGroup>
                     </Form.Group>
 
-                    <Form.Group className='input-label'  controlId="validationFormikUsername02">
+                    <Form.Group className='input-register-name'  controlId="validationFormikUsername02">
                     <Form.Label>الاسم  الاخير</Form.Label>
                     <InputGroup hasValidation>
                        

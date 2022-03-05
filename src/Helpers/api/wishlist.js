@@ -1,9 +1,8 @@
 import axios from "axios"
 import {BASE_URL} from '../Constants';
 import Swal from 'sweetalert2'
-const createCartURL=BASE_URL+'/orders/add-to-cart'
-const viweCart=BASE_URL+'/orders/cart'
-
+const addItem=BASE_URL+'/wish list/add-to-wishes'
+const getWishlist =BASE_URL+'/wish list/wishes list';
 const token = JSON.parse(localStorage.getItem("token"));
 axios.interceptors.request.use(
   config=>{
@@ -12,12 +11,12 @@ axios.interceptors.request.use(
   }
 )
 
-export const  createCart=({id,qty})=> {
+export const  createWishlist=(id)=> {
   return new Promise(async(resolve,reject)=>{
       try{
-          const res= await axios.post(createCartURL,{
+          const res= await axios.post(addItem,{
                 product_id: id,
-                item_qty:qty
+                
             },
       
         );
@@ -26,7 +25,7 @@ export const  createCart=({id,qty})=> {
               
            resolve(res.data);
           }
-  
+          localStorage.setItem('wishlist',JSON.stringify('wishlist'))
       }catch(error){
         Swal.fire({
             icon: 'error',
@@ -39,10 +38,10 @@ export const  createCart=({id,qty})=> {
     })
 }
 
-export const  getCartItems=()=> {
+export const  getItems=()=> {
   return new Promise(async(resolve,reject)=>{
       try{
-          const res= await axios.get(viweCart,{
+          const res= await axios.get(getWishlist,{
              
           }
         );
@@ -51,7 +50,7 @@ export const  getCartItems=()=> {
            
              resolve(res.data);
           }
-          //localStorage.setItem('cartItems',JSON.stringify(res.data))
+          localStorage.setItem('wishlist',JSON.stringify(res.data))
       }catch(error){
         Swal.fire({
             icon: 'error',
@@ -66,15 +65,22 @@ export const  getCartItems=()=> {
 export const  removeItem=(id)=> {
   return new Promise(async(resolve,reject)=>{
       try{
-          const res= await axios.delete(`${BASE_URL}/orders/item/${id}`,{
+          const res= await axios.delete(`${BASE_URL}/wish list/wish/${id}`,{
              
           }
         );
           resolve(res.data);
           if (res.status === 200){
-           
-            localStorage.setItem('cartItems',JSON.stringify(res.data))
+            resolve(res.data);
+            Swal.fire({
+                icon: 'success',
+                title: 'تمت عملية بالنجاح',
+                text: 'تمت حذف المنتج ',
+                
+              })
+            
           }
+          localStorage.setItem('wishlist',JSON.stringify(res.data))
   
       }catch(error){
         Swal.fire({

@@ -4,7 +4,7 @@ import ProductCard from '../../../Components/Card/ProductCard';
 import './relatedProducts.css';
 import { useSelector } from 'react-redux';
 export default function RelatedProducts() {
-  const {items,status}=useSelector(state=> state.products);
+  const items=useSelector(state=>state.all.all_products);
     return (
         <section className='related-products'>
           <Container >
@@ -16,7 +16,7 @@ export default function RelatedProducts() {
          <div className='products'>
          {items.slice(0, 4).map((item)=>{
               
-              return <ProductCard id={item.id} product={item} name={item.title} image={item.image} price={item.price} key={item.id} />
+              return <ProductCard id={item.id} product={item} name={item.name} image={item.images} price={item.price} key={item.id} />
 
             })}
          </div>

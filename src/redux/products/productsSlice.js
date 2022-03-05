@@ -70,17 +70,18 @@ export const getProductDetails = createAsyncThunk(
   async (id)=> {
     
     try {
-      const response = await axios.get(URL,{
-          params:{id:id},
-          mode: 'no-cors',
+      const response = await axios.get(`${URL}/${id}`,{
+
           headers:{
             "Content-Type" : "application/json",
             'Access-Control-Allow-Origin': '*',
         }
       }
     );
-    localStorage.setItem('product',JSON.stringify(response.data[id]))
-     return response.data[id];
+    localStorage.setItem('product',JSON.stringify(response.data))
+    return response.data;
+   
+     
     
     } catch (error) {
       console.log(error);
@@ -104,7 +105,7 @@ export const searchProducts = createAsyncThunk(
         }
       }
     )
-     console.log( response.data);
+     return response.data;
     
     } catch (error) {
       console.log(error);

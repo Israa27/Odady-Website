@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { Container } from 'react-bootstrap';
 import ProductCard from '../../../Components/Card/ProductCard';
 import '../best-selling/bastSelling.css';
+import { BASE_URL } from '../../../Helpers/Constants';
 import { useSelector,useDispatch } from 'react-redux';
 import {  useNavigate } from 'react-router';
 import { viweAllProducts } from '../../../redux/showAllSlice';
@@ -33,8 +34,7 @@ export default function NewlyProducts() {
 
        {items.slice(0,4).map((item)=>{
               
-              return <ProductCard product={item} id={item.id} name={item.name} image={item.ProductImage} price={item.price} key={item.id} />
-
+              return <ProductCard product={item} id={item.id} name={item.name} image={item.images[0].image } price={item.price} key={item.id} />
             })}
             
          </div>

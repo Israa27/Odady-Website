@@ -15,7 +15,9 @@ export default function OrderForm() {
       dispatch(getTotalPrice())
   },[cart,dispatch]);
 
-
+const hadleSubmit=()=>{
+  
+}
 
   return <div>
       <div className="order-total-amount">
@@ -28,7 +30,7 @@ export default function OrderForm() {
           <div className="order">
           {cart.cartItems.map((item)=>{ 
                 return<div className="product">
-                <p>{item.title} </p>
+                <p>{item.name} </p>
                 <span className='order-span2'>{item.price * item.qty} دينار</span>
                 </div>
           })}
@@ -39,24 +41,24 @@ export default function OrderForm() {
           <div className="order-radio-btn">
               <p>الشحن</p>
               <div className='radio'>
-                  <input type='radio'id='radio1'  value='5' onChange={(e)=>setValue(e.target.value)} checked={value === '5'} required/>
+                  <input type='radio'id='radio1'  value='5000' onChange={(e)=>setValue(e.target.value)} checked={value === '5000'} required/>
                   <label  htmlFor ='radio1'>داخل بغداد : 5000 دينار</label>
                </div>
                <div className='radio'>
-                  <input type='radio' id='radio2'  value='8' onChange={(e)=>setValue(e.target.value)} checked={value === '8'} required/>
+                  <input type='radio' id='radio2'  value='8000' onChange={(e)=>setValue(e.target.value)} checked={value === '8000'} required/>
                   <label htmlFor ='radio2'> باقي المحافظات : 8000 دينار</label>
                 </div>
                 <div className='radio'>
                   <input type='radio' id='radio3' value='0' onChange={(e)=>setValue(e.target.value)} checked={value === '0'} required/>
                   <label  htmlFor ='radio3'>الشحن المجاني</label>
                 </div>
-                <span className='order-span2'>سيتم تحديث الخيارات الشحن اثناء السداد</span>
+                
                 <hr/>    
               
           </div>
           <div className="order-temporary-amount ">
               <p>الاجمالي</p>
-              <span className='span'>{cart.totalPrice + (+value)} دينار</span>
+              <span className='span'>{ (+value)+cart.totalPrice } دينار</span>
           </div>
           <div className="radio-btn">
               <div className='radio'>

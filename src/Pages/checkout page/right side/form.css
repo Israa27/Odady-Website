@@ -47,6 +47,11 @@ textarea{
     height: 200px;
     padding: 13px !important;
 }
+.is-invalid~.invalid-feedback, .is-invalid~.invalid-tooltip, .was-validated :invalid~.invalid-feedback, .was-validated :invalid~.invalid-tooltip {
+    margin-top: -3px !important;
+    border-top-left-radius: 4px !important;
+    border-bottom-left-radius: 4px !important;
+}
 @media (max-width:1280px){
 .all-input {margin-right: 20px}
 }

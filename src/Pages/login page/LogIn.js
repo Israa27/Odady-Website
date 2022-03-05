@@ -17,7 +17,7 @@ export default function LogIn() {
 	let { from } = location.state || { from: { pathname: "/" } };
   const schema = yup.object().shape({
     email: yup.string().matches(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "البريد الكتروني غير صحيح ").required('هذا الحقل مطلوب'),
-    password:yup.string().min(8).required('هذا الحقل مطلوب'),
+    password:yup.string(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,'ثمانية أحرف كحد أدنى ، حرف كبير واحد على الأقل ، حرف صغير واحد ورقم واحد').matches().min(8,'ثمانية احرف كحد اقصى').required('هذا الحقل مطلوب'),
  
     
 
@@ -53,7 +53,7 @@ export default function LogIn() {
                     }
                     dispatch(loginSuccess());
                     dispatch(getUserProfile());
-                   console.log('hi')
+                    navigate('/')
                   }
                   catch(error){
                     dispatch(loginFail(error.message));
@@ -125,16 +125,15 @@ export default function LogIn() {
                   </Form.Group>
                    
 
-                    <Link to='/forgetpassword'>هل نسيت كلمة السر</Link>
-
+                    <Link to='/resetpassword'>هل نسيت كلمة السر</Link>
                     <Button className='login-btn' type="submit" >تسجيل الدخول</Button>
-                  
+                   
                
                  
                     
                    
                   </div>
-    
+                  
       
                    </Form>
                    )}

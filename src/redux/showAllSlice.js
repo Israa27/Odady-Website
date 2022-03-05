@@ -22,7 +22,7 @@ export const viweAllProducts = createAsyncThunk(
         
       }  
     })
-      
+    localStorage.setItem('allProducts',JSON.stringify(response.data))
       return response.data;
       
       } catch (error) {

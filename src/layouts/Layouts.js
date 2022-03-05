@@ -30,7 +30,7 @@ export default function Layouts() {
         return <Product />
       case '/product_detiles':
         return <ProductDetiles/>
-      case '/checkouts':
+      case '/checkout':
         return <Checkout/>
       case '/contact':
         return <Contact/>
@@ -45,16 +45,22 @@ export default function Layouts() {
   const {items,status}=useSelector(state=> state.product);
 
   return<div>
-     { status === 'pending' ?(
-       
-         <SpinnerLoading/>
-      ):(
-      <div>
+    
+
       <Navbar />
+      { status === 'pending' ?(
+           
+       <SpinnerLoading/>
+      
+    ):(
+      <div>
         {renderContent(location.pathname)}
+        
+        </div>
+        )}
       <Footer />
-      </div>
-      )}
+      
+     
     </div>
   
 }

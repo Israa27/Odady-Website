@@ -256,7 +256,7 @@ export default function InformationUser() {
                         style={{ height: '100px' }}
                         />
                     </Form.Group>
-                    <Button className='register-btn' type="submit" >إنشاء حساب</Button>
+                   
         </Form>
       )}
     </Formik>

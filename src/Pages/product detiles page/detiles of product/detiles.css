@@ -53,6 +53,10 @@
     background-color: #EC7D23;
     height: 50px;
     border-radius: 2px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-add-to-wishlist button{

@@ -1,13 +1,13 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import './card.css';
 import { Card} from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from '../../redux/cartSlice';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { addToWishList } from '../../redux/wishlistSlice';
-import { Link, useNavigate,useParams} from 'react-router-dom';
+import {  useNavigate} from 'react-router-dom';
 import { getProductDetails } from '../../redux/products/productsSlice';
-
+import {addToCart } from '../../redux/cartSlice';
+import {createWishlist} from '../../Helpers/api/wishlist';
 export default function ProductCard({id,product,name,image, price}) {
 
   const[state,setstate]=useState(false);
@@ -17,19 +17,17 @@ export default function ProductCard({id,product,name,image, price}) {
   
   const hadleAddToCart=(product)=>{
     dispatch(addToCart(product));
-   
-
-  
 
   }
   
   const hadleChange=(product)=>{
     dispatch(addToWishList(product));
+    
     setstate(true)
   };
   const hadleChangeImg=(product_id)=>{
     dispatch(getProductDetails(product_id));
-    console.log(product_id)
+    navigate('/product_detiles')
   }
  
 
@@ -37,12 +35,12 @@ export default function ProductCard({id,product,name,image, price}) {
     return (
        
           <Card className='card'>
-            <button className='card-btn' onClick={()=> dispatch(hadleChange(product))}>{state ? <i className="fas fa-heart"></i>:<i className="far fa-heart"></i>
+            <button className='card-btn' onClick={()=>hadleChange(product) }>{state ? <i className="fas fa-heart"></i>:<i className="far fa-heart"></i>
             }
             </button>
-            <Link to={`/product_detiles/${id}`}>
-             <Card.Img variant="top"onClick={()=>hadleChangeImg(id) } src={image} alt={name} />
-            </Link>
+           
+             <Card.Img variant="top" onClick={()=>hadleChangeImg(id)} src={image} alt={name} />
+            
             <Card.Body>
             <Card.Title className="card-span">{name} </Card.Title>
             <Card.Text className="card-span1">

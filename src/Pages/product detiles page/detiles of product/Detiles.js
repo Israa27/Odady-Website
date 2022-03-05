@@ -4,34 +4,34 @@ import { decreaseQty, removeFromCart,addToCart, getTotalPrice } from '../../../r
 import { addToWishList } from '../../../redux/wishlistSlice'
 import './detiles.css';
 export default function Detiles() {
-  const product=useSelector((state)=> state.productes);
-  console.log(product)
+  const product=JSON.parse(localStorage.getItem("product"));
+  
   const dispatch = useDispatch();
 
 
 
   return<section>
         <div className='informatin-of-product'>
-            <h5>product.title</h5>
-            <p>السعر:<span className='price'>product.price دينار</span></p>
-            <p>اسم الشركة :<span className='company'>اوتو جي</span></p>
-            <p className='detile'> product.description</p>
+            <h5>{product.name}</h5>
+            <p>السعر:<span className='price'>{product.price} دينار</span></p>
+            <p>اسم الشركة :<span className='company'>{product.company.name}</span></p>
+            <p className='detile'> {product.description}</p>
         </div>
         <div className='control-btn'>
           <div className='btn-add-to-cart'>
-            <button onClick={()=> dispatch(addToCart(product))}>اضف الى السلة</button>
+            <button onClick={()=> dispatch(addToCart(product.id))}>اضف الى السلة</button>
             
             <div class='qty-wishlist'>
               <div className='dec-inc-btn'>
-                <button className="qty-btn" onClick={()=> dispatch(addToCart(product))} ><i className="fas fa-caret-up"></i></button>
-                <button className="qty-btn" onClick={()=> dispatch(decreaseQty(product))}  ><i className="fas fa-caret-down"></i></button>
+                <button className="qty-btn" onClick={()=> dispatch(addToCart(product.id))} ><i className="fas fa-caret-up"></i></button>
+                <button className="qty-btn" onClick={()=> dispatch(decreaseQty(product.id))}  ><i className="fas fa-caret-down"></i></button>
              </div>
-            <span className="qty-span">productqty</span>
+            <span className="qty-span">0</span>
           </div>
           </div>
 
           <div className='btn-add-to-wishlist'>
-            <button onClick={()=> dispatch(addToWishList(product))}>اضف الى قائمة الرغبات</button>
+            <button onClick={()=> dispatch(addToWishList(product.id))}>اضف الى قائمة الرغبات</button>
             <select>
               <option>يوجد ضمان </option>
               <option>لا </option>

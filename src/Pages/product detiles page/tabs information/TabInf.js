@@ -11,7 +11,7 @@ export default function TabInf() {
   <p>لا يوجد معلومات بعد </p>
   </Tab>
   <Tab eventKey="contact" title="مراجعات (0)" >
-  
+  <p>لا يوجد معلومات بعد </p>
   </Tab>
 </Tabs>
 </Container>

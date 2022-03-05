@@ -10,11 +10,11 @@ import RelatedProducts from './Related Products/RelatedProducts';
 import TabInf from './tabs information/TabInf';
 import { useSelector } from 'react-redux';
 export default function ProductDetiles() {
- 
+  const product=JSON.parse(localStorage.getItem("product"));
 
   return <div>
       
-      <SecondaryNav name='hi'/>
+      <SecondaryNav name={product.name}/>
       <section className='product-detiles' >
         <Container className='flex items-center justify-between'>
           <Detiles />

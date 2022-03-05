@@ -9,12 +9,10 @@ import { useDispatch } from 'react-redux';
 import {viweAllProducts} from '../../../redux/showAllSlice';
 import { Link } from 'react-router-dom';
 export default function SlideShow() {
-  const navigate=useNavigate();
   const dispatch=useDispatch();
  
     const showAllProducts =(e)=>{
-      dispatch(viweAllProducts(e.target.alt))
-      navigate('/products') 
+      dispatch(viweAllProducts(e.target.name))
     
   }
     
@@ -22,36 +20,37 @@ export default function SlideShow() {
         <div>
         <Carousel className='carousel'>
           <Carousel.Item>
-            <Link  to=' '>
+            <Link  to='/products'>
             <img
               className="d-block w-100"
               src={sliderimg1}
-              alt="ٌIngco"
+              alt="ٌiron"
+              name= "company=iron"
              
               onClick={showAllProducts }
             />
            </Link>
           </Carousel.Item>
           <Carousel.Item>
-          <Link  to=' '  >
+          <Link  to='/products '  >
             <img
-            onClick={showAllProducts }
+            onClick={ showAllProducts }
               className="d-block w-100"
               src={sliderimg2}
-              alt="Crown"
-              
+              alt="شركة CROWN السويسرية"
+              name= "company=شركة CROWN السويسرية"
               
               
             />
            </Link>
           </Carousel.Item>
           <Carousel.Item>
-           <Link to=' '>
+           <Link to='/products '>
             <img
               className="d-block w-100"
               src={sliderimg3}
-              alt="Total"
-              
+              alt="Caterpillar"
+              name='company=Caterpillar'
               onClick={showAllProducts }
              
             />

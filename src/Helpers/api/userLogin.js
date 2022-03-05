@@ -1,11 +1,15 @@
 import axios from "axios"
+import { Navigate } from "react-router";
+import Swal from 'sweetalert2'
 import {BASE_URL} from '../Constants';
-const RegisterURL=BASE_URL+'/signup';
-const loginURL =BASE_URL+'/signin';
+const RegisterURL=BASE_URL+'/auth/signup';
+const loginURL =BASE_URL+'/auth/signin';
 const logoutURL=BASE_URL+'user/logout';
 const updateURL=BASE_URL;
-const userProfileURL=BASE_URL;
-const newAccessTokenURL=BASE_URL +'token';
+const userProfileURL=BASE_URL+'/auth';
+const updatePasswordURL = BASE_URL + "/auth/change-password";
+
+
 
 const token = JSON.parse(localStorage.getItem("token"));
 axios.interceptors.request.use(
@@ -43,11 +47,22 @@ export const userRegister=({
         resolve(res.data);
         if (res.status === 201){
           resolve(res.data);
+          Swal.fire(
+            'تم التسجيل بنجاح',
             
+            'تمت العملية التسجيل'
+          )
         }
+       
 
     }catch(error){
         console.log(error.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops... -_-',
+          text: 'حدث خطأ ما !',
+          footer: '<a href="/">هل تريد الرجوع الى صفحة الرئيسة?</a>'
+        })
         reject(error)
     }
   })
@@ -65,12 +80,21 @@ export const Login=({email,password}) => {
 
       if (res.status === 200 ) {
         const data= res.data.token.access;
-        console.log(res.data.token.access)
-
+        Swal.fire(
+          'تم التسجيل الدخول',
+          'تمت العملية التسجيل'
+        )
+        
         localStorage.setItem("token",JSON.stringify(data));
       
       }
     } catch (error) {
+      Swal.fire({
+          icon: 'error',
+          title: 'Oops... -_-',
+          text: 'حدث خطأ ما !',
+          footer: '<a href="/">هل تريد الرجوع الى صفحة الرئيسة!</a>'
+        })
       reject(error);
     }
   });
@@ -84,6 +108,11 @@ export const userLogout=async() => {
         Authorization:JSON.parse(localStorage.getItem("token"))
       }
     })
+    Swal.fire(
+      'تم التسجيل الخروج',
+     
+    )
+    Navigate('/login')
   }
   catch(error){
     console.log(error)
@@ -119,7 +148,10 @@ export const userUpdate=({
           {headers:{ 
             'Content-Type' : 'application/json',
             'Accept' : 'application/json',
-            'Authorization' : token
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Methods':'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+            'Authorization' : `Bearer ${token}`
           }
         });
 
@@ -127,6 +159,7 @@ export const userUpdate=({
           resolve(res.data);
             
         }
+       
 
     }catch(error){
         console.log(error.message);
@@ -146,7 +179,7 @@ export const getUser=() => {
 
       const res = await axios.get(userProfileURL, {
         headers: {
-          Authorization: token,
+          Authorization: `Bearer ${token}`,
         }
       });
 
@@ -160,36 +193,20 @@ export const getUser=() => {
 
 };
 
-export const getNewAccessToken=() => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const { refreshToken } = JSON.parse(localStorage.getItem("token"));
 
-      if (!refreshToken) {
-        reject("Token not found!");
-      }
-
-      const res = await axios.get(newAccessTokenURL, {
-        headers: {
-          Authorization: refreshToken,
-        },
+export const changePassword = ({password1,password2,password3}) => {
+	return new Promise(async (resolve, reject) => {
+		try {
+			const { data } = await axios.post( updatePasswordURL, {
+        old_password: password1,
+        new_password1: password2,
+        new_password2: password3
       });
 
-      if (res.status === 200) {
-        localStorage.setItem(
-          "token",
-          JSON.stringify({ refreshToken: res.data.token })
-        );
-      }
-
-      resolve(true);
-    } catch (error) {
-      if (error.message === 403) {
-        localStorage.removeItem("token");
-      }
-
-      reject(false);
-    }
-  });
-
-}
+			console.log(data);
+			resolve(data);
+		} catch (error) {
+			reject(error);
+		}
+	});
+};
