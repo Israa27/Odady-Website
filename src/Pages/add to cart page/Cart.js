@@ -1,7 +1,4 @@
 import React from 'react'
-import Footer from '../../Components/Footer/Footer';
-import Navbar from '../../Components/Navbar/Navber';
-import img from '../../Assets/images/cardimg.png';
 import './cart.css';
 import CartItems from './cart items/CartItems';
 import TotalPrice from './total Parice/TotalPrice';

@@ -1,6 +1,4 @@
 import React from 'react'
-import Navbar from '../../Components/Navbar/Navber';
-import Footer from '../../Components/Footer/Footer';
 import { Container } from 'react-bootstrap';
 import './privacy.css';
 export default function Privacy() {

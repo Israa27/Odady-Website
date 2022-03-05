@@ -7,11 +7,10 @@ import { addToWishList } from '../../redux/wishlistSlice';
 import {  useNavigate} from 'react-router-dom';
 import { getProductDetails } from '../../redux/products/productsSlice';
 import {addToCart } from '../../redux/cartSlice';
-import {createWishlist} from '../../Helpers/api/wishlist';
 export default function ProductCard({id,product,name,image, price}) {
 
   const[state,setstate]=useState(false);
-  const [item,setItem]=useState({});
+ // const [item,setItem]=useState({});
   const navigate = useNavigate();
   const dispatch=useDispatch();
   

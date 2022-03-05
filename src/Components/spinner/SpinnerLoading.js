@@ -1,6 +1,4 @@
 import React from 'react'
-import { Spinner } from 'react-bootstrap'
-import './spinner.css'
 import Lottie from 'react-lottie';
 import * as loading from './43298-app-icon-remote-shopping.json';
 

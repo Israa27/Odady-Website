@@ -5,7 +5,7 @@ import './profile.css'
 import Account from './account user/Account';
 import MyOrder from './myorder/MyOrder';
 import MywishList from './wishlist/MywishList'
-import { useSelector } from 'react-redux';
+
 export default function Profile() {
    const user= JSON.parse(localStorage.getItem("user"));
     const location = useLocation()

@@ -1,14 +1,12 @@
 import React, { useEffect } from "react";
 import Swal from 'sweetalert2'
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate,Routes } from "react-router-dom";
-import { loginSuccess } from "../redux/loginSlice";
-import { getUserProfile } from "../redux/user/userAction";
-import { getNewAccessToken} from "../Helpers/api/userLogin";
+//import { useNavigate } from "react-router-dom";
+
 import Layouts from '../layouts/Layouts'
 
-export const PrivateRoute = ({ children, ...rest }) => {
-	const navigate=useNavigate();
+export const PrivateRoute = ({ children }) => {
+	//const navigate=useNavigate();
 	const dispatch = useDispatch();
 	const  isAuth  = useSelector(state => state.login);
 	
@@ -16,7 +14,7 @@ export const PrivateRoute = ({ children, ...rest }) => {
 	useEffect(() => {
 
 		!isAuth && JSON.parse(localStorage.getItem("token")) ;
-	}, [dispatch]);;
+	}, [isAuth,dispatch]);;
 
 	return (
 		  

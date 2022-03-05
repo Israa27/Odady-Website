@@ -1,11 +1,11 @@
 import React,{useEffect, useState} from 'react';
 import './order.css';
 import { useSelector,useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import { getTotalPrice } from '../../../redux/cartSlice';
 
 export default function OrderForm() {
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const[value,setValue]=useState('');
   const[check,setCheck]=useState('');
 
@@ -15,9 +15,9 @@ export default function OrderForm() {
       dispatch(getTotalPrice())
   },[cart,dispatch]);
 
-const hadleSubmit=()=>{
+//const hadleSubmit=()=>{
   
-}
+//}
 
   return <div>
       <div className="order-total-amount">

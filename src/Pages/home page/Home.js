@@ -1,4 +1,4 @@
-import React, {Suspense} from 'react'
+import React from 'react'
 import './home.css';
 import Navs from './Navs/Navs';
 import SlideShow from './SlideShow/SlideShow';

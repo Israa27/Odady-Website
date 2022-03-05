@@ -1,6 +1,6 @@
-import React,{useEffect} from 'react';
-import { useSelector,useDispatch } from 'react-redux';
-import { decreaseQty, removeFromCart,addToCart, getTotalPrice } from '../../../redux/cartSlice';
+import React from 'react';
+import {useDispatch } from 'react-redux';
+import { decreaseQty,addToCart} from '../../../redux/cartSlice';
 import { addToWishList } from '../../../redux/wishlistSlice'
 import './detiles.css';
 export default function Detiles() {
@@ -19,19 +19,19 @@ export default function Detiles() {
         </div>
         <div className='control-btn'>
           <div className='btn-add-to-cart'>
-            <button onClick={()=> dispatch(addToCart(product.id))}>اضف الى السلة</button>
+            <button onClick={()=> dispatch(addToCart(product))}>اضف الى السلة</button>
             
             <div class='qty-wishlist'>
               <div className='dec-inc-btn'>
-                <button className="qty-btn" onClick={()=> dispatch(addToCart(product.id))} ><i className="fas fa-caret-up"></i></button>
-                <button className="qty-btn" onClick={()=> dispatch(decreaseQty(product.id))}  ><i className="fas fa-caret-down"></i></button>
+                <button className="qty-btn" onClick={()=> dispatch(addToCart(product))} ><i className="fas fa-caret-up"></i></button>
+                <button className="qty-btn" onClick={()=> dispatch(decreaseQty(product))}  ><i className="fas fa-caret-down"></i></button>
              </div>
-            <span className="qty-span">0</span>
+            <span className="qty-span">{product.qty}</span>
           </div>
           </div>
 
           <div className='btn-add-to-wishlist'>
-            <button onClick={()=> dispatch(addToWishList(product.id))}>اضف الى قائمة الرغبات</button>
+            <button onClick={()=> dispatch(addToWishList(product))}>اضف الى قائمة الرغبات</button>
             <select>
               <option>يوجد ضمان </option>
               <option>لا </option>

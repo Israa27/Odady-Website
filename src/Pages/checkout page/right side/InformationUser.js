@@ -2,7 +2,7 @@ import React from 'react'
 import './form.css';
 import * as yup from 'yup';
 import { Formik } from 'formik';
-import {Form ,InputGroup,Button} from 'react-bootstrap';
+import {Form ,InputGroup} from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { postOrder } from '../../../Helpers/api/order';
 import {orderPending,orderSuccess,orderFail} from '../../../redux/order/orderSlice'
@@ -30,7 +30,7 @@ export default function InformationUser() {
               
               <Formik
                 validationSchema={schema}
-                onSubmit={console.log}
+                //onSubmit={console.log}
                 initialValues={{
                     firstname: '',
                     lastname:'',
@@ -43,47 +43,47 @@ export default function InformationUser() {
                    
                 }}
                 onSubmit={async(values) => {
-                       let firstname=values.firstname,
-                           lastname=values.lastname,
-                           email=values.email,
-                           phoneNumber=values.phoneNumber,
-                           password=values.password,
-                           governorate=values.governorate,
-                           city=values.city,
-                           nearest=values.nearest;
-                           
-                        if(!values){return alert("يرجى ادخال البيانات ")}
+                    let firstname=values.firstname,
+                        lastname=values.lastname,
+                        email=values.email,
+                        phoneNumber=values.phoneNumber,
+                        password=values.password,
+                        governorate=values.governorate,
+                        city=values.city,
+                        nearest=values.nearest;
                         
-                        dispatch(orderPending());
-                        
-                        try{
-                          const isAuth= await postOrder(
-                              { 
-                                firstname,
-                                lastname,
-                                email,
-                                phoneNumber,
-                                password,
-                                governorate,
-                                city,
-                                nearest,
-                               
-                            });
-                          if(isAuth.status === 'error'){
-                            return dispatch(orderFail(isAuth.message));
-                    
-                          }
-                          dispatch(orderSuccess());
-                          
-                          
-                        }
-                        catch(error){
-                          dispatch(orderFail(error.message));
-                    
-                        }
-                      
+                     if(!values){return alert("يرجى ادخال البيانات ")}
+                     
+                     dispatch(orderPending());
+                     
+                     try{
+                       const isAuth= await postOrder(
+                           { 
+                             firstname,
+                             lastname,
+                             email,
+                             phoneNumber,
+                             password,
+                             governorate,
+                             city,
+                             nearest,
+                            
+                         });
+                       if(isAuth.status === 'error'){
+                         return dispatch(orderFail(isAuth.message));
+                 
+                       }
+                       dispatch(orderSuccess());
+                       
+                       
+                     }
+                     catch(error){
+                       dispatch(orderFail(error.message));
+                 
+                     }
                    
-                }}
+                
+             }}
                 >
             {({
                

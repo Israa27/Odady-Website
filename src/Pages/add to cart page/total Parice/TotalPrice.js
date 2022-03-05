@@ -12,8 +12,7 @@ export default function TotalPrice() {
   const dispatch = useDispatch();
   useEffect(()=>{
       dispatch(getTotalPrice())
-  },[cart,dispatch]);
-  const[btn,setBtn]=useState(false);
+  },[cart,dispatch]);;
   const[value,setValue]=useState('');
   
     return (

@@ -6,7 +6,7 @@ import SecondaryNav from '../../Components/secondary navbar/SecondaryNav';
 import img from '../../Assets/images/undefined.png';
 
 import './wishlist.css';
-import { getItems,removeFromWishList,decreaseQty,getTotalPrise} from '../../redux/wishlistSlice';
+import {removeFromWishList} from '../../redux/wishlistSlice';
 export default function Wishlist() {
   const wishlist=useSelector((state)=> state.wishlist);
  

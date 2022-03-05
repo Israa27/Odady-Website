@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { useLocation,useNavigate } from 'react-router-dom';
 import {orderPending,orderSuccess,orderFail} from '../../redux/order/orderSlice'
 import './rest.css';
@@ -12,7 +12,7 @@ export default function ResetPassword() {
  
  const dispatch=useDispatch();
  const navigate = useNavigate();
- let location = useLocation();
+ //let location = useLocation();
  const schema = yup.object().shape({
     oldPassword:yup.string().matches(/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/,'كلمة المرور غير صالحة').min(8).required('هذا الحقل مطلوب'),
     password:yup.string().matches(/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/,'كلمة المرور غير صالحة').min(8).required('هذا الحقل مطلوب'),
@@ -25,7 +25,7 @@ export default function ResetPassword() {
     
     <Formik
         validationSchema={schema}
-        onSubmit={console.log}
+        //onSubmit={console.log}
         initialValues={{
             oldPawssord:'',
             password:'',

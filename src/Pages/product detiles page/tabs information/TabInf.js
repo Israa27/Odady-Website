@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tab,Tabs,Sonnet, Container } from 'react-bootstrap';
+import { Tab,Tabs, Container } from 'react-bootstrap';
 import './tab.css';
 export default function TabInf() {
   return <Container>

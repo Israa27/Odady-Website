@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Container } from 'react-bootstrap';
 import ProductCard from '../../../Components/Card/ProductCard';
 import '../best-selling/bastSelling.css';
-import { BASE_URL } from '../../../Helpers/Constants';
 import { useSelector,useDispatch } from 'react-redux';
 import {  useNavigate } from 'react-router';
 import { viweAllProducts } from '../../../redux/showAllSlice';

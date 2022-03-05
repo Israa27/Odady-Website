@@ -2,12 +2,10 @@ import React, { useState ,useEffect}  from 'react';
 import ProductCard from '../../Components/Card/ProductCard';
 import SecondaryNav from '../../Components/secondary navbar/SecondaryNav';
 import { Container } from 'react-bootstrap';
-import { BASE_URL } from '../../Helpers/Constants';
 import SpinnerLoading from '../../Components/spinner/SpinnerLoading'
-import img from '../../Assets/images/undefined.png';
 import './product.css';
 import PaginationPage from './Pagination/PaginationPage';
-import {  useSelector,useDispatch } from 'react-redux';
+import {  useSelector } from 'react-redux';
 export default function Product() {
     
     const products=JSON.parse(localStorage.getItem("allProducts"));

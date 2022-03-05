@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import react from 'react'
 import './register.css';
 import img from '../../Assets/images/Sign up-cuate.png';
 import { useNavigate } from 'react-router-dom';
@@ -37,7 +37,7 @@ export default function Register() {
               
               <Formik
                 validationSchema={schema}
-                onSubmit={console.log}
+                //onSubmit={console.log}
                 initialValues={{
                     firstname: '',
                     lastname:'',

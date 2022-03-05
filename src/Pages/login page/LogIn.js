@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import { Link, useLocation,useNavigate } from 'react-router-dom';
 import { Container,Form ,Button,InputGroup} from 'react-bootstrap';
 import './login.css';
@@ -13,7 +13,7 @@ export default function LogIn() {
   const dispatch=useDispatch();
   const navigate = useNavigate();
   let location = useLocation();
-  const { isLoading, isAuth, error } = useSelector((state) => state.login);
+  const  isAuth = useSelector((state) => state.login);
 	let { from } = location.state || { from: { pathname: "/" } };
   const schema = yup.object().shape({
     email: yup.string().matches(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "البريد الكتروني غير صحيح ").required('هذا الحقل مطلوب'),
@@ -32,7 +32,7 @@ export default function LogIn() {
             <Container>
               <Formik
                 validationSchema={schema}
-                onSubmit={console.log}
+                //onSubmit={console.log}
                 initialValues={{
                     email: '',
                     password:'',
@@ -61,8 +61,8 @@ export default function LogIn() {
                   }
                 
                       
-                   
-              }}
+                }}
+                
                 >
             {({
                

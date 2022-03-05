@@ -2,9 +2,8 @@ import React from 'react'
 import { Container } from 'react-bootstrap';
 import ProductCard from '../../../Components/Card/ProductCard';
 import './bastSelling.css';
-import { BASE_URL } from '../../../Helpers/Constants';
 import { useSelector,useDispatch } from 'react-redux';
-import { useLocation, useNavigate } from 'react-router';
+import {  useNavigate } from 'react-router';
 import { viweAllProducts } from '../../../redux/showAllSlice';
 
 export default function BestSelling() {

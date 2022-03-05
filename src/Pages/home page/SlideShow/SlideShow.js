@@ -4,7 +4,6 @@ import './slide.css';
 import sliderimg1 from '../../../Assets/images/5.png';
 import sliderimg2 from '../../../Assets/images/6.png';
 import sliderimg3 from '../../../Assets/images/TOTAL.png';
-import { useLocation, useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import {viweAllProducts} from '../../../redux/showAllSlice';
 import { Link } from 'react-router-dom';

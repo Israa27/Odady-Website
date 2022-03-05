@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './pagination.css';
-import { useSelector } from 'react-redux';
+
 export default function PaginationPage({pages,currentPage,setCurrentPage}) {
     const [pageNumberLimit, setpageNumberLimit] = useState(5);
     const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
