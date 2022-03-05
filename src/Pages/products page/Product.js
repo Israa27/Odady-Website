@@ -18,7 +18,7 @@ export default function Product() {
 
     //pagination
     const[currentPage,setCurrentPage]=useState(1);
-    const[itemPerPage,setItemPerPage]=useState(5);
+    const itemPerPage=5;
     const pages=[];
     for(let i=1;i<=Math.ceil(products.length/itemPerPage);i++){
         pages.push(i);

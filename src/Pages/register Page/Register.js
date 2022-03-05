@@ -1,4 +1,4 @@
-import react from 'react'
+import React from 'react'
 import './register.css';
 import img from '../../Assets/images/Sign up-cuate.png';
 import { useNavigate } from 'react-router-dom';
