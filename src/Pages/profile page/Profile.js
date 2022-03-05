@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Container } from 'react-bootstrap';
 import { Link ,useLocation} from 'react-router-dom';
 import './profile.css'
@@ -7,10 +7,7 @@ import MyOrder from './myorder/MyOrder';
 import MywishList from './wishlist/MywishList'
 
 export default function Profile() {
-  const[user,setUser]=useState([]);
-  useEffect(()=>{
-    setUser(JSON.parse(localStorage.getItem("user")));
-  },[])
+   const user= JSON.parse(localStorage.getItem("user"));
     const location = useLocation()
     const renderContent = (routeName) => {
       console.log(routeName)
