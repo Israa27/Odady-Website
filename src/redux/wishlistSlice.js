@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
 const initialState ={
-  wishListItems:localStorage.getItem('wishList')?JSON.parse(localStorage.getItem('wishList')):[],
+  wishListItems:localStorage.getItem('wishlist')?JSON.parse(localStorage.getItem('wishlist')):[],
   qty:0,
   totalPrice:0,
   totalItem:0,
@@ -32,7 +32,7 @@ export const wishlistSlice = createSlice({
         toast.error(`تم اضافة ${action.payload.name} الى قائمة الرغبات `,{position:'bottom-left'});
        
       };
-      localStorage.setItem('wishList',JSON.stringify(state.wishListItems))
+      localStorage.setItem('wishlist',JSON.stringify(state.wishListItems))
      
     },
     removeFromWishList(state,action){

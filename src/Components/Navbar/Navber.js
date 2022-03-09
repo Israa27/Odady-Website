@@ -3,10 +3,11 @@ import { Container,Navbar,NavDropdown} from 'react-bootstrap';
 import './navbar.css';
 import logo from '../../Assets/images/logo.png';
 import { useNavigate } from 'react-router-dom';
-import { getTotalPrice } from '../../redux/cartSlice';
+import { getCartItems } from '../../redux/cartSlice';
 import { getTotal } from '../../redux/wishlistSlice';
 import { useSelector ,useDispatch} from 'react-redux';
 import { userLogout } from "../../Helpers/api/userLogin";
+import { getUserProfile } from '../../redux/user/userAction';
 import { searchProducts } from '../../redux/products/productsSlice';
 import { viweAllProducts } from '../../redux/showAllSlice';
 
@@ -18,8 +19,9 @@ export default function Navber() {
   // logout
   const logOut = () => {
     localStorage.removeItem("token");
-    userLogout();
-    navigate('/login');
+    //userLogout();
+    dispatch(getUserProfile());
+    //navigate('/login');
   }
   const cart=useSelector((state)=> state.cart);
   const wishlist=useSelector((state)=> state.wishlist);
@@ -27,7 +29,7 @@ export default function Navber() {
   const dispatch = useDispatch();
 
   useEffect(()=>{
-    dispatch(getTotalPrice())
+    //dispatch(getTotalPrice())
     dispatch(getTotal());
 },[cart,wishlist,dispatch]);
  
@@ -46,7 +48,7 @@ export default function Navber() {
   }
   //show cart
   const handleShowCart=()=>{
-   
+    dispatch(getCartItems())
    
     navigate('/cart')
   }

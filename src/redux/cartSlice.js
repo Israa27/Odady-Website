@@ -1,116 +1,165 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+import Swal from 'sweetalert2'
 import { toast } from 'react-toastify';
+import { addItem,removeItemCart  } from "./cartActionSlice";
+import {BASE_URL} from '../Helpers/Constants';
+import { addToWishList } from "./wishlistSlice";
+const URL=BASE_URL+'/orders/add-to-cart';
+const URLList=BASE_URL+'/orders/cart'
 
 const initialState ={
   status:'',
-  cartItems: localStorage.getItem("cartItems")? JSON.parse(localStorage.getItem("cartItems")):[],
+  cartItems:localStorage.getItem('cartItems')?JSON.parse(localStorage.getItem('cartItems')):[],
   qty:0,
   totalPrice:0,
   totalItem:0,
 }
 
 
+
+
+//get  best seller products
+export const addToCart = createAsyncThunk(
+    "cart/add_to_cart",
+    async (id,thunkAPI)=> {
+     const {dispatch}=thunkAPI
+      
+      try {
+        const response = await axios.post(URL,{
+        product_id: id,
+        
+    }
+      )
+      Swal.fire({
+        icon: 'success',
+        title: 'تمت الاضافة بنجاح',
+        text: 'تمت اضافة منتج الى سلة المشتريات',
+       
+      });
+      //dispatch(addToWishList(id))
+       return response.data
+      
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops... -_-',
+        text: 'حدث خطأ ما !',
+        footer: '<a href="/">هل تريد الرجوع الى صفحة الرئيسة?</a>'
+      });
+    }
+  }
+);
+
+export const getCartItems = createAsyncThunk(
+  "cart/get_cart",
+  async ()=> {
+    
+    try {
+      const response = await axios.get(URLList,{
+      }
+    )  
+     
+    
+     return response.data
+    
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops... -_-',
+      text: 'حدث خطأ ما !',
+      footer: '<a href="/">هل تريد الرجوع الى صفحة الرئيسة?</a>'
+    });
+  }
+}
+);
+
+export const removeFromCart = createAsyncThunk(
+  "cart/remove_from_cart",
+  async (id,thunkAPI)=> {
+    
+    
+    try {
+      const response = await axios.delete(`${BASE_URL}/orders/item/${id}`,{
+      }
+    )  
+   
+    //localStorage.setItem('cartItems',JSON.stringify(response.data))
+     return response.data
+    
+  } catch (error) {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops... -_-',
+      text: 'حدث خطأ ما !',
+      footer: '<a href="/">هل تريد الرجوع الى صفحة الرئيسة?</a>'
+    });
+  }
+}
+);
 export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    addToCart (state,action){
-      const itemIndex= state.cartItems.findIndex(
-        (item)=>item.id === action.payload.id );
-       
-      if(itemIndex >= 0){
-        state.cartItems[itemIndex] = {
-          ...state.cartItems[itemIndex],
-          qty: state.cartItems[itemIndex].qty + 1,
-          
-        };
-        toast.info("تم زيادة الكمية ",{position:'bottom-left'})
-        
-      }
-      else{
-        const productNot={...action.payload,qty:1};
-        state.cartItems.push(productNot)
-        toast.error(`تم اضافة ${action.payload.name} الى قائمة الرغبات `,{position:'bottom-left'});
-       
-      };
-      localStorage.setItem('cartItems',JSON.stringify(state.cartItems))
-     
-    },
-    removeFromCart(state,action){
-      state.cartItems.map((cartItem) => {
-        if (cartItem.id === action.payload.id) {
-          const nextCartItems = state.cartItems.filter(
-            (item) => item.id !== cartItem.id
-          );
-
-          state.cartItems = nextCartItems;
-
-          toast.error("تم حذف المنتج ", {
-            position: "bottom-left",
-          });
-        }
-        
-        localStorage.setItem('cartItems',JSON.stringify(state.cartItems))
-       
-        return state;
-      });
-    },
-
-    decreaseQty(state,action){
-      const itemIndex = state.cartItems.findIndex(
-        (item) => item.id === action.payload.id
-      );
-        if (state.cartItems[itemIndex].qty > 1) {
-          state.cartItems[itemIndex].qty -= 1;
-
-          toast.error(`تم تقليل الكمية ${action.payload.name} `,{position:'bottom-left'});
-        }
-        else if (state.cartItems[itemIndex].qty === 1) {
-          const nextCartItems = state.cartItems.filter(
-            (item) => item.id !== action.payload.id
-          );
-  
-          state.cartItems = nextCartItems;
-            toast.error(`تم حذف العنصر من سلة المشتريات ${action.payload.title} `,{position:'bottom-left'});
-            
-        }
-        
-        localStorage.setItem('cartItems',JSON.stringify(state.cartItems))
-       
-    },
-    getTotalPrice(state, action) {
-      let { total, quantity} = state.cartItems.reduce(
-        (cartTotal, cartItem) => {
-          const { price,qty } = cartItem;
-          let totalItem = price * qty;
-          cartTotal.total += totalItem;
-          cartTotal.quantity += qty;
-          
-         
-          
-          return cartTotal;
-          
-        },
-        {
-          total: 0,
-          quantity: 0,
-        
-         
-          
-        }
-      );
-      state.qty = quantity;
-      state.totalPrice = total;
-     
-      
-      
-    },
   },
+  extraReducers: {
+    //best seller products
+    [addToCart.pending]: (state, action) => {
+        state.status = "pending"
+        state.isLoading=true
+  },
+    [addToCart.fulfilled]: (state, action) => {
+          state.isLoading=false
+          state.cartItems=action.payload  
+          state.status = "success"
+  },
+    [addToCart.rejected]: (state, action) => {
+        state.status = "rejected";
+        state.isLoading=false
+        state.cartItems=action.payload 
+        state.error='error'
+  },
+    
+  [getCartItems.pending]: (state, action) => {
+    state.status = "pending"
+    state.isLoading=true
+},
+  [getCartItems.fulfilled]: (state, action) => {
+      state.isLoading=false
+      state.cartItems=action.payload
+      state.status = "success"
+},
+[getCartItems.rejected]: (state, action) => {
+    state.status = "rejected";
+    state.isLoading=false
+    state.error='error'
+},
+
   
+
+  [removeFromCart.pending]: (state, action) => {
+    state.status = "pending"
+    state.isLoading=true
+},
+  [removeFromCart.fulfilled]: (state, action) => {
+      state.isLoading=false
+      state.cartItems=action.payload
+      state.status = "success"
+    
+   
+  },
+ 
+[removeFromCart.rejected]: (state, action) => {
+    state.status = "rejected";
+    state.isLoading=false
+    state.error='error'
+},
+
+  },
  
   
 })
 
 
-export const {addToCart,removeFromCart,decreaseQty,getTotalPrice}=cartSlice.actions;
+
 export default cartSlice.reducer

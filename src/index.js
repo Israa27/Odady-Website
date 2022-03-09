@@ -10,9 +10,11 @@ import  store from './redux/store';
 import { Provider } from 'react-redux';
 import { ToastContainer } from 'react-toastify';
 
+export const browserRouterRef = React.createRef();
 ReactDOM.render(
+ 
+  <BrowserRouter ref={browserRouterRef}>
   
-  <BrowserRouter>
   <ToastContainer />
   <React.StrictMode>
    

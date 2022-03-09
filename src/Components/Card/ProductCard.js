@@ -14,8 +14,8 @@ export default function ProductCard({id,product,name,image, price}) {
   const navigate = useNavigate();
   const dispatch=useDispatch();
   
-  const hadleAddToCart=(product)=>{
-    dispatch(addToCart(product));
+  const hadleAddToCart=(id)=>{
+    dispatch(addToCart(id));
 
   }
   
@@ -45,7 +45,7 @@ export default function ProductCard({id,product,name,image, price}) {
             <Card.Text className="card-span1">
                     {price} دينار
             </Card.Text>
-             <button className='card-add-to-btn' onClick={()=>hadleAddToCart(product)}>اضف الى السلة</button>
+             <button className='card-add-to-btn' onClick={()=>hadleAddToCart(product.id)}>اضف الى السلة</button>
             </Card.Body>
           </Card>
         

@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit'
-import cartReducer , { getTotalPrice } from './cartSlice';
+import cartReducer, { getCartItems }  from './cartSlice';
 import loginReducer from './loginSlice';
 import userReducer from './user/userSlice';
 import wishlistReducer , { getTotal }from './wishlistSlice';
@@ -35,9 +35,9 @@ store.dispatch(getSubCategory());
 store.dispatch(getBestSellerProducts());
 store.dispatch(getProductDetails());
 store.dispatch(viweAllProducts())
-store.dispatch(getTotalPrice());
+//store.dispatch(getTotalPrice());
 store.dispatch(getTotal());
-
+store.dispatch(getCartItems())
 
 
 

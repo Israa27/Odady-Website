@@ -24,7 +24,7 @@ export default function Detiles() {
             <div class='qty-wishlist'>
               <div className='dec-inc-btn'>
                 <button className="qty-btn" onClick={()=> dispatch(addToCart(product))} ><i className="fas fa-caret-up"></i></button>
-                <button className="qty-btn" onClick={()=> dispatch(decreaseQty(product))}  ><i className="fas fa-caret-down"></i></button>
+                <button className="qty-btn" ><i className="fas fa-caret-down"></i></button>
              </div>
             <span className="qty-span">{product.qty}</span>
           </div>

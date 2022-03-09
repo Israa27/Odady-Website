@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react'
 import './total.css';
 import { useSelector,useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import {getTotalPrice } from '../../../redux/cartSlice';
+//import {getTotalPrice } from '../../../redux/cartSlice';
 export default function TotalPrice() {
   const navigate = useNavigate();
   const cart=useSelector((state)=> state.cart);
@@ -11,7 +11,7 @@ export default function TotalPrice() {
   console.log(cart)
   const dispatch = useDispatch();
   useEffect(()=>{
-      dispatch(getTotalPrice())
+     // dispatch(getTotalPrice())
   },[cart,dispatch]);;
   const[value,setValue]=useState('');
   

@@ -66,7 +66,7 @@ export default function Product() {
     
           {filterItems.slice(0,4).map((item)=>{
               
-              return <ProductCard product={item} id={item.id} name={item.name} image={item.images[0].image } price={item.price} key={item.id} />
+              return <ProductCard product={item} id={item.id} name={item.name} image={item.images } price={item.price} key={item.id} />
             })}
           
           </div>
