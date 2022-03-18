@@ -17,30 +17,29 @@ export default function Product() {
   const[filters,setFilters]=useState(products);
   const[currentPage,setCurrentPage]=useState(1);
   const[productsPerPage]=useState(5);
-  //filter by company name
+  
   const dispatch = useDispatch();
-  const handleFilter=(val)=>{
-     setValue(val);
-     console.log(val)
-     const company=products.filter((companyItem)=>{
-       return companyItem.company.name===val
+ 
+   
+    useEffect(()=>{
+      if(value){
+        //filter by company name
+        const company=products.filter((companyItem)=>{
+          return companyItem.company.name===value
+          
+        })
+        setFilters( company)
        
-     })
-     setFilters( company)
-    }
-
-     //filter by category name
-     const handleFilter2=(val)=>{
-      setCate(val);
-      
-      const category=products.filter((categoryItem)=>{
-        return categoryItem.category.name===val
+      }
+      if(cate){
+        const category=products.filter((categoryItem)=>{
+          return categoryItem.category.name===cate
+          
+        })
         
-      })
-      
-      setFilters(category)
-
-    };
+        setFilters(category)
+      }
+    },[setFilters,value,cate])
     
   
          
@@ -84,8 +83,8 @@ export default function Product() {
           cate={cate}
           sort={sort}
           showAll={showAll}
-          handleFilter={handleFilter}
-          handleFilter2={handleFilter2}
+          setValue={setValue}
+         setCate={setCate}
           setSort={setSort}
           />
           <Products 
