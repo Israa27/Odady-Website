@@ -9,6 +9,7 @@ import { getWishListItems } from '../../redux/wishlistSlice';
 import { useSelector ,useDispatch} from 'react-redux';
 import { viweAllProducts } from '../../redux/showAllSlice';
 import { userLogout } from "../../Helpers/api/userLogin";
+import { logoutSuccess } from '../../redux/loginSlice';
 
 
 
@@ -23,8 +24,12 @@ export default function Navber() {
 
   // logout
   const logOut = () => {
+    dispatch(logoutSuccess())
+
     localStorage.removeItem("token");
-    userLogout();
+    Swal.fire(
+      'تم التسجيل الخروج',
+    )
     navigate('/login');
   }
 
