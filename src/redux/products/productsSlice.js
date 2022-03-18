@@ -16,7 +16,7 @@ const initialState = {
 //get  best seller products
 export const getBestSellerProducts = createAsyncThunk(
     "products/best_seller_products",
-    async ()=> {
+    async (_,{ rejectWithValue })=> {
       
       try {
         const response = await axios.get(URL,{
@@ -35,7 +35,7 @@ export const getBestSellerProducts = createAsyncThunk(
       return response.data;
       
       } catch (error) {
-        console.log(error);
+        return rejectWithValue(error.response.status)
       }
     }
   );
@@ -43,7 +43,7 @@ export const getBestSellerProducts = createAsyncThunk(
 //get popular products
 export const getPopularProducts = createAsyncThunk(
   "products/popular_products",
-  async ()=> {
+  async (_,{ rejectWithValue })=> {
     
     try {
       const response = await axios.get(URL,{
@@ -60,14 +60,14 @@ export const getPopularProducts = createAsyncThunk(
      return response.data;
     
     } catch (error) {
-      console.log(error);
+      return rejectWithValue(error.response.status)
     }
   }
 );
 //get product details
 export const getProductDetails = createAsyncThunk(
   "products/product_details",
-  async (id)=> {
+  async (id,{ rejectWithValue })=> {
     
     try {
       const response = await axios.get(`${URL}/${id}`,{
@@ -84,14 +84,14 @@ export const getProductDetails = createAsyncThunk(
      
     
     } catch (error) {
-      console.log(error);
+      return rejectWithValue(error.response.status)
     }
   }
 );
 
 export const searchProducts = createAsyncThunk(
   "products/search",
-  async (value)=> {
+  async (value,{ rejectWithValue })=> {
     
     try {
       const response = await axios.get(URL,{
@@ -108,7 +108,7 @@ export const searchProducts = createAsyncThunk(
      return response.data;
     
     } catch (error) {
-      console.log(error);
+      return rejectWithValue(error.response);
     }
   }
 );
@@ -134,7 +134,7 @@ const allproductsSlice = createSlice({
       [getBestSellerProducts.rejected]: (state, action) => {
         state.status = "rejected";
         state.isLoading=false
-        state.error='error'
+        state.error=action.payload
       },
     
     //popular products
@@ -150,7 +150,7 @@ const allproductsSlice = createSlice({
     [getPopularProducts.rejected]: (state, action) => {
       state.status = "rejected";
       state.isLoading=false
-      state.error='error'
+      state.error=action.payload
     },
 
     //get Product Details
@@ -169,7 +169,7 @@ const allproductsSlice = createSlice({
     [getProductDetails.rejected]: (state, action) => {
       state.status = "rejected";
       state.isLoading=false
-      state.error='error'
+      state.error=action.payload
     },
 
     //search 
@@ -188,7 +188,7 @@ const allproductsSlice = createSlice({
     [searchProducts.rejected]: (state, action) => {
       state.status = "rejected";
       state.isLoading=false
-      state.error='error'
+      state.error=action.payload
     },
   },
 });

@@ -51,7 +51,7 @@ export const addToCart = createAsyncThunk(
       
     } catch (error) {
       
-      return rejectWithValue(error.response.data)
+      return rejectWithValue(error.response)
       
     }}
 );
@@ -108,7 +108,7 @@ export const removeFromCart = createAsyncThunk(
      return id
     
   } catch (error) {
-    return rejectWithValue(error.response.status)
+    return rejectWithValue(error.response)
     
   
   }
@@ -134,7 +134,7 @@ export const cartSlice = createSlice({
     [addToCart.rejected]: (state, action) => {
         state.status = "rejected";
         state.isLoading=false
-        state.error=action.error.status
+        state.error=action.payload
         
        
   },
@@ -151,7 +151,7 @@ export const cartSlice = createSlice({
 [getCartItems.rejected]: (state, action) => {
     state.status = "rejected";
     state.isLoading=false
-    state.error=action.error.status
+    state.error=action.payload
    
 },
 
@@ -170,7 +170,7 @@ export const cartSlice = createSlice({
 [removeFromCart.rejected]: (state, action) => {
     state.status = "rejected";
     state.isLoading=false
-    state.error=action.error
+    state.error=action.payload
 },
  //reduce qty item to cart
 [reduceQty.pending]: (state, action) => {
@@ -188,8 +188,8 @@ export const cartSlice = createSlice({
 [reduceQty.rejected]: (state, action) => {
   state.status = "rejected";
   state.isLoading=false
-  state.error=action.error
-},
+  state.error=action.payload
+}
 
   },
  

@@ -14,6 +14,7 @@ import TransferPolicy from '../Pages/Transfer and return policy page/TransferPol
 import AboutUs from '../Pages/about us page/AboutUs'
 import SpinnerLoading from '../Components/spinner/SpinnerLoading'
 import { useSelector } from 'react-redux';
+import NotFound from '../Pages/not found page/NotFound'
 
 export default function Layouts() {
   const location = useLocation()
@@ -42,25 +43,24 @@ export default function Layouts() {
         return <AboutUs/>
      
   }};
-  const {items,status}=useSelector(state=> state.product);
+  const error=useSelector(state=> state.product);
 
   return<div>
-    
-
-      <Navbar />
-      { status === 'pending' ?(
-           
-       <SpinnerLoading/>
-      
-    ):(
-      <div>
-        {renderContent(location.pathname)}
-        
-        </div>
-        )}
-      <Footer />
-      
+     {error.error=== 500 || error.error=== 404 ?(
      
+        <NotFound />
+     
+      )
+    :(<div>
+      <Navbar />
+ 
+        {renderContent(location.pathname)}
+
+        
+      <Footer />
+    
     </div>
-  
-}
+    )}
+    </div>
+
+    }

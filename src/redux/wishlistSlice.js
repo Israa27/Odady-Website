@@ -46,7 +46,7 @@ export const addToWishList = createAsyncThunk(
        return response.data
       
     } catch (error) {
-      return rejectWithValue(error.response.status)
+      return rejectWithValue(error.response)
     }
   }
 );
@@ -85,7 +85,7 @@ export const removeFromWishList = createAsyncThunk(
      return id
     
   } catch (error) {
-    return rejectWithValue(error.response.data)
+    return rejectWithValue(error.response)
   
   
   }
@@ -110,7 +110,7 @@ export const wishlistSlice = createSlice({
     [addToWishList.rejected]: (state, action) => {
         state.status = "rejected";
         state.isLoading=false
-        state.error=action.error.status
+        state.error=action.payload
         
   },
    //get all items of cart
@@ -126,7 +126,7 @@ export const wishlistSlice = createSlice({
 [getWishListItems.rejected]: (state, action) => {
     state.status = "rejected";
     state.isLoading=false
-    state.error=action.error.status
+    state.error=action.payload
    
 },
 

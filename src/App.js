@@ -8,7 +8,7 @@ import ForgetPassword from './Pages/forget password/ForgetPassword';
 import ResetPassword from './Pages/reset password/ResetPassword';
 import LogIn from './Pages/login page/LogIn';
 import Layouts from './layouts/Layouts'
-import { PrivateRoute } from './private route/PrivateRoute';
+import NotFound from './Pages/not found page/NotFound';
 
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
   const location=useLocation()
   return<div className="App">
     
-   
+    
       <Routes >
           <Route exact path="/" element={<Layouts/> }/>
           <Route exact path="/register" element={<Register />}/>
@@ -39,6 +39,7 @@ function App() {
           <Route exact path="/forgetpassword" element={<ForgetPassword/>}/>
           <Route exact path="/resetpassword" element={<ResetPassword/>}/>
           <Route exact path="/about" element={<Layouts />}/>
+          <Route exact path='/not_found' element={<NotFound/>}/>
    
       </Routes>
       </div>

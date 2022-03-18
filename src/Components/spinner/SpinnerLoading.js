@@ -15,3 +15,4 @@ export default function SpinnerLoading() {
      <Lottie options={defaultOptions} height={200} width={200} />
   </div>
 }
+
