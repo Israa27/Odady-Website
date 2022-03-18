@@ -22,7 +22,7 @@ export const addToWishList = createAsyncThunk(
       
       try {
         const response = await axios.post(URL,{
-        product_id: id,
+          product_id: id,
         
     }
       )
@@ -46,7 +46,7 @@ export const addToWishList = createAsyncThunk(
        return response.data
       
     } catch (error) {
-      return rejectWithValue(error.response.data)
+      return rejectWithValue(error.response.status)
     }
   }
 );
@@ -64,7 +64,8 @@ export const getWishListItems = createAsyncThunk(
      return response.data
     
   } catch (error) {
-    return rejectWithValue(error.response.data)
+    return rejectWithValue(error.response.status)
+    
   }}
 );
 
@@ -109,8 +110,8 @@ export const wishlistSlice = createSlice({
     [addToWishList.rejected]: (state, action) => {
         state.status = "rejected";
         state.isLoading=false
-        state.error=action.payload
-      
+        state.error=action.error.status
+        
   },
    //get all items of cart
   [getWishListItems.pending]: (state, action) => {
@@ -125,7 +126,7 @@ export const wishlistSlice = createSlice({
 [getWishListItems.rejected]: (state, action) => {
     state.status = "rejected";
     state.isLoading=false
-    state.error=action.payload
+    state.error=action.error.status
    
 },
 

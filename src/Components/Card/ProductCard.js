@@ -11,18 +11,46 @@ import {addToCart, getCartItems } from '../../redux/cartSlice';
 
 export default function ProductCard({id,product,name,image, price}) {
   const[state,setstate]=useState(false);
+  const error=useSelector((state)=> state.wishlist.error)
+  const cartError=useSelector((state)=> state.cart.error)
   const navigate = useNavigate();
   const dispatch=useDispatch();
 
 
   const hadleAddToCart=(id)=>{
+    if ( cartError===500){
+      Swal.fire({
+        icon: 'error',
+        title: 'عذرا لا يمكن اضافة منتج قبل تسجيل الدخول',
+        text: 'يرجى تسجيل الدخول  ',
+
+        
+        }).then(function() {
+        window.location = "/login";
+      })
+    }else{
+
       dispatch(addToCart(id));
       dispatch(getCartItems());
+    }
   }
   
   const hadleAddToWishList=(id)=>{
+    if (error===500){
+      Swal.fire({
+        icon: 'error',
+        title: 'عذرا لا يمكن اضافة منتج قبل تسجيل الدخول',
+        text: 'يرجى تسجيل الدخول  ',
+
+        
+        }).then(function() {
+        window.location = "/login";
+      })
+    }
+    else{
       dispatch(addToWishList(id));
       dispatch(getWishListItems())
+    }
       setstate(!state)
   };
 
