@@ -4,10 +4,12 @@ import tools from '../../../Assets/images/tools.png' ;
 import electricity from '../../../Assets/images/electricity.png' ;
 import welding from '../../../Assets/images/welding.png' ;
 import './navs.css';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { getCategory } from '../../../redux/catgoriesSlice';
+import {viweAllProducts} from '../../../redux/showAllSlice'
 export default function Navs() {
   const dispatch=useDispatch();
+  const navigate = useNavigate();
   const[toggleMenu,setToggleMenu]=useState(false);
   const[screenWidth,setScreenWidth]=useState((window.innerWidth))
   const toggleNavs=()=>{
@@ -25,7 +27,8 @@ export default function Navs() {
   },[])
 
 const fatchCategory=(e)=>{
-  dispatch(getCategory(e.target.innerText))
+  dispatch(viweAllProducts(`category=${e.target.innerText}`))
+  navigate('/products')
   console.log(e.target.innerText)
 }
 

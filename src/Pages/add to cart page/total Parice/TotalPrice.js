@@ -2,25 +2,41 @@ import React,{useEffect, useState} from 'react'
 import './total.css';
 import { useSelector,useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { getCartItems } from '../../../redux/cartSlice';
 //import {getTotalPrice } from '../../../redux/cartSlice';
 export default function TotalPrice() {
   const navigate = useNavigate();
-  const cart=useSelector((state)=> state.cart);
+  const[value,setValue]=useState('');
+  const getcart=useSelector((state)=> state.cart);
+  const cart= getcart?.cartItems || []
+  const totalPrice=cart.reduce((price,item)=>price+ item.item_qty * item.product.price,0) 
+  const coupon=useSelector(state => state.order) 
+  const discount= coupon.coupon[0] ?.discount_value || ''
+  
+    
+
+    
+  
+
   
   
-  console.log(cart)
+  
   const dispatch = useDispatch();
   useEffect(()=>{
-     // dispatch(getTotalPrice())
-  },[cart,dispatch]);;
-  const[value,setValue]=useState('');
+   
+      dispatch(getCartItems())
+   
+    
+    
+  },[dispatch]);
+ 
   
     return (
         <div className="total-amount-price">
           <h5>اجمالي سلة المشتريات</h5>
           <div className="temporary-amount-price">
               <p>المجموع </p>
-              <span className='span-price'>{cart.totalPrice.toFixed(0)} دينار</span>
+              <span className='span-price'>{totalPrice} دينار</span>
           </div>
           <hr/>
           <div className="price-radio-btn">
@@ -43,7 +59,7 @@ export default function TotalPrice() {
           </div>
           <div className="temporary-amount-price ">
               <p>الاجمالي</p>
-              <span className='span-price'>{(+value+ cart.totalPrice).toFixed(0)} دينار</span>
+              <span className='span-price'>{+value+ totalPrice-(discount === ''  ?(0):(discount))} دينار</span>
           </div>
           <button className= "btn-amount" onClick={()=>navigate('/checkout') }>اتمام الطلب</button>
         </div>

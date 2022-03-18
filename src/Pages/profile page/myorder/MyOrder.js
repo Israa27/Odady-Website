@@ -1,7 +1,7 @@
 import React from 'react'
 import './myorder.css';
 import { useSelector,useDispatch } from 'react-redux';
-import { addToWishList,removeFromWishList,decreaseQty,getTotal} from '../../../redux/wishlistSlice';
+import { addToWishList,removeFromWishList} from '../../../redux/wishlistSlice';
 import img from '../../../Assets/images/undefined.png';
 export default function MyOrder() {
    const wishlist=useSelector((state)=> state.wishlist);
@@ -41,7 +41,7 @@ export default function MyOrder() {
             <button className="qty-btn" onClick={()=> dispatch(addToWishList(item))} >+</button>
 
             <span className="qty-span">{item.qty}</span>
-            <button className="qty-btn" onClick={()=> dispatch(decreaseQty(item))}  >-</button>
+            <button className="qty-btn"   >-</button>
           </div>
            <span className="price">{item.price * item.qty} دينار</span>
           </div>

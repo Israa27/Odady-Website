@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit'
-import cartReducer, { getCartItems }  from './cartSlice';
-import loginReducer from './loginSlice';
+import cartReducer, {getCartItems }  from './cartSlice';
+import loginReducer ,{ loginSuccess} from './loginSlice';
 import userReducer from './user/userSlice';
-import wishlistReducer , { getTotal }from './wishlistSlice';
+import wishlistReducer , { getWishListItems }from './wishlistSlice';
 import registerReducer from './registerSlice';
 import passwordReducer  from './reset password/passwordSlice';
 import allproductsReducer, { getBestSellerProducts,getPopularProducts, getProductDetails  } from './products/productsSlice';
@@ -23,10 +23,11 @@ const store = configureStore({
     order:orderReducer,
     wishlist: wishlistReducer,
     all:showAllReducer,
-   
-    
   },
+
+
 });
+
 
 
 store.dispatch(getPopularProducts());
@@ -35,9 +36,9 @@ store.dispatch(getSubCategory());
 store.dispatch(getBestSellerProducts());
 store.dispatch(getProductDetails());
 store.dispatch(viweAllProducts())
-//store.dispatch(getTotalPrice());
-store.dispatch(getTotal());
 store.dispatch(getCartItems())
+store.dispatch(getWishListItems())
+store.dispatch(loginSuccess())
 
 
 

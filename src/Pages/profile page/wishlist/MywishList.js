@@ -2,12 +2,12 @@ import React,{useEffect} from 'react'
 import './mywishlist.css';
 import { useSelector,useDispatch } from 'react-redux';
 import img from '../../../Assets/images/undefined.png';
-import { addToWishList,removeFromWishList,decreaseQty,getTotal} from '../../../redux/wishlistSlice';
+import { addToWishList,removeFromWishList} from '../../../redux/wishlistSlice';
 export default function MywishList() {
   const wishlist=useSelector((state)=> state.wishlist);
   const dispatch = useDispatch();
   useEffect(()=>{
-      dispatch(getTotal())
+      
   },[wishlist,dispatch]);
     return (
         <div className='my-wishlist'>
@@ -42,7 +42,7 @@ export default function MywishList() {
             <button className="qty-btn" onClick={()=> dispatch(addToWishList(item))} >+</button>
 
             <span className="qty-span">{item.qty}</span>
-            <button className="qty-btn" onClick={()=> dispatch(decreaseQty(item))}  >-</button>
+            <button className="qty-btn"   >-</button>
           </div>
            <span className="price">{item.price * item.qty} دينار</span>
           </div>

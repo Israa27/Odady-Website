@@ -47,11 +47,11 @@ export const userRegister=({
         resolve(res.data);
         if (res.status === 201){
           resolve(res.data);
-          Swal.fire(
-            'تم التسجيل بنجاح',
-            
-            'تمت العملية التسجيل'
-          )
+          Swal.fire({
+            icon: 'success',
+            title: 'تمت عملية بنجاح',
+            text: ' تم انشاء حساب جديد '
+          })
         }
        
 
@@ -80,10 +80,11 @@ export const Login=({email,password}) => {
 
       if (res.status === 200 ) {
         const data= res.data.token.access;
-        Swal.fire(
-          'تم التسجيل الدخول',
-          'تمت العملية التسجيل'
-        )
+        Swal.fire({
+          icon: 'success',
+          title: 'تمت عملية بنجاح',
+          text: ' تم تسجيل الدخول بنجاح ^_^ '
+        })
         
         localStorage.setItem("token",JSON.stringify(data));
       

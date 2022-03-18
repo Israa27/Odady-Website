@@ -19,19 +19,13 @@ export default function Detiles() {
         </div>
         <div className='control-btn'>
           <div className='btn-add-to-cart'>
-            <button onClick={()=> dispatch(addToCart(product))}>اضف الى السلة</button>
+            <button onClick={()=> dispatch(addToCart(product.id))}>اضف الى السلة</button>
             
-            <div class='qty-wishlist'>
-              <div className='dec-inc-btn'>
-                <button className="qty-btn" onClick={()=> dispatch(addToCart(product))} ><i className="fas fa-caret-up"></i></button>
-                <button className="qty-btn" ><i className="fas fa-caret-down"></i></button>
-             </div>
-            <span className="qty-span">{product.qty}</span>
-          </div>
+            
           </div>
 
           <div className='btn-add-to-wishlist'>
-            <button onClick={()=> dispatch(addToWishList(product))}>اضف الى قائمة الرغبات</button>
+            <button onClick={()=> dispatch(addToWishList(product.id))}>اضف الى قائمة الرغبات</button>
             <select>
               <option>يوجد ضمان </option>
               <option>لا </option>

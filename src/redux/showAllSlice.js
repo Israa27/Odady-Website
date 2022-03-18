@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-const URL='https://mofalihodd.herokuapp.com/api/products';
+import { BASE_URL } from "../Helpers/Constants";
+const URL=BASE_URL;
 
 
 const initialState = {
@@ -15,7 +16,7 @@ export const viweAllProducts = createAsyncThunk(
     async (value)=> {
       
       try {
-        const response = await axios.get(`${URL}?${value}`,{
+        const response = await axios.get(value ?`${URL}/products?${value}` : `${URL}/products`,{
          headers:{
           "Content-Type" : "application/json",
           'Access-Control-Allow-Origin': '*',

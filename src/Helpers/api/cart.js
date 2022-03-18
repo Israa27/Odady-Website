@@ -28,8 +28,6 @@ export const  createCart=(id)=> {
             },
         
         );
-        const dispatch=useDispatch();
-        dispatch(addItem(id))
           resolve(res.data);
           if (res.status === 201){
               
@@ -60,7 +58,7 @@ export const  getCartItems=()=> {
            
              resolve(res.data);
           }
-          //localStorage.setItem('cartItems',JSON.stringify(res.data))
+          localStorage.setItem('cartItems',JSON.stringify(res.data))
       }catch(error){
         Swal.fire({
             icon: 'error',

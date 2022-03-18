@@ -17,11 +17,11 @@ export const sendPasswordReset = (email) => async (dispatch) => {
 		dispatch(passwordResetFail(error.message));
 	}
 };
-export const updatePassword = dataForm => async dispatch => {
+export const updatePassword =(password1,password2,password3) => async dispatch => {
 	try {
 		dispatch(passwordResetPending());
 
-		const { status, message } = await updateUserPassword(dataForm);
+		const { status, message } = await updateUserPassword(password1,password2,password3);
 
 		if (status === "success") {
 			return dispatch( updatePasswordSuccess(message));

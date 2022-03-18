@@ -1,113 +1,158 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify';
-
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+import Swal from 'sweetalert2'
+import {BASE_URL} from '../Helpers/Constants';
+const URL=BASE_URL+'/wish list/add-to-wishes';
+const URLList=BASE_URL+'/wish list/wishes list'
 const initialState ={
-  wishListItems:localStorage.getItem('wishlist')?JSON.parse(localStorage.getItem('wishlist')):[],
-  qty:0,
-  totalPrice:0,
-  totalItem:0,
+  status:'',
+  wishlistItems:[],
+  isLoading:false,
+  error:null
 }
 
 
+
+
+//get  best seller products
+export const addToWishList = createAsyncThunk(
+    "wishlist/add_to_wishlist",
+    async (id,{ rejectWithValue })=> {
+    
+      
+      try {
+        const response = await axios.post(URL,{
+        product_id: id,
+        
+    }
+      )
+      const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+      })
+      
+      Toast.fire({
+        icon: 'success',
+        title: "  تمت اضافة منتج الى قائمة الرغبات "
+      })
+      
+       return response.data
+      
+    } catch (error) {
+      return rejectWithValue(error.response.data)
+    }
+  }
+);
+
+export const getWishListItems = createAsyncThunk(
+  "wishlist/get_wishlist",
+  async (_,{ rejectWithValue })=> {
+    
+    try {
+      const response = await axios.get(URLList,{
+      }
+    )  
+     
+    //localStorage.setItem('cartItems',JSON.stringify(response.data))
+     return response.data
+    
+  } catch (error) {
+    return rejectWithValue(error.response.data)
+  }}
+);
+
+
+
+export const removeFromWishList = createAsyncThunk(
+  "cart/remove_from_cart",
+  async (id,{rejectWithValue })=> {
+    
+    
+    try {
+      const response = await axios.delete(`${BASE_URL}/wish list/wish/${id}`,{
+      }
+    )  
+   
+    //localStorage.setItem('cartItems',JSON.stringify(response.data))
+     return id
+    
+  } catch (error) {
+    return rejectWithValue(error.response.data)
+  
+  
+  }
+}
+);
 export const wishlistSlice = createSlice({
   name: 'wishlist',
   initialState,
   reducers: {
-    addToWishList(state,action){
-      const itemIndex= state.wishListItems.findIndex(
-        (item)=>item.id === action.payload.id );
-       
-      if(itemIndex >= 0){
-        state.wishListItems[itemIndex] = {
-          ...state.wishListItems[itemIndex],
-          qty: state.wishListItems[itemIndex].qty + 1,
-          
-        };
-        toast.info("تم زيادة الكمية ",{position:'bottom-left'})
-        
-      }
-      else{
-        const productNot={...action.payload,qty:1};
-        state.wishListItems.push(productNot)
-        toast.error(`تم اضافة ${action.payload.name} الى قائمة الرغبات `,{position:'bottom-left'});
-       
-      };
-      localStorage.setItem('wishlist',JSON.stringify(state.wishListItems))
-     
-    },
-    removeFromWishList(state,action){
-      state.wishListItems.map((wishItem) => {
-        if (wishItem.id === action.payload.id) {
-          const nextwishListItems = state.wishListItems.filter(
-            (item) => item.id !== wishItem.id
-          );
-
-          state.wishListItems = nextwishListItems;
-
-          toast.error("تم حذف المنتج ", {
-            position: "bottom-left",
-          });
-        }
-        localStorage.setItem("wishList", JSON.stringify(state.wishListItems));
-        return state;
-      });
-    },
-
-    decreaseQty(state,action){
-      const itemIndex = state.wishListItems.findIndex(
-        (item) => item.id === action.payload.id
-      );
-        if (state.wishListItems[itemIndex].qty > 1) {
-          state.wishListItems[itemIndex].qty -= 1;
-
-          toast.error(`تم تقليل الكمية ${action.payload.name} `,{position:'bottom-left'});
-        }
-        else if (state.wishListItems[itemIndex].qty === 1) {
-          const nextwishListItems = state.wishListItems.filter(
-            (item) => item.id !== action.payload.id
-          );
-  
-          state.wishListItems = nextwishListItems;
-            toast.error(`تم حذف العنصر من قائمة ${action.payload.name} `,{position:'bottom-left'});
-            
-        }
-        localStorage.setItem('wishList',JSON.stringify(state.wishListItems))
-       
-    },
-    getTotal(state, action) {
-      let { total, quantity} = state.wishListItems.reduce(
-        (cartTotal, cartItem) => {
-          const { price,qty } = cartItem;
-          let totalItem = price * qty;
-          cartTotal.total += totalItem;
-          cartTotal.quantity += qty;
-          
-         
-          
-          return cartTotal;
-          
-        },
-        {
-          total: 0,
-          quantity: 0,
-        
-         
-          
-        }
-      );
-      state.qty = quantity;
-      state.totalPrice = total;
-     
-      
-      
-    },
   },
+  extraReducers: {
+    //add item to cart
+    [addToWishList.pending]: (state, action) => {
+        state.status = "pending"
+        state.isLoading=true
+  },
+    [addToWishList.fulfilled]: (state, action) => {
+          state.isLoading=false
+          state.wishlistItems=[...action.payload]
+          state.status = "success"
+  },
+    [addToWishList.rejected]: (state, action) => {
+        state.status = "rejected";
+        state.isLoading=false
+        state.error=action.payload
+      
+  },
+   //get all items of cart
+  [getWishListItems.pending]: (state, action) => {
+    state.status = "pending"
+    state.isLoading=true
+},
+  [getWishListItems.fulfilled]: (state, action) => {
+      state.isLoading=false
+      state.wishlistItems= action.payload
+      state.status = "success"
+},
+[getWishListItems.rejected]: (state, action) => {
+    state.status = "rejected";
+    state.isLoading=false
+    state.error=action.payload
+   
+},
+
   
+  //remove item from cart
+  [removeFromWishList.pending]: (state, action) => {
+    state.status = "pending"
+    state.isLoading=true
+},
+  [removeFromWishList.fulfilled]: (state, action) => {
+      state.isLoading=false
+      state.wishlistItems= state.wishlistItems.filter((item) =>item.id !== action.payload)
+   
+  },
+ 
+[removeFromWishList.rejected]: (state, action) => {
+    state.status = "rejected";
+    state.isLoading=false
+    state.error=action.payload
+},
 
 
+  },
+ 
   
 })
 
 
-export const {addToWishList,removeFromWishList,decreaseQty,getTotal}=wishlistSlice.actions;
+
 export default wishlistSlice.reducer

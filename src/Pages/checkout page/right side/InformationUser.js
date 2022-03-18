@@ -5,7 +5,7 @@ import { Formik } from 'formik';
 import {Form ,InputGroup} from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { postOrder } from '../../../Helpers/api/order';
-import {orderPending,orderSuccess,orderFail} from '../../../redux/order/orderSlice'
+
 
 
 export default function InformationUser() {
@@ -54,7 +54,7 @@ export default function InformationUser() {
                         
                      if(!values){return alert("يرجى ادخال البيانات ")}
                      
-                     dispatch(orderPending());
+                     //dispatch(orderPending());
                      
                      try{
                        const isAuth= await postOrder(
@@ -70,15 +70,15 @@ export default function InformationUser() {
                             
                          });
                        if(isAuth.status === 'error'){
-                         return dispatch(orderFail(isAuth.message));
+                         //return dispatch(orderFail(isAuth.message));
                  
                        }
-                       dispatch(orderSuccess());
+                       //dispatch(orderSuccess());
                        
                        
                      }
                      catch(error){
-                       dispatch(orderFail(error.message));
+                      // dispatch(orderFail(error.message));
                  
                      }
                    

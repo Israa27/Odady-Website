@@ -25,14 +25,17 @@ export const sendPassword=(email) => {
   })
 }
 
-export const updateUserPassword = ({password1,password2,password3}) => {
+export const updateUserPassword = (password1,password2,password3) => {
 	return new Promise(async (resolve, reject) => {
+
 		try {
-			const { data } = await axios.patch( updatePasswordURL, {
+			const { data } = await axios.post( updatePasswordURL, {
         old_password: password1,
         new_password1: password2,
         new_password2: password3
-      });
+      },
+      
+      );
 
 			console.log(data);
 			resolve(data);

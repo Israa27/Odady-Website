@@ -1,20 +1,6 @@
-.list-items{
+.flex-content{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-bottom: 30px ;
-    margin-top: 30px;
-}
-.filter-items{
-    margin-top: 30px;
-}
-.filter-items select{
-    border: 2px solid #f6f5f5;
-    background-color: #f6f5f5;
-    height: 45px;
-    padding: 5px;
-    margin-right:12px;
-    border-radius: 5px;   
+    margin: auto 85px 45px;
 }
 @media (max-width:1280px){
     .list-items{justify-content: flex-start;}

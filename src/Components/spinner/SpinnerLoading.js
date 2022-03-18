@@ -1,6 +1,6 @@
 import React from 'react'
 import Lottie from 'react-lottie';
-import * as loading from './43298-app-icon-remote-shopping.json';
+import * as loading from './lf30_editor_iomxr4yy.json';
 
 const defaultOptions = {
   loop: true,
@@ -12,6 +12,6 @@ const defaultOptions = {
 }
 export default function SpinnerLoading() {
   return <div className='spinner'>
-     <Lottie options={defaultOptions} height={220} width={220} />
+     <Lottie options={defaultOptions} height={200} width={200} />
   </div>
 }

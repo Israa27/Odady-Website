@@ -1,22 +1,19 @@
-import { createSlice} from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 
-
-
 const initialState ={
-  status:'',
-  cartItems: localStorage.getItem("cartItems")? JSON.parse(localStorage.getItem("cartItems")):[],
+ cartItems:localStorage.getItem('cartItems')?JSON.parse(localStorage.getItem('cartItems')):[],
   qty:0,
   totalPrice:0,
   totalItem:0,
 }
 
 
-export const cartActionSlice = createSlice({
-  name: 'cartAction',
+export const cartSlice = createSlice({
+  name: 'cart',
   initialState,
   reducers: {
-    addItem(state,action){
+    addItemToCart(state,action){
       const itemIndex= state.cartItems.findIndex(
         (item)=>item.id === action.payload.id );
        
@@ -32,13 +29,13 @@ export const cartActionSlice = createSlice({
       else{
         const productNot={...action.payload,qty:1};
         state.cartItems.push(productNot)
-        toast.error(`تم اضافة ${action.payload.name} الى قائمة الرغبات `,{position:'bottom-left'});
+        toast.error(`تم اضافة ${action.payload.name} الى سلة المشتريات `,{position:'bottom-left'});
        
       };
       //localStorage.setItem('cartItems',JSON.stringify(state.cartItems))
      
     },
-    removeItemCart(state,action){
+    removeFromCart(state,action){
       state.cartItems.map((cartItem) => {
         if (cartItem.id === action.payload.id) {
           const nextCartItems = state.cartItems.filter(
@@ -51,12 +48,11 @@ export const cartActionSlice = createSlice({
             position: "bottom-left",
           });
         }
-        
-       localStorage.setItem('cartItems',JSON.stringify(state.cartItems))
-       
+        localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
         return state;
       });
     },
+
     decreaseQty(state,action){
       const itemIndex = state.cartItems.findIndex(
         (item) => item.id === action.payload.id
@@ -71,11 +67,10 @@ export const cartActionSlice = createSlice({
             (item) => item.id !== action.payload.id
           );
   
-          state.cartItems = nextCartItems;
-            toast.error(`تم حذف العنصر من سلة المشتريات ${action.payload.title} `,{position:'bottom-left'});
+          state.cartItems =  nextCartItems ;
+            toast.error(`تم حذف من سلة المشتريات ${action.payload.name} `,{position:'bottom-left'});
             
         }
-        
         localStorage.setItem('cartItems',JSON.stringify(state.cartItems))
        
     },
@@ -108,9 +103,11 @@ export const cartActionSlice = createSlice({
     },
   },
   
- 
+
+
   
 })
 
 
-export const {addItem,removeItemCart ,decreaseQty,getTotalPrice}=cartActionSlice.actions;
+export const {addItemToCart,removeFromCart,decreaseQty,getTotalPrice}=cartSlice.actions;
+export default cartSlice.reducer

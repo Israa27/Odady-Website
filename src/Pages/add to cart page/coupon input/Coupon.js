@@ -1,12 +1,15 @@
 import { Container } from 'react-bootstrap';
-import { postCoupon } from '../../../Helpers/api/order';
+import { PostCoupon } from '../../../redux/order/orderSlice';
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import './coipon.css';
 export default function Coupon() {
+  const dispatch = useDispatch();
   const[input,setInput]=useState('');
   const handleSubmit=(e)=>{
-    e.preventDefault();
-    postCoupon(input)
+    e.preventDefault()
+    dispatch(PostCoupon(input))
+    
   }
   return <Container>
       <form className='form'>

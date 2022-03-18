@@ -60,7 +60,7 @@
 }
 
 .btn-add-to-wishlist button{
-    width: 340px;
+    width: 280px;
     margin-left: 5px;
     font-size: 18px;
     font-weight: 700;
@@ -76,7 +76,7 @@
     color: rgb(63, 62, 62);
     background-color: #F6F5F5;
     height: 50px;
-    width: 190px;
+    width: 160px;
     text-align: center;
     padding: 10px;
 }

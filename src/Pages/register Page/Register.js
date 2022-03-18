@@ -1,4 +1,4 @@
-import React from 'react'
+import React ,{useState} from 'react'
 import './register.css';
 import img from '../../Assets/images/Sign up-cuate.png';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +15,7 @@ export default function Register() {
         firstname: yup.string().required('هذا الحقل مطلوب'),
         lastname: yup.string().required('هذا الحقل مطلوب'),
         email: yup.string().matches(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "البريد الكتروني غير صحيح ").required('هذا الحقل مطلوب'),
-        password:yup.string(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,'ثمانية أحرف كحد أدنى ، حرف كبير واحد على الأقل ، حرف صغير واحد ورقم واحد').matches().min(8,'ثمانية احرف كحد اقصى').required('هذا الحقل مطلوب'),
+        password:yup.string().matches(/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/,'يجب ان تحتوي كلمة سر مزيج من الاحرف والارقام وعلامات خاضة #@!$%').min(8,'الحد الاقصى ثمانية احرف').required('هذا الحقل مطلوب'),
         phoneNumber:yup.number().required('هذا الحقل مطلوب'),
         governorate: yup.string().required('هذا الحقل مطلوب'),
         city: yup.string().required('هذا الحقل مطلوب'),
@@ -147,7 +147,7 @@ export default function Register() {
                     <Form.Label>عنوان البريد الالكتروني</Form.Label>
                     <InputGroup hasValidation>
                        
-                        <Form.Control
+                        <Form.Control 
                         type="email"
                         aria-describedby="inputGroupPrepend"
                         name="email"
@@ -155,6 +155,7 @@ export default function Register() {
                         onChange={handleChange}
                         isInvalid={!!errors.email}
                         />
+                        
                         <Form.Control.Feedback type="invalid">
                         {errors.email}
                         </Form.Control.Feedback>
@@ -163,16 +164,18 @@ export default function Register() {
 
                     <Form.Group  controlId="validationFormik03">
                     <Form.Label>كلمة المرور</Form.Label>
-                    <InputGroup hasValidation>
+                    <InputGroup  hasValidation >
                        
-                        <Form.Control
-                        type="password"
+                        <Form.Control 
+                        type= "password"
                         aria-describedby="inputGroupPrepend"
                         name="password"
                         value={values.password}
                         onChange={handleChange}
                         isInvalid={!!errors.password}
                         />
+                       
+                      
                         <Form.Control.Feedback type="invalid">
                         {errors.password}
                         </Form.Control.Feedback>

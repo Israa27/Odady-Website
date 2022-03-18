@@ -42,13 +42,7 @@ export default function Product() {
 
     };
     
-   useCallback(()=>{
-    const category=products.filter((categoryItem)=>{
-      return categoryItem.category.name===val
-      
-    })
-    setFilters(category)
-    },[filters])
+  
          
     
   

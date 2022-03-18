@@ -1,38 +1,46 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect,useCallback} from 'react'
+import Swal from 'sweetalert2'
 import { Container,Navbar,NavDropdown} from 'react-bootstrap';
 import './navbar.css';
 import logo from '../../Assets/images/logo.png';
 import { useNavigate } from 'react-router-dom';
-import { getCartItems } from '../../redux/cartSlice';
-import { getTotal } from '../../redux/wishlistSlice';
+import { getCartItems} from '../../redux/cartSlice';
+import { getWishListItems } from '../../redux/wishlistSlice';
 import { useSelector ,useDispatch} from 'react-redux';
-import { userLogout } from "../../Helpers/api/userLogin";
-import { getUserProfile } from '../../redux/user/userAction';
-import { searchProducts } from '../../redux/products/productsSlice';
 import { viweAllProducts } from '../../redux/showAllSlice';
+import { userLogout } from "../../Helpers/api/userLogin";
+
+
 
 
 
 export default function Navber() {
+  const cart=useSelector((state)=> state.cart.cartItems);
+  const wishlist=useSelector((state)=> state.wishlist.wishlistItems);
+  const[keyword,setKeyWord]=useState('');
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   // logout
   const logOut = () => {
     localStorage.removeItem("token");
-    //userLogout();
-    dispatch(getUserProfile());
-    //navigate('/login');
+    userLogout();
+    navigate('/login');
   }
-  const cart=useSelector((state)=> state.cart);
-  const wishlist=useSelector((state)=> state.wishlist);
-  const[keyword,setKeyWord]=useState('');
-  const dispatch = useDispatch();
 
-  useEffect(()=>{
-    //dispatch(getTotalPrice())
-    dispatch(getTotal());
-},[cart,wishlist,dispatch]);
+  useEffect(() => {
+   
+    if(cart ){
+
+      dispatch(getCartItems());
+    }
+    if(wishlist ){
+      dispatch(getWishListItems())
+    }
+    
+},[dispatch]);
  
+
   
  
   
@@ -40,22 +48,23 @@ export default function Navber() {
  
   const hadleSearch =(e)=>{
     e.preventDefault();
-    dispatch(searchProducts(keyword))
     dispatch(viweAllProducts(`q=${keyword}`))
     navigate('/products')
-    setKeyWord('')
+    //setKeyWord('')
    
   }
+  
   //show cart
   const handleShowCart=()=>{
-    dispatch(getCartItems())
-   
+    dispatch(getCartItems());
     navigate('/cart')
-  }
-  const handleShowWishlist=()=>{
-  
    
-    navigate('/wishlist')
+  }
+  //show WishList
+  const handleShowWishlist=()=>{
+     dispatch(getWishListItems())
+      navigate('/wishlist')
+  
   }
     return (
     <Navbar  className="navbar" expand="xl" >
@@ -67,15 +76,20 @@ export default function Navber() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-        <div className='navbar-icons'>
-                <button className='navbar-btns' onClick={handleShowWishlist} ><span className='badge'>{wishlist.qty}</span> <i className="far fa-heart"></i><a className='link-nav'>قائمة الرغبات</a></button>
-                <button  className='navbar-btns' onClick={ handleShowCart} ><span className='badge'>{cart.qty}</span> <i className="fas fa-shopping-cart"></i><a className='link-nav'>عربة التسوق</a></button>
-                <NavDropdown  title={ <i className="far fa-user"></i> } className='navbar-btns' id="basic-nav-dropdown">
-                  <NavDropdown.Item className='items' onClick={()=>{navigate('/login')}}>تسجيل الدخول <i className="fas fa-sign-in-alt"></i></NavDropdown.Item>
-                  <NavDropdown.Item className='items' onClick={()=>{navigate('/register')}}>انشاء حساب  <i className="fas fa-user-plus"></i></NavDropdown.Item>
-                  <NavDropdown.Item className='items' onClick={()=>{navigate('/profile_user')}}>معلومات المستخدم  <i className="fas fa-user-cog"></i></NavDropdown.Item>
-                  <NavDropdown.Item className='items' onClick={logOut}>تسجيل خروج<i className="fas fa-sign-out-alt"></i></NavDropdown.Item>
-                </NavDropdown>
+        <div className='navbar-icons'> 
+            <button className='navbar-btns' onClick={handleShowWishlist} >
+              <span className='badge'>{wishlist === undefined ?(0):(wishlist.length)}</span> 
+            <i className="far fa-heart"></i><a className='link-nav'>قائمة الرغبات</a>
+            
+            </button>
+            <button  className='navbar-btns' onClick={ handleShowCart} ><span className='badge'>{cart === undefined ?(0):(cart.length)}</span> <i className="fas fa-shopping-cart"></i><a className='link-nav'>عربة التسوق</a></button>
+             <NavDropdown  title={ <i className="far fa-user"></i> } className='navbar-btns' id="basic-nav-dropdown">
+            <NavDropdown.Item className='items' onClick={()=>{navigate('/register')}}>انشاء حساب  <i className="fas fa-user-plus"></i></NavDropdown.Item>
+            <NavDropdown.Item className='items' onClick={()=>{navigate('/profile_user')}}>معلومات المستخدم  <i className="fas fa-user-cog"></i></NavDropdown.Item>
+            <NavDropdown.Item className='items' onClick={logOut}>تسجيل خروج<i className="fas fa-sign-out-alt"></i></NavDropdown.Item>
+        </NavDropdown>
+              
+                
             </div>
            
           

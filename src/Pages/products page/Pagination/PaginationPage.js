@@ -1,40 +1,40 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import './pagination.css';
 
-export default function PaginationPage({pages,currentPage,setCurrentPage}) {
-    const pageNumberLimit= 5;
-    const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
-    const [minPageNumberLimit, setminPageNumberLimit] = useState(1);
-    const handleClick =(event)=>{
-        setCurrentPage(Number(event.target.id))
-    };
-    const handleNextbtn = () => {
-        setCurrentPage(currentPage + 1);
-    
-        if (currentPage + 1 > maxPageNumberLimit) {
-          setmaxPageNumberLimit(maxPageNumberLimit + pageNumberLimit);
-          setminPageNumberLimit(minPageNumberLimit + pageNumberLimit);
-        }
-      };
-    
-      const handlePrevbtn = () => {
-        setCurrentPage(currentPage - 1);
-    
-        if ((currentPage - 1) % pageNumberLimit === 0) {
-          setmaxPageNumberLimit(maxPageNumberLimit - pageNumberLimit);
-          setminPageNumberLimit(minPageNumberLimit - pageNumberLimit);
-        }
-      };
-  return <div className='pagination-item'>
-      <button onClick={handleNextbtn}><i className="fas fa-angle-double-right"></i></button>
-      {pages.map(number=>{
-          return<li className={currentPage === number ?'active' : null} key={number}id={number} onClick={handleClick}>{number}</li>
-          
-      })
+export default function PaginationPage({setCurrentPage,pages}) {
+  const numOfPages = [];
 
-      }
-       <button onClick={handlePrevbtn}><i className="fas fa-angle-double-left"></i></button>
-  </div>
-    
+    for (let i=1; i <= pages; i++) {
+        numOfPages.push(i);
+    }
 
+    const [currentButton, setCurrentButton] = useState(1);
+
+    useEffect(() => {
+        setCurrentPage(currentButton);
+    }, [currentButton, setCurrentPage])
+
+    return (
+        <div className="clearfix">
+        <ul className="pagination">
+            <li className={`${currentButton === 1 ? 'page-item disabled' : 'page-item' }`}><a href="#!"
+                onClick = { () => setCurrentButton((prev) => prev === 1 ? prev : prev - 1)}
+            >السابق</a></li>
+          {
+            numOfPages.map((page, index) => {
+                return (
+                    <li key={index} className={`${currentButton === page ? 'page-item active' : 'page-item' }`}><a href="#!" className="page-link"
+                        onClick = {()=>setCurrentButton(page)}
+                    >{page}</a></li> 
+                )
+            })
+
+}
+
+             <li className={`${currentButton === numOfPages.length ? 'page-item disabled' : 'page-item' }`}><a href="#!"
+                onClick = { () => setCurrentButton((next) => next === numOfPages.length ? next : next + 1)}
+            >التالي</a></li>
+        </ul>
+    </div>
+    )
 }

@@ -24,12 +24,12 @@ function App() {
           <Route exact path="/products" element={<Layouts />}/>
           <Route exact path="/product_detiles" element={<Layouts />}/>
           
-          <Route element={<PrivateRoute />}>
+        
           <Route exact path="/cart" element={<Layouts />}/>
           <Route exact path="/checkout" element={<Layouts/>}/>
           <Route exact path="/contact" element={<Layouts />}/>
           <Route exact path="/wishlist" element={<Layouts />}/>
-          </Route>
+         
           <Route exact path="/privacy" element={<Layouts />}/>
           <Route exact path="/transfer" element={<Layouts />}/>
           <Route exact path="/profile_user" element={<Profile />}/>
