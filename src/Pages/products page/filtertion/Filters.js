@@ -52,11 +52,11 @@ export default function Filters({showAll,value,cate,sort,setValue,setCate,setSor
         <span>ترتيب المنتجات حسب</span>
         
         <div className='radio'>
-            <input type='radio' id='radio8' value='asc' onChange={(e)=>setSort(e.target.value)} checked={sort ==='asc'}/>
+            <input type='radio' id='radio8' value='rsc' onChange={(e)=>setSort(e.target.value)} checked={sort ==='rsc'}/>
             <label htmlFor='radio8'>من الاعلى سعرا الى اقل سعرا</label>
         </div> 
          <div className='radio'>
-            <input type='radio' id='radio9' value='res' onChange={(e)=>setSort(e.target.value)} checked={sort ==='res'}/>
+            <input type='radio' id='radio9' value='asc' onChange={(e)=>setSort(e.target.value)} checked={sort ==='asc'}/>
             <label htmlFor='radio9'>من اقل سعرا الى اعل سعر </label>
         </div>
         
