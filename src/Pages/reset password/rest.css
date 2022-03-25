@@ -68,3 +68,14 @@
     border: none;
 }
 
+.password{
+    position: relative;
+}
+.password i{
+    position: absolute;
+    left: 15px;
+    top: 13px;
+    font-size: 15px;
+    color: #75756e;
+
+}

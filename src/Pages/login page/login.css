@@ -93,6 +93,17 @@
     border-top-left-radius: 4px !important;
     border-bottom-left-radius: 4px !important;
 }
+.password{
+    position: relative;
+}
+.password i{
+    position: absolute;
+    left: 15px;
+    top: 13px;
+    font-size: 15px;
+    color: #75756e;
+
+}
 .register-link{
 
 }
