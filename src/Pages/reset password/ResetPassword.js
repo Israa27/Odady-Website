@@ -1,13 +1,14 @@
 import React ,{useState} from 'react';
 import { useLocation,useNavigate } from 'react-router-dom';
 import './rest.css';
+import Swal from 'sweetalert2'
 import { useDispatch } from 'react-redux';
 import { updatePassword} from '../../redux/reset password/passwordAction';
 //import  {passwordResetPending, passwordResetSuccess, updatePasswordSuccess, passwordResetFail} from '../../redux/reset password/passwordSlice'
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import { Form ,Button,InputGroup } from 'react-bootstrap';
-import {changePassword } from '../../Helpers/api/userLogin';
+import { updateAccountFail, updateAccountPending } from '../../redux/updateAccountSlice';
 export default function ResetPassword() {
   const[showPasssword,setShowPassword]=useState(false);
   const[showPasssword2,setShowPassword2]=useState(false);
@@ -39,15 +40,20 @@ export default function ResetPassword() {
             const password=values.password
             const confirmPassword=values.confirmPawssord
            
-        
+            dispatch(updateAccountPending());
             try{
              
               dispatch(updatePassword(oldPassword,password,confirmPassword))
-              
-              //navigate('/login')
+              Swal.fire({
+                icon: 'success',
+                title: 'تمت عملية بنجاح',
+                text: ' تم  تعديل بيانات  ^_^ '
+              }) ;
+                
+              navigate('/login')
             }
             catch(error){
-              //dispatch(orderFail(error.message));
+              dispatch(updateAccountFail(error.message));
         
             }}
                

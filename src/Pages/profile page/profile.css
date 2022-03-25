@@ -1,60 +1,64 @@
 .profile-cart{
+    width: 1070px !important;
     background-color: #fff;
     box-shadow: 0px 0px 7px 2px #eeeeee8c;
     border-radius: 5px;
     display: flex;
     margin-top: 40px;
+    height: 600px;
 }
 .nav-right{
-    width: 350px;
-    background-color: #fff;
-    height: 600px;
+    
+    background-color: #13172d;
     display: flex;
     align-items: flex-start;
-    margin-top: 29px;
-    border-left: 2px solid #eee;
     flex-direction: column;
+    margin-right: -12px;
+    color: #fff;
+    border-radius: 15px 5px 5px 15px;
 }
 
 .meun{
     margin-top: 40px;
 }
 .meun ul li{
-    height: 60px;
-    width: 362px;
-    padding: 10px 25px;
-    margin-right: -13px;
-}
-.meun ul li:hover{
-    background-color: #fdd8b8;
-    transition: 0.5s all ease-in-out;
+    height: 41px;
+    width: 200px;
+    padding: 2px 15px;
+    margin-bottom: 21px;
+    line-height: 35px;
+    display: flex;
+    align-items: center
+
    
 }
 
+
 .meun ul li a {
-    color: #535157;
+    color: #ffffff;
     text-decoration: none;
-    font-size: 20px;
-    font-weight: 500 !important
+    font-size: 17px;
+    font-weight: 500 !important;
+    width: 200px;
 }
-.meun ul li:hover a,.meun ul li:hover i{
-    color:#fff;
+.meun ul li:first-child a.hade{display: none;}
+.meun ul li.show:hover:not(li:first-child) {
+     border-left: 4px solid #fff;
+     background-color: #eeeeee5c;
     transition: 0.5s all ease-in-out;
 }
 .meun ul li i{
-color: #535157;
+color: #ffffff;
 margin-left: 10px;
+cursor: pointer;
 }
-.meun ul hr{
-    width: 362px !important;
-    margin-right: -13px;
-    height: 2px !important;
-    background-color: #bfbcbc !important;
-    margin: 0px  -14px 0px 0px!important;
-}
-.meun ul li:hover hr{
-    display: none !important;
-}
+
 .email{
-    color: #535157 !important;
+    color: #ffffff !important;
+}
+.hade{
+    display: none;
+}
+.show{
+    display: block;
 }

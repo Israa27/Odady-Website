@@ -7,8 +7,9 @@ const URL=BASE_URL+'/products';
 const initialState = {
   best_seller_products: [],
   popular_products:[],
-  product_deitals:[],
-  search:[],
+  product_deitals:localStorage.getItem('product')?JSON.parse(localStorage.getItem('product')):[],
+  type:[],
+  promotion:[],
   status: null,
   isLoading:false,
   error:'',
@@ -79,7 +80,7 @@ export const getProductDetails = createAsyncThunk(
       }
     );
     localStorage.setItem('product',JSON.stringify(response.data))
-    return response.data;
+    return  response.data;
    
      
     
@@ -89,30 +90,60 @@ export const getProductDetails = createAsyncThunk(
   }
 );
 
-export const searchProducts = createAsyncThunk(
-  "products/search",
-  async (value,{ rejectWithValue })=> {
+
+//get type
+
+export const getType = createAsyncThunk(
+  "products/type",
+  async (_,{ rejectWithValue })=> {
     
     try {
-      const response = await axios.get(URL,{
-          params:{q:value},
-          mode: 'no-cors',
-          headers:{
-            "Content-Type" : "application/json",
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authortization',
-            'Acces-Control-Allow-Methods':'GET, POST, PATCH, DELETE', 
-        }
+      const response = await axios.get(`${BASE_URL}/types`,{
+
+        headers:{
+          "Content-Type" : "application/json",
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authortization',
+          'Acces-Control-Allow-Methods':'GET, POST, PATCH, DELETE', 
       }
-    )
-     return response.data;
+      }
+    );
+    
+    return response.data;
+   
+     
     
     } catch (error) {
-      return rejectWithValue(error.response);
+      return rejectWithValue(error.response.status)
     }
   }
 );
+// promotion announcement
+export const getPromotion = createAsyncThunk(
+  "products/promotion",
+  async (_,{ rejectWithValue })=> {
+    
+    try {
+      const response = await axios.get(`${BASE_URL}/promo`,{
 
+        headers:{
+          "Content-Type" : "application/json",
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authortization',
+          'Acces-Control-Allow-Methods':'GET, POST, PATCH, DELETE', 
+      }
+      }
+    );
+    
+    return response.data;
+   
+     
+    
+    } catch (error) {
+      return rejectWithValue(error.response.status)
+    }
+  }
+);
 const allproductsSlice = createSlice({
   name: "products",
   initialState,
@@ -125,11 +156,13 @@ const allproductsSlice = createSlice({
     [getBestSellerProducts.pending]: (state, action) => {
         state.status = "pending"
         state.isLoading=true
+        state.error=''
       },
       [getBestSellerProducts.fulfilled]: (state, action) => {
           state.isLoading=false
           state.best_seller_products=action.payload
           state.status = "success"
+          state.error=''
   },
       [getBestSellerProducts.rejected]: (state, action) => {
         state.status = "rejected";
@@ -141,11 +174,13 @@ const allproductsSlice = createSlice({
     [getPopularProducts.pending]: (state, action) => {
       state.status = "pending"
       state.isLoading=true
+      state.error=''
     },
     [getPopularProducts.fulfilled]: (state, action) => {
         state.isLoading=false
         state.popular_products=action.payload
         state.status = "success"
+        state.error=''
 },
     [getPopularProducts.rejected]: (state, action) => {
       state.status = "rejected";
@@ -172,25 +207,46 @@ const allproductsSlice = createSlice({
       state.error=action.payload
     },
 
-    //search 
-    [searchProducts.pending]: (state, action) => {
+
+    //get type
+    [getType.pending]: (state, action) => {
       state.status = "pending"
       state.isLoading=true
       state.error=''
     },
-    [searchProducts.fulfilled]: (state, action) => {
+    [getType.fulfilled]: (state, action) => {
       
         state.isLoading=false
-        state.search=action.payload
+        state.type=action.payload
         state.status = "success"
         state.error=''
 },
-    [searchProducts.rejected]: (state, action) => {
+    [getType.rejected]: (state, action) => {
+      state.status = "rejected";
+      state.isLoading=false
+      state.error=action.payload
+    },
+
+    //promotion
+    [getPromotion.pending]: (state, action) => {
+      state.status = "pending"
+      state.isLoading=true
+      state.error=''
+    },
+    [getPromotion.fulfilled]: (state, action) => {
+      
+        state.isLoading=false
+        state.promotion=action.payload
+        state.status = "success"
+        state.error=''
+},
+    [getPromotion.rejected]: (state, action) => {
       state.status = "rejected";
       state.isLoading=false
       state.error=action.payload
     },
   },
+
 });
 
 

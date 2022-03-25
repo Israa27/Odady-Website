@@ -5,7 +5,7 @@ const URL=BASE_URL;
 
 
 const initialState = {
-  all_products:[],
+  all_products:localStorage.getItem('allProducts')?JSON.parse(localStorage.getItem('allProducts')):[],
   status: null,
   isLoading:false,
   error:'',
@@ -16,7 +16,7 @@ export const viweAllProducts = createAsyncThunk(
     async (value)=> {
       
       try {
-        const response = await axios.get(value ?`${URL}/products?${value}` : `${URL}/products`,{
+        const response = await axios.get(`${URL}/products?${value}`,{
          headers:{
           "Content-Type" : "application/json",
           'Access-Control-Allow-Origin': '*',
@@ -32,7 +32,93 @@ export const viweAllProducts = createAsyncThunk(
     }
   );
 
+// search
+  export const searchProducts = createAsyncThunk(
+    "products/search_products",
+    async (keyword)=> {
+      
+      try {
+        const response = await axios.get(`${URL}/products?q=${keyword}`,{
+         headers:{
+          "Content-Type" : "application/json",
+          'Access-Control-Allow-Origin': '*',
+        
+      }  
+    })
+    localStorage.setItem('allProducts',JSON.stringify(response.data))
+      return response.data;
+      
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  );
+export const getTypeProducts = createAsyncThunk(
+    "products/sub-category",
+    async (value)=> {
+      
+      try {
+        const response = await axios.get(`${URL}/products?type=${value}`,{
+         headers:{
+          "Content-Type" : "application/json",
+          'Access-Control-Allow-Origin': '*',
+        
+      }  
+    })
+    localStorage.setItem('allProducts',JSON.stringify(response.data))
+      return response.data;
+      
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  );
 
+export const getPromotionProducts = createAsyncThunk(
+    "products/promotion_products",
+    async (id)=> {
+      
+      try {
+        const response = await axios.get(`${URL}/promo/get promo products/${id}`,{
+         headers:{
+          "Content-Type" : "application/json",
+          'Access-Control-Allow-Origin': '*',
+        
+      }  
+    })
+    localStorage.setItem('allProducts',JSON.stringify(response.data))
+      return response.data;
+      
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  );
+
+// get related products 
+export const getRelatedProducts = createAsyncThunk(
+  "products/related_products ",
+  async (id,{ rejectWithValue })=> {
+    
+    try {
+      const response = await axios.get(`${URL}/products/${id}/related`,{
+
+          headers:{
+            "Content-Type" : "application/json",
+            'Access-Control-Allow-Origin': '*',
+        }
+      }
+    );
+    localStorage.setItem('allProducts ',JSON.stringify(response.data))
+    return response.data;
+   
+     
+    
+    } catch (error) {
+      return rejectWithValue(error.response.status)
+    }
+  }
+);
 
 const showAllSlice = createSlice({
   name: "all_products",
@@ -57,7 +143,66 @@ const showAllSlice = createSlice({
         state.isLoading=false
         state.error='error'
       },
-    
+      // sreach
+      [searchProducts.pending]: (state, action) => {
+        state.status = "pending"
+        state.isLoading=true
+      },
+      [searchProducts.fulfilled]: (state, action) => {
+          state.isLoading=false
+          state.all_products=[...action.payload]
+          state.status = "success"
+  },
+      [searchProducts.rejected]: (state, action) => {
+        state.status = "rejected";
+        state.isLoading=false
+        state.error='error'
+      },
+      //get Related Products
+      [getRelatedProducts.pending]: (state, action) => {
+        state.status = "pending"
+        state.isLoading=true
+      },
+      [getRelatedProducts.fulfilled]: (state, action) => {
+          state.isLoading=false
+          state.all_products=[...action.payload]
+          state.status = "success"
+  },
+      [getRelatedProducts.rejected]: (state, action) => {
+        state.status = "rejected";
+        state.isLoading=false
+        state.error='error'
+      },
+      // get sub-category
+      [getTypeProducts.pending]: (state, action) => {
+        state.status = "pending"
+        state.isLoading=true
+      },
+      [getTypeProducts.fulfilled]: (state, action) => {
+          state.isLoading=false
+          state.all_products=[...action.payload]
+          state.status = "success"
+  },
+      [getTypeProducts.rejected]: (state, action) => {
+        state.status = "rejected";
+        state.isLoading=false
+        state.error='error'
+      },
+    // get products of Promotion
+      [getPromotionProducts.pending]: (state, action) => {
+        state.status = "pending"
+        state.isLoading=true
+      },
+      [getPromotionProducts.fulfilled]: (state, action) => {
+          state.isLoading=false
+          state.all_products=[...action.payload]
+          state.status = "success"
+  },
+      [getPromotionProducts.rejected]: (state, action) => {
+        state.status = "rejected";
+        state.isLoading=false
+        state.error='error'
+      },
    
 },
 });

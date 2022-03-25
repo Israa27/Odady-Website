@@ -7,30 +7,44 @@ import {  useSelector ,useDispatch} from 'react-redux';
 import { viweAllProducts } from '../../redux/showAllSlice';
 import PaginationPage from './Pagination/PaginationPage';
 export default function Product() {
+
   const products=useSelector((state)=> state.all.all_products); 
-  //fatch all products
-  console.log(products)
   
+console.log(products)
+  //fatch all products
   const[value,setValue]=useState(''); //company
   const[cate,setCate]=useState(''); //category
   const[sort,setSort]=useState(''); //sort
-  const[filters,setFilters]=useState(products);
+ 
+  const[filters,setFilters]=useState([]);
+  
   const[currentPage,setCurrentPage]=useState(1);
   const[productsPerPage]=useState(5);
   
   const dispatch = useDispatch();
- 
-   
+  useEffect(()=>{
+    setTimeout(
+      () => setFilters(products),
+      1000
+    );
+    
+  
+  },[products])
+  useEffect(()=>{
+    if(value){
+      //filter by company name
+      const company=products.filter((companyItem)=>{
+        return companyItem.company.name===value
+        
+      })
+      setFilters( company)
+     
+    }
+    
+  
+  },[setFilters,value])
     useEffect(()=>{
-      if(value){
-        //filter by company name
-        const company=products.filter((companyItem)=>{
-          return companyItem.company.name===value
-          
-        })
-        setFilters( company)
-       
-      }
+      
       if(cate){
         const category=products.filter((categoryItem)=>{
           return categoryItem.category.name===cate
@@ -39,7 +53,7 @@ export default function Product() {
         
         setFilters(category)
       }
-    },[setFilters,value,cate])
+    },[setFilters,cate])
     
   
          
@@ -71,8 +85,9 @@ export default function Product() {
     const currentProducts = filters.slice(indexOfFirstProduct, indexOfLastProduct);
     const totalPages = Math.ceil(filters.length / productsPerPage);
 
+  //show all products
   const showAll=()=>{
-   dispatch(viweAllProducts())
+     dispatch(viweAllProducts())
   }
 
   return <div>

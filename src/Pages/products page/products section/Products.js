@@ -2,10 +2,17 @@ import React  from 'react'
 import ProductCard from '../../../Components/Card/ProductCard';
 import img from '../../../Assets/images/empty_product.png';
 import './products.css';
+import { useSelector } from 'react-redux';
+import SpinnerLoading from '../../../Components/spinner/SpinnerLoading';
 
 export default function ({currentProducts,filters}) {
- 
- return (
+ const loading=useSelector((state)=>state.all.isLoading)
+ return (<div className='product-content'>
+   {loading===true?(
+     <div className='loading'>
+     <SpinnerLoading/>
+     </div>
+   ):(
     <div className='list-items'>
        {filters.length===0 ?(
             <div className='product-empty'>
@@ -27,5 +34,8 @@ export default function ({currentProducts,filters}) {
 
 
           </div>
-  )
+  
+ )}
+ </div>
+ )
 }

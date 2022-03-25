@@ -1,13 +1,23 @@
-import React from 'react'
+import React ,{useState} from 'react'
 import { Container } from 'react-bootstrap';
 import { Link ,useLocation} from 'react-router-dom';
 import './profile.css'
 import Account from './account user/Account';
 import MyOrder from './myorder/MyOrder';
-import MywishList from './wishlist/MywishList'
-
+import User from './information user/User';
+import { useNavigate } from 'react-router';
+import { useSelector,useDispatch } from 'react-redux';
+import { getOrders } from '../../redux/order/orderSlice';
+import OrderItem from './myorder/OrderItem';
 export default function Profile() {
-   const user= JSON.parse(localStorage.getItem("user"));
+  const dispatch = useDispatch();
+  const error= useSelector((state)=>state.user);
+  const navigate = useNavigate();
+   const[isOpen,setIsOpen]=useState(false);
+   const toggle=()=>{
+     setIsOpen(!isOpen)
+   }
+  
     const location = useLocation()
     const renderContent = (routeName) => {
       console.log(routeName)
@@ -16,30 +26,28 @@ export default function Profile() {
           return <Account />
         case '/myorder':
           return <MyOrder/>
-        case '/mywishlist':
-          return <MywishList />
+        default:
+          return <User/>
        
     }};
   return (
-   
-
+    <div>
+    { error.error==='Token not found!' ?(
+      navigate('/not_found')
+    ):(
   
     <Container className='profile-cart'>
        
        <div className='nav-right' >
-           <div className='user'>
-             <div>
-               <img src=''/>
-             </div>
-               <h4>{user.first_name} {user.last_name}</h4>
-               <span className='email'>{user.email}</span>
-           </div>
-           <div className='meun'>
+           <div className='meun'style={{width:isOpen? '200px':'50px'}}>
                <ul>
-               <li><Link to='/'><i className="fas fa-home"></i> الصفحة الرئيسة </Link></li><hr/>
-                   <li><Link to='/account'><i className="fas fa-user-edit"></i> تعديل الحساب </Link></li><hr/>
-                   <li><Link  to='/myorder'><i className="fas fa-shopping-cart"></i> طلباتي  </Link></li><hr/>
-                   <li><Link  to='/mywishlist'> <i className="far fa-heart"></i> قائمة رغباتي </Link></li>
+               <li><i onClick={toggle}  className="fas fa-align-justify"></i><Link to =''className={isOpen ?'show':'hade'}>  ملف الشخصي </Link></li>
+               <li onClick={()=>navigate('/')} className={isOpen ?'show':'hade'}><i className="fas fa-home"  ></i> <Link to='/' className={isOpen ?'show':'hade'}> الصفحة الرئيسة </Link></li>
+               <li onClick={()=>navigate('/user')} className={isOpen ?'show':'hade'}><i class="fas fa-user-alt"></i> <Link to='/user' className={isOpen ?'show':'hade'}>معلومات المستخدم</Link></li>
+               <li onClick={()=>navigate('/account')} className={isOpen ?'show':'hade'}><i className="fas fa-edit"></i> <Link className={isOpen ?'show':'hade'} to='/account'> تعديل الحساب </Link></li>
+               <li onClick={()=>{dispatch(getOrders());
+                navigate('/myorder')}} className={isOpen ?'show':'hade'}><i className="fas fa-shopping-cart"></i> <Link to='/myorder' className={isOpen ?'show':'hade'} > طلباتي  </Link></li>
+                 
                    
                </ul>
 
@@ -47,12 +55,15 @@ export default function Profile() {
        </div>
  
        <div className='main'>
-         
+        
        {renderContent(location.pathname)}
           
        </div>
      
     </Container>
     
+  
+  )}
+  </div>
   )
 }

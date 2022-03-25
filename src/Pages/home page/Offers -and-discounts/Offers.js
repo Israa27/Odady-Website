@@ -1,37 +1,39 @@
-import React from 'react'
+import React, { useCallback, useEffect } from 'react'
 import './offers.css';
-import img1 from '../../../Assets/images/img2.jpg';
-import img2 from '../../../Assets/images/img1.jpg';
 import ProductCard from '../../../Components/Card/ProductCard';
 import { Container } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getPromotionProducts } from '../../../redux/showAllSlice';
+import { useNavigate } from 'react-router';
 export default function Offers() {
     const items=useSelector((state)=> state.product.popular_products);
+    const promotion=useSelector((state)=> state.product.promotion)
+    const dispatch = useDispatch()
+    const navigate=useNavigate()
+    const handleSubmit=(id)=>{
+       dispatch(getPromotionProducts(id))
+       navigate('/products')
+       
+     
+    }
+  
     return (
         <section className='offers'>
-        <Container>
+        <Container className='flex-column'>
           <div className='header'>
               <h5>عروض وخصومات</h5>
           </div>
           <div className='offer-content'>
-              <div className='offer'>
-                  <div className='offer-text'>
-                  <p>عروض
-                     خاصة</p>
-                  <button>تسوق الان</button>
-                  </div>
-                  <img src={img1} alt='' />
-              </div>
-              <div className='offer'>
-                  <img src={img2} alt='' />
-                  <div className='offer-text last'>
-                    <p>خضم <span>يصل الى </span>
-                        30%
-                    </p>
-                    <button>تسوق الان</button>
-                </div>
-              </div>
-          </div>
+                  {promotion.map((item,index)=>(
+                      <div key={index} className='offer'>
+                          <img src={item.image} alt={item.name} id={item.id} />
+                          <button onClick={()=>handleSubmit(item.id)}>تسوق الان</button>
+
+                      </div>
+                  ))}
+         </div>
+              
+          
           <div className='products'>
           {items.slice(0,4).map((item)=>{
               

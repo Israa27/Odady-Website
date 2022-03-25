@@ -1,4 +1,5 @@
 import React, {useState,useEffect} from 'react';
+import Swal from 'sweetalert2'
 import { Link, useLocation,useNavigate } from 'react-router-dom';
 import { Container,Form ,Button,InputGroup} from 'react-bootstrap';
 import './login.css';
@@ -22,17 +23,20 @@ export default function LogIn() {
     
 
 });
-
+const refrshPage=()=>{
+  window.location.reload(false);
+}
 	useEffect(() => {
+   
 		JSON.parse(localStorage.getItem("token")) && navigate(from);
-	}, [navigate, isAuth]);
+	}, [dispatch,navigate, isAuth]);
   
   
     return (
             <Container>
               <Formik
                 validationSchema={schema}
-                //onSubmit={console.log}
+              
                 initialValues={{
                     email: '',
                     password:'',
@@ -51,9 +55,22 @@ export default function LogIn() {
                       return dispatch(loginFail(isAuth.message));
               
                     }
+                    refrshPage()
                     dispatch(loginSuccess());
                     dispatch(getUserProfile());
-                    navigate('/')
+                   
+                    Swal.fire({
+                      icon: 'success',
+                      title: 'تمت عملية بنجاح',
+                      text: ' تم تسجيل الدخول بنجاح ^_^ '
+                    }) ;
+                   
+                   
+                      navigate('/')
+                   
+                  
+                   
+
                   }
                   catch(error){
                     dispatch(loginFail(error.message));

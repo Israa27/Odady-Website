@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState ={
   isloading:false,
   isAuth:false,
+  token:localStorage.getItem('token')?JSON.parse(localStorage.getItem('token')):[],
   error:'',
 }
 
@@ -16,9 +17,10 @@ export const loginSlice = createSlice({
         state.isloading = true;
     
     },
-    loginSuccess:(state) =>{
+    loginSuccess:(state,action) =>{
         state.isloading =false;
         state.isAuth=true;
+        state.token=action.payload;
         state.error='';
         
     },

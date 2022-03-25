@@ -1,16 +1,14 @@
 import React from 'react';
-import  Navbar  from '../../Components/Navbar/Navber';
-import  Footer  from '../../Components/Footer/Footer';
 
-import OrderForm from './left side/OrderForm';
 import './Checout.css';
-import InformationUser from './right side/InformationUser';
+import Summary from './summary/Summary';
+
 export default function Checkout() {
   return <div>
    
     <section className='all-content' >
-      <InformationUser/>
-      <OrderForm />
+     
+      <Summary/>
       </section>
      
   </div>;

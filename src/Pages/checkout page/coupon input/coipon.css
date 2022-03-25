@@ -1,21 +1,31 @@
-.form {margin: 0px 0px 50px 0px;}
+.form {display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
 .form input{
-    border: 1px solid #C2BFBF;
-    width: 250px;
-    height: 50px;
-    border-radius: 5px;
-    padding: 15px;
-    margin-left: 20px;
-    background-color: #F6F5F5
+    width: 90%;
+    height: 43px;
+    border-radius: 3px;
+    color: #16044a;
+    background-color: #ffffff;
+    margin-top: 20px;
+    padding-right: 15px;
+}
+.form input:focus{
+    outline: none;
 }
 .form button{
-    width: 250px;
-    height: 50px;
+    width: 166px;
+    height: 43px;
     border-radius: 5px;
-    margin-left: 20px;
-    background-color: #494949;
-    color: #fff;
+    background-color: #ff8229;
+    color: #ffffff;
     font-weight: 700;
+    position: absolute;
+    left: 42px;
+    top: 20px;
+
 }
 @media (max-width:1024px){
     .form{ margin: 0px -25px 50px 0px;}

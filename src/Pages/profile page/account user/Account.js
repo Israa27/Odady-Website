@@ -12,13 +12,11 @@ export default function Account() {
   const schema = yup.object().shape({
     firstname: yup.string().required('هذا الحقل مطلوب'),
     lastname: yup.string().required('هذا الحقل مطلوب'),
-    email: yup.string().matches(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/, "البريد الكتروني غير صحيح ").required('هذا الحقل مطلوب'),
-    password:yup.string().matches(/^(?=.*?[A-Z])(?=(.*[a-z]){1,})(?=(.*[\d]){1,})(?=(.*[\W]){1,})(?!.*\s).{8,}$/,'كلمة المرور غير صالحة').min(8).required('هذا الحقل مطلوب'),
     phoneNumber:yup.number().required('هذا الحقل مطلوب'),
     governorate: yup.string().required('هذا الحقل مطلوب'),
     city: yup.string().required('هذا الحقل مطلوب'),
     nearest: yup.string().required('هذا الحقل مطلوب'),
-    nate:yup.string()
+  
     
     
 
@@ -28,12 +26,10 @@ export default function Account() {
               
               <Formik
                 validationSchema={schema}
-                onSubmit={console.log}
+               
                 initialValues={{
                     firstname: '',
                     lastname: '',
-                    email:'',
-                    password:'',
                     phoneNumber:'',
                     governorate :'',
                     city:'',
@@ -60,9 +56,7 @@ export default function Account() {
                            { 
                              firstname,
                              lastname,
-                        
                              phoneNumber,
-                             password,
                              governorate,
                              city,
                              nearest,

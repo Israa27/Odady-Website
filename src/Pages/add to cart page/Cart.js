@@ -2,7 +2,6 @@ import React from 'react'
 import './cart.css';
 import CartItems from './cart items/CartItems';
 import TotalPrice from './total Parice/TotalPrice';
-import Coupon from './coupon input/Coupon';
 import SecondaryNav from '../../Components/secondary navbar/SecondaryNav';
 export default function Cart() {
     return (
@@ -14,7 +13,7 @@ export default function Cart() {
          <CartItems />  
          <TotalPrice />
          </div>
-         <Coupon />
+       
         
 
         

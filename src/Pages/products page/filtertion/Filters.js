@@ -14,8 +14,8 @@ export default function Filters({showAll,value,cate,sort,setValue,setCate,setSor
           <span>حسب الشركة</span>
           
           <div className='radio'>
-             <input type='radio' id='radio1' value='Caterpillar' onChange={(e)=>setValue(e.target.value)} checked={value ==='Caterpillar'}/>
-             <label htmlFor='radio1'>شركة Caterpillar</label>  
+             <input type='radio' id='radio1' value='Total' onChange={(e)=>setValue(e.target.value)} checked={value ==='Total'}/>
+             <label htmlFor='radio1'>شركة Total</label>  
          </div>
          <div className='radio'>
             <input type='radio' id='radio2' value='شركة INGCO الصينية' onChange={(e)=>setValue(e.target.value)} checked={value ==='شركة INGCO الصينية'}/>

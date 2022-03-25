@@ -3,9 +3,11 @@ import './total.css';
 import { useSelector,useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getCartItems } from '../../../redux/cartSlice';
+import { CreateOrder } from '../../../redux/order/orderSlice';
 //import {getTotalPrice } from '../../../redux/cartSlice';
 export default function TotalPrice() {
   const navigate = useNavigate();
+  const dispatch=useDispatch()
   const[value,setValue]=useState('');
   const getcart=useSelector((state)=> state.cart);
   const cart= getcart?.cartItems || []
@@ -13,20 +15,21 @@ export default function TotalPrice() {
   const coupon=useSelector(state => state.order) 
   const discount= coupon.coupon[0] ?.discount_value || ''
   
-    
+ //create order   
+const handleSubmite=()=>{
+   const id = coupon.coupon[0]?.id || []
+   if(!id){
+    dispatch(CreateOrder())
+    navigate('/checkout')
+   }
+   else{
+    dispatch(CreateOrder(id))
+    navigate('/checkout')
+   }
+}
 
-    
-  
-
-  
-  
-  
-  const dispatch = useDispatch();
-  useEffect(()=>{
-   
+  useEffect(()=>{  
       dispatch(getCartItems())
-   
-    
     
   },[dispatch]);
  
@@ -61,7 +64,7 @@ export default function TotalPrice() {
               <p>الاجمالي</p>
               <span className='span-price'>{+value+ totalPrice-(discount === ''  ?(0):(discount))} دينار</span>
           </div>
-          <button className= "btn-amount" onClick={()=>navigate('/checkout') }>اتمام الطلب</button>
+          <button className= "btn-amount" onClick={()=> handleSubmite() }>اتمام الطلب</button>
         </div>
     )
 }

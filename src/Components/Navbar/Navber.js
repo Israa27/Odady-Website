@@ -1,4 +1,4 @@
-import React, { useState,useEffect,useCallback} from 'react'
+import React, { useState,useEffect, useCallback} from 'react'
 import Swal from 'sweetalert2'
 import { Container,Navbar,NavDropdown} from 'react-bootstrap';
 import './navbar.css';
@@ -7,17 +7,16 @@ import { useNavigate } from 'react-router-dom';
 import { getCartItems} from '../../redux/cartSlice';
 import { getWishListItems } from '../../redux/wishlistSlice';
 import { useSelector ,useDispatch} from 'react-redux';
-import { viweAllProducts } from '../../redux/showAllSlice';
+import { searchProducts, viweAllProducts } from '../../redux/showAllSlice';
 import { userLogout } from "../../Helpers/api/userLogin";
 import { logoutSuccess } from '../../redux/loginSlice';
-
-
-
-
+import { getUserProfile } from '../../redux/user/userAction';
 
 export default function Navber() {
   const cart=useSelector((state)=> state.cart.cartItems);
   const wishlist=useSelector((state)=> state.wishlist.wishlistItems);
+  const cartError=useSelector((state)=> state.cart.error);
+  const wishlistError=useSelector((state)=> state.wishlist.error);
   const[keyword,setKeyWord]=useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -25,18 +24,23 @@ export default function Navber() {
   // logout
   const logOut = () => {
     dispatch(logoutSuccess())
-
     localStorage.removeItem("token");
     Swal.fire(
       'تم التسجيل الخروج',
-    )
+    )  
+    window.location.reload();
     navigate('/login');
   }
 
-  useEffect(() => {
+// get user 
+const getUser=()=>{
+  dispatch(getUserProfile())
+  navigate('/profile_user')
+}
+
+ useEffect(() => {
    
     if(cart ){
-
       dispatch(getCartItems());
     }
     if(wishlist ){
@@ -53,7 +57,7 @@ export default function Navber() {
  
   const hadleSearch =(e)=>{
     e.preventDefault();
-    dispatch(viweAllProducts(`q=${keyword}`))
+    dispatch(searchProducts(keyword))
     navigate('/products')
     //setKeyWord('')
    
@@ -61,15 +65,40 @@ export default function Navber() {
   
   //show cart
   const handleShowCart=()=>{
-    dispatch(getCartItems());
-    navigate('/cart')
-   
+    if(cartError === 500 ){
+      Swal.fire({
+        icon: 'error',
+        title: 'عذرا لا يمكن الدخول قبل تسجيل الدخول',
+        text: 'يرجى تسجيل الدخول  ',
+
+        
+        }).then(function() {
+        window.location = "/login";
+      })
+    }
+    else{
+      dispatch(getCartItems());
+      navigate('/cart')
+    }
   }
   //show WishList
   const handleShowWishlist=()=>{
-     dispatch(getWishListItems())
-      navigate('/wishlist')
-  
+    if(wishlistError === 500 ){
+      Swal.fire({
+        icon: 'error',
+        title: 'عذرا لا يمكن الدخول قبل تسجيل الدخول',
+        text: 'يرجى تسجيل الدخول  ',
+
+        
+        }).then(function() {
+        window.location = "/login";
+      })
+    }
+      else{
+
+        dispatch(getWishListItems())
+        navigate('/wishlist')
+      }
   }
     return (
     <Navbar  className="navbar" expand="xl" >
@@ -87,17 +116,17 @@ export default function Navber() {
             <i className="far fa-heart"></i><a className='link-nav'>قائمة الرغبات</a>
             
             </button>
-            <button  className='navbar-btns' onClick={ handleShowCart} ><span className='badge'>{cart === undefined ?(0):(cart.length)}</span> <i className="fas fa-shopping-cart"></i><a className='link-nav'>عربة التسوق</a></button>
+            <button  className='navbar-btns' onClick={ handleShowCart} ><span className='badge'>{cart.error === 404 ?(0):(cart.length)}</span> <i className="fas fa-shopping-cart"></i><a className='link-nav'>عربة التسوق</a></button>
              <NavDropdown  title={ <i className="far fa-user"></i> } className='navbar-btns' id="basic-nav-dropdown">
             <NavDropdown.Item className='items' onClick={()=>{navigate('/register')}}>انشاء حساب  <i className="fas fa-user-plus"></i></NavDropdown.Item>
-            <NavDropdown.Item className='items' onClick={()=>{navigate('/profile_user')}}>معلومات المستخدم  <i className="fas fa-user-cog"></i></NavDropdown.Item>
+            <NavDropdown.Item className='items' onClick={()=>getUser()}>معلومات المستخدم  <i className="fas fa-user-cog"></i></NavDropdown.Item>
             <NavDropdown.Item className='items' onClick={logOut}>تسجيل خروج<i className="fas fa-sign-out-alt"></i></NavDropdown.Item>
         </NavDropdown>
               
                 
             </div>
            
-          
+           
             <form className='navbar-search-input ' onSubmit={hadleSearch} >
               <input  type='text'placeholder=' ابحث عن شى....' value={keyword} onChange={(e)=> setKeyWord(e.target.value)}/>
               <button type='submit' className='navbar-search-btn'><i className="fas fa-search"></i></button>

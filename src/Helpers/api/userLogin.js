@@ -1,11 +1,11 @@
 import axios from "axios"
-import { Navigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import Swal from 'sweetalert2'
 import {BASE_URL} from '../Constants';
 const RegisterURL=BASE_URL+'/auth/signup';
 const loginURL =BASE_URL+'/auth/signin';
 const logoutURL=BASE_URL+'user/logout';
-const updateURL=BASE_URL;
+const updateURL=BASE_URL+'/auth';
 const userProfileURL=BASE_URL+'/auth';
 const updatePasswordURL = BASE_URL + "/auth/change-password";
 
@@ -67,28 +67,27 @@ export const userRegister=({
     }
   })
 }
-export const Login=({email,password}) => {
-  return new Promise(async (resolve, reject) => {
+export const Login=async({email,password}) => {
     try {
       const res = await axios.post(loginURL,{
         email:email,
         password:password
       });
       
-     
-      resolve(res.data);
-
       if (res.status === 200 ) {
         const data= res.data.token.access;
+        
         Swal.fire({
           icon: 'success',
           title: 'تمت عملية بنجاح',
           text: ' تم تسجيل الدخول بنجاح ^_^ '
-        })
-        
-        localStorage.setItem("token",JSON.stringify(data));
-      
+        }) ;
+       
+        localStorage.setItem("token",JSON.stringify(data))
       }
+        return  res.data.token.access
+      
+      
     } catch (error) {
       Swal.fire({
           icon: 'error',
@@ -96,9 +95,9 @@ export const Login=({email,password}) => {
           text: 'حدث خطأ ما !',
           footer: '<a href="/">هل تريد الرجوع الى صفحة الرئيسة!</a>'
         })
-      reject(error);
+     
     }
-  });
+  
 }
 
 
@@ -156,8 +155,13 @@ export const userUpdate=({
           }
         });
 
-        if (res.status === 201){
+        if (res.status === 200){
           resolve(res.data);
+          Swal.fire({
+            icon: 'success',
+            title: 'تمت عملية بنجاح',
+            text: ' تم  تعديل بيانات  ^_^ '
+          }) ;
             
         }
        
@@ -195,17 +199,30 @@ export const getUser=() => {
 };
 
 
-export const changePassword = ({password1,password2,password3}) => {
+export const changePassword = (password1,password2,password3) => {
 	return new Promise(async (resolve, reject) => {
 		try {
-			const { data } = await axios.post( updatePasswordURL, {
+			const  data  = await axios.post( updatePasswordURL, {
         old_password: password1,
         new_password1: password2,
         new_password2: password3
-      });
+      },
+      {headers:{ 
+        'Content-Type' : 'application/json',
+        'Accept' : 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Content-Type',
+        'Access-Control-Allow-Methods':'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+        'Authorization' : `Bearer ${token}`
+      }}
+      );
 
-			console.log(data);
-			resolve(data);
+		
+      if(data.status === 200){
+       
+        resolve(data)
+      }
+		;
 		} catch (error) {
 			reject(error);
 		}

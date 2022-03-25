@@ -36,6 +36,10 @@
     width:  350px !important;
     height:45px
 }
+.register-btn{
+    background: #ff641a !important;
+    border: none;
+}
 @media (max-width:1024px){
     .accunt-name .accunt-label input ,.accunt-name select{ width:245px  !important;}
 }

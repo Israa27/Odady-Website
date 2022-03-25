@@ -23,17 +23,15 @@
 }
 
 .cart-item-del {
-    display: grid;
-    grid-template-columns: 20% 80%;
-    grid-gap: 50px;
-    gap: 50px;
+    display: flex;
     justify-content: space-around;
     width: 70%;
+    flex-direction: row;
 
 }
 .cart-img-item{
-    width: 180px;
-    margin-right: 35px;
+    width: 200px;
+    margin-right:5px;
     align-self: center;
     
 }
@@ -45,16 +43,16 @@
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    margin-right: auto;
-    justify-content: space-evenly;
     height: 130px !important;
     margin-top: 25px;
+    width: 100%;
+    margin-right: 50px;
 }
-.cart-item-del .text p{
-    font-size: 18px;
+.cart-item-del .title{
+    font-size: 17px;
     font-weight: 500;
     color: #555;
-    width: 65%;
+    
 }
 .cart-item-del .text span{
     font-size: 19px;
@@ -106,7 +104,8 @@ display: flex;
     width: 40px;
     height: 31px;
     line-height: 31px;
-    font-size: 14px;
+    font-size: 16px;
+    font-weight: 600;
     text-align: center;
     background-color: #fff;
     border-radius: 4px;
@@ -120,7 +119,7 @@ display: flex;
     font-size: 18px;
     font-weight: 500;
     color: #ec7d23;
-    margin-bottom: 46px !important;
+    margin-bottom: 50px !important;
     align-self: flex-start;
 }
 .card-empty{

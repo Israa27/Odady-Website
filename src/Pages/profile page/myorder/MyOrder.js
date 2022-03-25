@@ -1,58 +1,43 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './myorder.css';
+import img from '../../../Assets/images/order_empty.png'
 import { useSelector,useDispatch } from 'react-redux';
-import { addToWishList,removeFromWishList} from '../../../redux/wishlistSlice';
-import img from '../../../Assets/images/undefined.png';
-export default function MyOrder() {
-   const wishlist=useSelector((state)=> state.wishlist);
-  const dispatch = useDispatch();
-  return (
-    <div>
-      <div className='my-wishlist'>
-        <h5>عدد الطلبات ({wishlist.wishListItems.length})</h5>
-        <div className="content-wishlist"> 
-       
-        <div className="my-wishlist-cart-items">
-          {wishlist.wishListItems.length===0 ?(
-            <div className='wishlist-cart-empty'>
-              <img src={img} alt="cart-empty"/>
-              <h5>لا توجد طلبات   </h5 >
-              </div>
-          ):(<div>
-         
-          {wishlist.wishListItems.map((item)=>(
-          
-          <div key={item.id} className="wishlist-carts">
-          <div className="item-del">
-            <div className="img-item">
-              <img src={item.image} alt={item.title} />
-            </div>
-            <div className="text">
-              <p className='title'>{item.title}</p>
-              <div className="btn-wishlist">
-                  <button className='btn-add' onClick={()=> dispatch(removeFromWishList(item))} > 
-                    <i className="far fa-trash-alt"></i>حذف المنتج </button>
-                  <button className='btn-add'> <i className="fas fa-heart"></i> اضافة الى رغباتي</button>
-              </div>
-            </div>
-          </div>
-          <div className="qty-price">
-          <div class='qty'>
-            <button className="qty-btn" onClick={()=> dispatch(addToWishList(item))} >+</button>
 
-            <span className="qty-span">{item.qty}</span>
-            <button className="qty-btn"   >-</button>
-          </div>
-           <span className="price">{item.price * item.qty} دينار</span>
-          </div>
-        </div>
-          ))}
-          </div>
-          )}
-        </div> 
-        </div> 
-       
-        </div>
+import { getOrderInfo, getOrders } from '../../../redux/order/orderSlice';
+import OrderItem from './OrderItem';
+export default function MyOrder() {
+  const order=useSelector((state)=>state.order)
+  const dispatch = useDispatch();
+  const getItem=(id)=>{
+    dispatch(getOrderInfo(id))
+  }
+ 
+  
+  return<div className='order-content'>
+    {order.length===0 || order.error === 404?(
+      <div className='order-empty'>
+        <img src={img} alt=''/>
+      </div>
+    ):(
+    <div className='order-items'>
+    <div className='yourorder'>
+      <h5>طلبات</h5>
+       {order.orderlist.map((item,index)=>(
+         <div  key={index} className='order'>
+           <h6>تم الطلب في تاريخ: {new Date(item.created).toLocaleString()} </h6>
+           <div className='listorder'>
+             <h6> عدد المنتجات({item.items.length})</h6>
+             {item.items.map((prod,index)=>(
+               <span key={index} id={prod} className='orderitem' onClick={()=>getItem(prod) }>تفاصيل منتج {index}</span>
+             ))}
+           </div>
+         </div>
+       ))}
     </div>
-  )
+    <div className='main'>
+       <OrderItem />
+    </div>
+    </div>
+    )}
+  </div>
 }

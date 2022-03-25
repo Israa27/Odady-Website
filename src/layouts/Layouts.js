@@ -31,8 +31,6 @@ export default function Layouts() {
         return <Product />
       case '/product_detiles':
         return <ProductDetiles/>
-      case '/checkout':
-        return <Checkout/>
       case '/contact':
         return <Contact/>
       case '/privacy':
@@ -41,12 +39,14 @@ export default function Layouts() {
         return <TransferPolicy/>
       case '/about':
         return <AboutUs/>
+      default:
+        return <Home />
      
   }};
   const error=useSelector(state=> state.product);
 
   return<div>
-     {error.error=== 500 || error.error=== 404 ?(
+     {error.error=== 404 ?(
      
         <NotFound />
      

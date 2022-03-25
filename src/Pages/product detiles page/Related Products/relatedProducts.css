@@ -1,3 +1,12 @@
 .related-products{
     margin-bottom: 40px;
 }
+h5{
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+h5:hover{
+    color:rgb(255, 84, 16);
+   
+    
+}

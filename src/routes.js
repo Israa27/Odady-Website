@@ -1,48 +1,13 @@
-import React, {
-    Suspense,
-    Fragment,
-    lazy
-  } from 'react';
-  import {
-    
-    Routes,
-   
-    Route
-  } from 'react-router-dom';
- 
-  import SpinnerLoading from './Components/spinner/SpinnerLoading';
- 
+import React, {lazy} from 'react';
 
-  
-  export const renderRoutes = (routes = []) => (
-    <Suspense fallback={<SpinnerLoading />}>
-      <Routes>
-        
-        {routes.map((route, i) => {
-          
-          const Component = route.element;
-          return (
-            <Route
-              key={i}
-              path={route.path}
-              exact={route.exact}
-              element={(props) => (
-                   <div>
-                    <Component {...props} /> 
-                    </div>
-              )}
-            />
-          );
-        })}
-      </Routes>
-    </Suspense>
-  );
-  
+  const layouts=lazy(() => import('./layouts/Layouts'))
+  const profile=lazy(() => import('./Pages/profile page/Profile'))
+  const NotFound=lazy(() => import('./Pages/not found page/NotFound'))
   export const routes = [
     {
       exact: true,
       path: '/',
-      element: lazy(() => import('./Pages/home page/Home'))
+      element: layouts
     },
     {
       exact: true,
@@ -52,54 +17,64 @@ import React, {
     {
       exact: true,
       path: '/cart',
-      element: lazy(() => import('./Pages/add to cart page/Cart'))
+      element: layouts
     },
 
     {
       exact: true,
       path: '/products',
-      element: lazy(() => import('./Pages/products page/Product'))
+      element: layouts
     },
     {
       exact: true,
       path: '/product_detiles',
-      element: lazy(() => import('./Pages/product detiles page/ProductDetiles'))
+      element: layouts
     },
   
     {
       exact: true,
       path: '/wishlist',
-      element: lazy(() => import('./Pages/checkout page/Checkout'))
+      element: layouts
     },
     {
       exact: true,
       path: '/checkout',
-      element: lazy(() => import('./Pages/checkout page/Checkout'))
+      element:layouts
+    },
+    {
+      exact: true,
+      path: '/profile_user',
+      element: profile
     },
     {
       exact: true,
       path: '/account',
-      element: lazy(() => import('./Pages/product detiles page/ProductDetiles'))
+      element: profile
     },
     {
       exact: true,
       path: '/myorder',
-      element: lazy(() => import('./Pages/product detiles page/ProductDetiles'))
+      element: profile
+    },
+    {
+      exact: true,
+      path: '/user',
+      element: profile
     },
     {
       exact: true,
       path: '/transfer',
-     element: lazy(() => import('./Pages/Transfer and return policy page/TransferPolicy'))
+     element: layouts
     },
     {
       exact: true,
       path: '/privacy',
-      element: lazy(() => import('./Pages/Privacy policy page/Privacy'))
+      element: layouts
     },
     {
       exact: true,
       path: '/contact',
-      element: lazy(() => import('./Pages/contact us page/Contact'))
+      element: layouts
     },
     {
       exact: true,
@@ -107,11 +82,8 @@ import React, {
       element: lazy(() => import('./Pages/register Page/Register'))
     },
 
-    {
-      exact: true,
-      path: '/mywishlist',
-      element: lazy(() => import('./Pages/profile page/Profile'))
-    },
+   
+     
     {
       exact: true,
       path: '/forgetpassword',
@@ -125,8 +97,14 @@ import React, {
     {
       exact: true,
       path: '/about',
-      element: lazy(() => import('./Pages/about us page/AboutUs'))
+      element: layouts
     },
+    {
+      exact: true,
+      path: '/not_found',
+      element: NotFound
+    },
+    
     
   ];
   

@@ -129,7 +129,13 @@ export const cartSlice = createSlice({
     [addToCart.fulfilled]: (state, action) => {
           state.isLoading=false
           state.cartItems=[...action.payload]
+       
+          
+            
+          
+        
           state.status = "success"
+          state.error=''
   },
     [addToCart.rejected]: (state, action) => {
         state.status = "rejected";
@@ -142,11 +148,13 @@ export const cartSlice = createSlice({
   [getCartItems.pending]: (state, action) => {
     state.status = "pending"
     state.isLoading=true
+    state.error=''
 },
   [getCartItems.fulfilled]: (state, action) => {
       state.isLoading=false
-      state.cartItems= action.payload
+      state.cartItems=[...action.payload]
       state.status = "success"
+      state.error=''
 },
 [getCartItems.rejected]: (state, action) => {
     state.status = "rejected";
@@ -160,11 +168,12 @@ export const cartSlice = createSlice({
   [removeFromCart.pending]: (state, action) => {
     state.status = "pending"
     state.isLoading=true
+    state.error=''
 },
   [removeFromCart.fulfilled]: (state, action) => {
       state.isLoading=false
       state.cartItems= state.cartItems.filter((item) =>item.id !== action.payload)
-   
+      state.error=''
   },
  
 [removeFromCart.rejected]: (state, action) => {
@@ -176,11 +185,16 @@ export const cartSlice = createSlice({
 [reduceQty.pending]: (state, action) => {
   state.status = "pending"
   state.isLoading=true
+  state.error=''
 },
 [reduceQty.fulfilled]: (state, action) => {
     state.isLoading=false
-    state.cartItems=[...action.payload]
+  
+    state.cartItems=[...state,
+    state.cartItems.filter(item => item.id !== action.payload.id)]
+   
     state.status = "success"
+    state.error=''
   
  
 },

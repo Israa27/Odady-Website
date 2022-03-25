@@ -15,7 +15,9 @@
 .span-price{
     color: #f39200;
     font-weight: 700;
+    
 }
+
 .price-radio-btn{
     display: flex;
     flex-direction: column;
@@ -99,7 +101,9 @@ hr{
     box-shadow: 2px 5px 4px 2px #938e8e40;
     border-radius: 5px;
     cursor: pointer;
+    transition: all 0.5s ease;
 }
+.btn-amount:hover{background-color: #4f4f4f;}
 .btn-change{
     background-color: #e5e5e5;
 }

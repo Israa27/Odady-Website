@@ -37,10 +37,16 @@
     width: 85%;
 }
 .img-item{
-    width: 160px;
-    height: 160px;
+    width: 150px;
+    height: 150px;
     margin-right: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
+.img-item img{width: 90%;}
+
+
 
 .text{
     display: flex;

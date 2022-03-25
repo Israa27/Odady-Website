@@ -13,7 +13,7 @@ export default function() {
       }
   return (
     <div className='error'>
-        <Lottie options={defaultOptions} height={400} width={400} />
+        <Lottie options={defaultOptions} height={360} width={460} />
     </div>
   )
 }

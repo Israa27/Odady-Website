@@ -8,6 +8,7 @@ import { addToWishList ,getWishListItems} from '../../redux/wishlistSlice';
 import {  useNavigate} from 'react-router-dom';
 import { getProductDetails } from '../../redux/products/productsSlice';
 import {addToCart, getCartItems } from '../../redux/cartSlice';
+import { getRelatedProducts } from '../../redux/showAllSlice';
 
 export default function ProductCard({id,product,name,image, price}) {
   const[state,setstate]=useState(false);
@@ -15,7 +16,11 @@ export default function ProductCard({id,product,name,image, price}) {
   const cartError=useSelector((state)=> state.cart.error)
   const navigate = useNavigate();
   const dispatch=useDispatch();
+  useEffect(()=>{
+    dispatch(getCartItems())
+    dispatch(getWishListItems())
 
+},[dispatch]);
 
   const hadleAddToCart=(id)=>{
     if ( cartError===500){
@@ -31,7 +36,7 @@ export default function ProductCard({id,product,name,image, price}) {
     }else{
 
       dispatch(addToCart(id));
-      dispatch(getCartItems());
+      dispatch(getCartItems())
     }
   }
   
@@ -56,6 +61,7 @@ export default function ProductCard({id,product,name,image, price}) {
 
   const hadleChangeImg=(product_id)=>{
     dispatch(getProductDetails(product_id));
+    dispatch(getRelatedProducts(id));
     navigate('/product_detiles')
   }
  

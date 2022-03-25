@@ -89,7 +89,7 @@
 .is-invalid~.invalid-feedback, .is-invalid~.invalid-tooltip,
  .was-validated :invalid~.invalid-feedback,
  .was-validated :invalid~.invalid-tooltip{
-    margin-top: -17px !important;
+    margin-bottom: 6px !important;
     border-top-left-radius: 4px !important;
     border-bottom-left-radius: 4px !important;
 }

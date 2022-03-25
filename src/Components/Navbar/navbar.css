@@ -5,6 +5,7 @@
 }
 .navbar-container{display: flex;flex-direction: row-reverse !important;}
 .navbar-collapse {justify-content: space-evenly;}
+/*-------logo-----*/
 .navbar-logo{
     width: 60px;
     height: 60px;
@@ -12,6 +13,7 @@
 .navbar-logo img{
     width: 100%;
 }
+/*-------search input-----*/
 .navbar-search-input{
     position: relative;
 }
@@ -29,8 +31,9 @@
     color: rgb(145, 143, 143);
 
 }
-.search-input input:focus{
+.navbar-search-input input:focus{
     outline: none !important;
+    border: none;
     
 }
 .navbar-search-input .navbar-search-btn{ 
@@ -44,12 +47,16 @@
     background-color: #ec7d23 !important;
     color: #fff !important;
 }
+/*-------end search input-----*/
+
+/*-------icons navbar-----*/
 .navbar-icons{ 
     display: flex;
     align-items: center;
     width: 200px;
     justify-content: space-between;
     margin-right: -100px;
+    
    
 
 }
@@ -61,6 +68,7 @@
     margin-left: 10px;
     margin-top: 10px;
     display: none;
+    
 }
 .navbar-btns .nav-item .dropdown{margin-bottom: 15px;}
 #basic-nav-dropdown,.navbar-icons .navbar-btns{
@@ -75,7 +83,10 @@
     position: relative;
     margin-bottom: 15px;
     
+    
 }
+.navbar-btns i{cursor: pointer}
+
 .badge{
     position: absolute;
     width: 23px;
@@ -124,7 +135,7 @@
 .fa-search{
     margin: 10px;
 }
-
+/*-------end icons navbar-----*/
 @media (max-width:1025px) {
     
     .navbar-icons {flex-direction: column;margin-right: 0px;}

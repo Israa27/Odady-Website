@@ -101,11 +101,13 @@ export const wishlistSlice = createSlice({
     [addToWishList.pending]: (state, action) => {
         state.status = "pending"
         state.isLoading=true
+        state.error=''
   },
     [addToWishList.fulfilled]: (state, action) => {
           state.isLoading=false
           state.wishlistItems=[...action.payload]
           state.status = "success"
+          state.error=''
   },
     [addToWishList.rejected]: (state, action) => {
         state.status = "rejected";
@@ -117,11 +119,13 @@ export const wishlistSlice = createSlice({
   [getWishListItems.pending]: (state, action) => {
     state.status = "pending"
     state.isLoading=true
+    state.error=''
 },
   [getWishListItems.fulfilled]: (state, action) => {
       state.isLoading=false
       state.wishlistItems= action.payload
       state.status = "success"
+      state.error=''
 },
 [getWishListItems.rejected]: (state, action) => {
     state.status = "rejected";
@@ -135,11 +139,13 @@ export const wishlistSlice = createSlice({
   [removeFromWishList.pending]: (state, action) => {
     state.status = "pending"
     state.isLoading=true
+    state.error=''
 },
   [removeFromWishList.fulfilled]: (state, action) => {
       state.isLoading=false
+      state.status = "success"
       state.wishlistItems= state.wishlistItems.filter((item) =>item.id !== action.payload)
-   
+      state.error=''
   },
  
 [removeFromWishList.rejected]: (state, action) => {
