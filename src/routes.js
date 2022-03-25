@@ -12,7 +12,7 @@ import React, {lazy} from 'react';
     {
       exact: true,
       path: '/login',
-      component: lazy(() => import('./Pages/login page/LogIn'))
+      element: lazy(() => import('./Pages/login page/LogIn'))
     },
     {
       exact: true,
