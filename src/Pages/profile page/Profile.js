@@ -1,11 +1,11 @@
 import React ,{useState} from 'react'
 import { Container } from 'react-bootstrap';
-import { Link ,useLocation} from 'react-router-dom';
+import { Link ,useLocation,useNavigate} from 'react-router-dom';
 import './profile.css'
 import Account from './account user/Account';
 import MyOrder from './myorder/MyOrder';
 import User from './information user/User';
-import { useNavigate } from 'react-router';
+import NotFound from '../../Pages/not found page/NotFound'
 import { useSelector,useDispatch } from 'react-redux';
 import { getOrders } from '../../redux/order/orderSlice';
 import OrderItem from './myorder/OrderItem';
@@ -33,7 +33,7 @@ export default function Profile() {
   return (
     <div>
     { error.error==='Token not found!' ?(
-      navigate('/not_found')
+        <NotFound />
     ):(
   
     <Container className='profile-cart'>
