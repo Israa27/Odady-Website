@@ -27,10 +27,12 @@
     padding: 20px;
 }
 
+
+
 .register-form label{ 
     font-size: 15px;
     color: #a3a3a3;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     font-weight: 500;
     padding-right: 2px;
 }
@@ -87,12 +89,7 @@ input[type=number]::-webkit-inner-spin-button {
 
 }
 
-.invalid-feedback {
-    margin-bottom: -8px !important;
-    margin-top: 0px !important;
-    width: 80% !important;
 
-}
 .input-group>.form-control, .input-group>.form-select{
     flex: none !important;
 }

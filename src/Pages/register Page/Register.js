@@ -143,7 +143,7 @@ export default function Register() {
                     </Form.Group>
                    
 
-                    <Form.Group  controlId="validationFormik02">
+                    <Form.Group className='input-register' controlId="validationFormik02">
                     <Form.Label>عنوان البريد الالكتروني</Form.Label>
                     <InputGroup hasValidation>
                        
@@ -162,7 +162,7 @@ export default function Register() {
                     </InputGroup>
                     </Form.Group>
 
-                    <Form.Group  controlId="validationFormik03">
+                    <Form.Group className='input-register' controlId="validationFormik03">
                     <Form.Label>كلمة المرور</Form.Label>
                     <InputGroup  hasValidation >
                        
@@ -183,7 +183,7 @@ export default function Register() {
                     </Form.Group>
                     
 
-                    <Form.Group  controlId="validationFormik04">
+                    <Form.Group className='input-register' controlId="validationFormik04">
                     <Form.Label>رقم الهاتف</Form.Label>
                     <InputGroup hasValidation>
                        
@@ -203,7 +203,7 @@ export default function Register() {
 
                     
 
-                    <Form.Group controlId="validationFormik05">
+                    <Form.Group className='input-register' controlId="validationFormik05">
                     <Form.Label>المحافظة</Form.Label>
                       <Form.Select aria-label="Default select example" 
                        name="governorate"
@@ -233,7 +233,7 @@ export default function Register() {
                         {errors.governorate}
                     </Form.Control.Feedback>
                     </Form.Group>
-                    <Form.Group  controlId="validationFormik06">
+                    <Form.Group className='input-register'  controlId="validationFormik06">
                     <Form.Label>المنطقة</Form.Label>
                     <Form.Control
                         type="text"
@@ -246,7 +246,7 @@ export default function Register() {
                         {errors.city}
                     </Form.Control.Feedback>
                     </Form.Group>
-                    <Form.Group  controlId="validationFormik07">
+                    <Form.Group className='input-register' controlId="validationFormik07">
                     <Form.Label>اقرب نقطة دالة</Form.Label>
                     <Form.Control
                         type="text"

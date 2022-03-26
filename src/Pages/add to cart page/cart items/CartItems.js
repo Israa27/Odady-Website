@@ -44,6 +44,7 @@ export default function CartItems() {
  const handleReduceQty =(id,qty)=>{
    if(qty===1){
     dispatch(removeFromCart(id))
+    dispatch(getCartItems())
    }
    else{
 
@@ -53,7 +54,8 @@ export default function CartItems() {
      
  }
  const handleRemove=(id)=>{
-  
+  dispatch(removeFromCart(id))
+    dispatch(getCartItems())
  }
     return (
         <div className="card-items">

@@ -128,12 +128,7 @@ export const cartSlice = createSlice({
   },
     [addToCart.fulfilled]: (state, action) => {
           state.isLoading=false
-          state.cartItems=[...action.payload]
-       
-          
-            
-          
-        
+          state.cartItems=[...action.payload];
           state.status = "success"
           state.error=''
   },
@@ -152,7 +147,7 @@ export const cartSlice = createSlice({
 },
   [getCartItems.fulfilled]: (state, action) => {
       state.isLoading=false
-      state.cartItems=[...action.payload]
+      state.cartItems=action.payload
       state.status = "success"
       state.error=''
 },
@@ -173,6 +168,7 @@ export const cartSlice = createSlice({
   [removeFromCart.fulfilled]: (state, action) => {
       state.isLoading=false
       state.cartItems= state.cartItems.filter((item) =>item.id !== action.payload)
+      state.qty=state.cartItems.length
       state.error=''
   },
  
@@ -189,7 +185,6 @@ export const cartSlice = createSlice({
 },
 [reduceQty.fulfilled]: (state, action) => {
     state.isLoading=false
-  
     state.cartItems=[...state,
     state.cartItems.filter(item => item.id !== action.payload.id)]
    

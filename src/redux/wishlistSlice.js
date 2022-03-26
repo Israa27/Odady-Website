@@ -123,7 +123,7 @@ export const wishlistSlice = createSlice({
 },
   [getWishListItems.fulfilled]: (state, action) => {
       state.isLoading=false
-      state.wishlistItems= action.payload
+      state.wishlistItems=action.payload
       state.status = "success"
       state.error=''
 },
