@@ -9,15 +9,19 @@
     display: flex;
     justify-content: center;
     flex-direction: row-reverse;
+    align-items: flex-start;
+    margin-right: 80px;
+    margin-left: 40px;
 }
-.navs a{
+.navs span{
     text-decoration: none;
     font-size: 20px;
     color: #444343ee;
     margin-right:5px;
     transition: 0.5s ease-in-out;
+    cursor: pointer;
 }
-.navs a:hover{
+.navs span:hover{
     color: #ff790aee;
 }
 .navs img{

@@ -4,15 +4,15 @@ import './slide.css';
 import sliderimg1 from '../../../Assets/images/5.png';
 import sliderimg2 from '../../../Assets/images/6.png';
 import sliderimg3 from '../../../Assets/images/TOTAL.png';
-import { useDispatch } from 'react-redux';
-import {viweAllProducts} from '../../../redux/showAllSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import {compnayProducts, viweAllProducts} from '../../../redux/showAllSlice';
 import { useNavigate } from 'react-router-dom';
 export default function SlideShow() {
   const navigate = useNavigate();
   const dispatch=useDispatch();
-
-    const showAllProducts =(e)=>{
-      dispatch(viweAllProducts(`company=${e.target.name}`))
+  const company=useSelector((state)=>state.product.company)
+    const showAllProducts =(id)=>{
+      dispatch(compnayProducts(id))
       navigate('/products')
     
   }
@@ -20,46 +20,19 @@ export default function SlideShow() {
     return (
         <div>
         <Carousel className='carousel'>
-          <Carousel.Item>
+          {company.map((item,index)=>(
+           <Carousel.Item key={index}>
            
             <img
               className="d-block w-100"
-              src={sliderimg1}
-              alt="ٌ
-              شركة INGCO الصينية"
-              name= "شركة INGCO الصينية"
-             
-              onClick={showAllProducts }
+              src={item.image}
+              alt={item.name}
+              id={item.id}
+              onClick={()=> showAllProducts(item.id) }
             />
-          
-          </Carousel.Item>
-          <Carousel.Item>
-          
-            <img
-            onClick={ showAllProducts }
-              className="d-block w-100"
-              src={sliderimg2}
-              alt="شركة CROWN السويسرية"
-              name= "شركة CROWN السويسرية"
-              
-              
-            />
-           
-          </Carousel.Item>
-          <Carousel.Item>
-           
-            <img
-              className="d-block w-100"
-              src={sliderimg3}
-              alt="Caterpillar"
-              name=' Caterpillar'
-              onClick={showAllProducts }
-             
-            />
-           
-           
-          </Carousel.Item>
-      </Carousel>
+             </Carousel.Item>
+          ))}
+         </Carousel>
         </div>
     )
 }

@@ -35,7 +35,10 @@ export default function Navber() {
 // get user 
 const getUser=()=>{
   dispatch(getUserProfile())
-  navigate('/profile_user')
+  setTimeout(
+    () => navigate('/profile_user'),
+    1000
+  ); 
 }
 
  useEffect(() => {

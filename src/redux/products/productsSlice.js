@@ -5,6 +5,8 @@ const URL=BASE_URL+'/products';
 
 
 const initialState = {
+  company:[],
+  category:[],
   best_seller_products: [],
   popular_products:[],
   product_deitals:localStorage.getItem('product')?JSON.parse(localStorage.getItem('product')):[],
@@ -14,6 +16,58 @@ const initialState = {
   isLoading:false,
   error:'',
 };
+// category information
+export const getCategory = createAsyncThunk(
+  "products/category",
+  async (_,{ rejectWithValue })=> {
+    
+    try {
+      const response = await axios.get(`${BASE_URL}/category/return_categories`,{
+       
+       
+       headers:{
+        "Content-Type" : "application/json",
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authortization',
+        'Acces-Control-Allow-Methods':'GET, POST, PATCH, DELETE', 
+        "Access-Control-Allow-Origin": "http://localhost:3000",
+    }  
+  }
+    )
+    
+    return response.data;
+    
+    } catch (error) {
+      return rejectWithValue(error.response.status)
+    }
+  }
+);
+//get company name and image
+export const getCompany = createAsyncThunk(
+  "products/company",
+  async (_,{ rejectWithValue })=> {
+    
+    try {
+      const response = await axios.get(`${BASE_URL}/Company`,{
+       
+       
+       headers:{
+        "Content-Type" : "application/json",
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authortization',
+        'Acces-Control-Allow-Methods':'GET, POST, PATCH, DELETE', 
+        "Access-Control-Allow-Origin": "http://localhost:3000",
+    }  
+  }
+    )
+    
+    return response.data;
+    
+    } catch (error) {
+      return rejectWithValue(error.response.status)
+    }
+  }
+);
 //get  best seller products
 export const getBestSellerProducts = createAsyncThunk(
     "products/best_seller_products",
@@ -152,6 +206,41 @@ const allproductsSlice = createSlice({
    
   },
   extraReducers: {
+    //Category
+    [getCategory.pending]: (state, action) => {
+      state.status = "pending"
+      state.isLoading=true
+      state.error=''
+    },
+    [getCategory.fulfilled]: (state, action) => {
+        state.isLoading=false
+        state.category=action.payload
+        state.status = "success"
+        state.error=''
+},
+    [getCategory.rejected]: (state, action) => {
+      state.status = "rejected";
+      state.isLoading=false
+      state.error=action.payload
+    },
+    //company information
+    [getCompany.pending]: (state, action) => {
+      state.status = "pending"
+      state.isLoading=true
+      state.error=''
+    },
+    [getCompany.fulfilled]: (state, action) => {
+        state.isLoading=false
+        state.company=action.payload
+        state.status = "success"
+        state.error=''
+},
+    [getCompany.rejected]: (state, action) => {
+      state.status = "rejected";
+      state.isLoading=false
+      state.error=action.payload
+    },
+
     //best seller products
     [getBestSellerProducts.pending]: (state, action) => {
         state.status = "pending"

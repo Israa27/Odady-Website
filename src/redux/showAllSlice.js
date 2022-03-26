@@ -32,8 +32,49 @@ export const viweAllProducts = createAsyncThunk(
     }
   );
 
+export const compnayProducts = createAsyncThunk(
+    "products/company_products",
+    async (id)=> {
+      
+      try {
+        const response = await axios.get(`${URL}/Company/get company products/${id}`,{
+         headers:{
+          "Content-Type" : "application/json",
+          'Access-Control-Allow-Origin': '*',
+        
+      }  
+    })
+    localStorage.setItem('allProducts',JSON.stringify(response.data))
+      return response.data;
+      
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  );
+// category products
+export const categoryProducts = createAsyncThunk(
+    "products/category_products",
+    async (id)=> {
+      
+      try {
+        const response = await axios.get(`${URL}/category/category/${id}/products`,{
+         headers:{
+          "Content-Type" : "application/json",
+          'Access-Control-Allow-Origin': '*',
+        
+      }  
+    })
+    localStorage.setItem('allProducts',JSON.stringify(response.data))
+      return response.data;
+      
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  );
 // search
-  export const searchProducts = createAsyncThunk(
+export const searchProducts = createAsyncThunk(
     "products/search_products",
     async (keyword)=> {
       
@@ -53,6 +94,8 @@ export const viweAllProducts = createAsyncThunk(
       }
     }
   );
+
+//type products 
 export const getTypeProducts = createAsyncThunk(
     "products/sub-category",
     async (value)=> {
@@ -128,7 +171,7 @@ const showAllSlice = createSlice({
    
   },
   extraReducers: {
-    //best seller products
+    //all products
     [viweAllProducts.pending]: (state, action) => {
         state.status = "pending"
         state.isLoading=true
@@ -139,6 +182,37 @@ const showAllSlice = createSlice({
           state.status = "success"
   },
       [viweAllProducts.rejected]: (state, action) => {
+        state.status = "rejected";
+        state.isLoading=false
+        state.error='error'
+      },
+
+      [categoryProducts.pending]: (state, action) => {
+        state.status = "pending"
+        state.isLoading=true
+      },
+      [categoryProducts.fulfilled]: (state, action) => {
+          state.isLoading=false
+          state.all_products=action.payload
+          state.status = "success"
+  },
+      [categoryProducts.rejected]: (state, action) => {
+        state.status = "rejected";
+        state.isLoading=false
+        state.error='error'
+      },
+
+      //get company products
+      [compnayProducts.pending]: (state, action) => {
+        state.status = "pending"
+        state.isLoading=true
+      },
+      [compnayProducts.fulfilled]: (state, action) => {
+          state.isLoading=false
+          state.all_products=action.payload
+          state.status = "success"
+  },
+      [compnayProducts.rejected]: (state, action) => {
         state.status = "rejected";
         state.isLoading=false
         state.error='error'

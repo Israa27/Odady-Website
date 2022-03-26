@@ -1,10 +1,12 @@
 import React ,{useState} from 'react'
+import { useSelector } from 'react-redux'
 import './filter.css'
 
 
    
 export default function Filters({showAll,value,cate,sort,setValue,setCate,setSort}) {
-  
+  const company=useSelector((state)=> state.product.company)
+  const category=useSelector((state)=> state.product.category)
   return (
     <div className='filter-card'>
         <button onClick={ showAll}>عرض كل المنتجات</button>
@@ -12,40 +14,24 @@ export default function Filters({showAll,value,cate,sort,setValue,setCate,setSor
         <hr/>
         <div className='filter-card-item'>
           <span>حسب الشركة</span>
-          
-          <div className='radio'>
-             <input type='radio' id='radio1' value='Total' onChange={(e)=>setValue(e.target.value)} checked={value ==='Total'}/>
-             <label htmlFor='radio1'>شركة Total</label>  
+           {company.map((item,index)=>(
+          <div className='radio' key={index}>
+             <input type='radio' id={item.id} value={item.name}  onChange={(e)=>setValue(e.target.value)} checked={value ===item.name}/>
+             <label htmlFor={item.id}>{item.name}</label>  
          </div>
-         <div className='radio'>
-            <input type='radio' id='radio2' value='شركة INGCO الصينية' onChange={(e)=>setValue(e.target.value)} checked={value ==='شركة INGCO الصينية'}/>
-            <label htmlFor='radio2'>شركة INGCO الصينية</label>
-         </div>
-         <div className='radio'>
-            <input type='radio' id='radio3' value='شركة CROWN السويسرية' onChange={(e)=>setValue(e.target.value)} checked={value ==='شركة CROWN السويسرية'}/>
-            <label htmlFor='radio3'>شركة CROWN السويسرية</label>
-         </div>
+         ))}
+         
          <hr/>
         </div>
         <div className='filter-card-item'>
         <span>حسب الفئات</span>
          
-        <div className='radio'>
-           <input type='radio' id='radio4' value='اجهزة كهربائية' onChange={(e)=>setCate(e.target.value)} checked={cate ==='اجهزة كهربائية'} />
-            <label htmlFor='radio4'>اجهزة كهربائية </label>  
+        {category.map((item,index)=>(
+          <div className='radio' key={index}>
+             <input type='radio' id={item.id} value={item.name}  onChange={(e)=>setCate(e.target.value)} checked={cate ===item.name}/>
+             <label htmlFor={item.id}>{item.name}</label>  
          </div>
-         <div className='radio'>
-            <input type='radio' id='radio5' value='عدد يدوية' onChange={(e)=>setCate(e.target.value)} checked={cate ==='عدد يدوية'}/>
-            <label htmlFor='radio5'>عدد يدوية</label>
-         </div>
-         <div className='radio'>
-            <input type='radio' id='radio6' value='ادوات لحام' onChange={(e)=>setCate(e.target.value)} checked={cate ==='ادوات لحام'}/>
-            <label htmlFor='radio6'>ادوات لحام</label>
-         </div>
-         <div className='radio'>
-            <input type='radio' id='radio7' value='اجهزة شحن' onChange={(e)=>setCate(e.target.value)} checked={cate ==='اجهزة شحن'}/>
-            <label htmlFor='radio7'>اجهزة شحن</label>
-         </div>
+         ))}
          <hr/>
         </div>
         <div className='filter-card-item'>

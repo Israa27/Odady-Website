@@ -5,17 +5,21 @@ import electricity from '../../../Assets/images/electricity.png' ;
 import welding from '../../../Assets/images/welding.png' ;
 import './navs.css';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import {viweAllProducts} from '../../../redux/showAllSlice'
+import { useDispatch, useSelector } from 'react-redux';
+import {categoryProducts, viweAllProducts} from '../../../redux/showAllSlice'
+import { getCategory } from '../../../redux/products/productsSlice';
 export default function Navs() {
   const dispatch=useDispatch();
   const navigate = useNavigate();
+  const category=useSelector((state)=>state.product.category)
   const[toggleMenu,setToggleMenu]=useState(false);
   const[screenWidth,setScreenWidth]=useState((window.innerWidth))
+  const images=[tools,electricity,charging,welding]
   const toggleNavs=()=>{
     setToggleMenu(!toggleMenu)
   }
   useEffect(()=>{
+    dispatch(getCategory())
     const changeWidth=()=>{
       setScreenWidth(window.innerWidth)
   }
@@ -26,10 +30,10 @@ export default function Navs() {
     }
   },[])
 
-const fatchCategory=(e)=>{
-  dispatch(viweAllProducts(`category=${e.target.innerText}`))
+const fatchCategory=(id)=>{
+  dispatch(categoryProducts(id))
   navigate('/products')
-  console.log(e.target.innerText)
+ 
 }
 
     return (
@@ -41,19 +45,16 @@ const fatchCategory=(e)=>{
               </div>
               {(toggleMenu || screenWidth > 600 ) &&(
              <div className='navs-content '>
-              <div className='navs frist'>
-                <a onClick={fatchCategory} href='#'>اجهزة كهربائية </a>
-                <img src={electricity} alt=''/>
-              </div>
-              
-              <div className='navs'>
-                <a onClick={fatchCategory} href='#'>ادوات لحام</a>
-                <img src={welding}  alt=''/>
-              </div>
-              <div className='navs'><a onClick={fatchCategory} href='#'>اجهزة شحن</a>
-              <img src={charging}/></div>
-              <div className='navs'><a onClick={fatchCategory} href='#'>عدد يدوية</a>
-              <img src={tools}  alt=''/></div>
+               {category.map((item,index)=>(
+                
+                 <div className='navs' key={index}>
+                   <span onClick={()=> fatchCategory(item.id) } id={item.id}>{item.name}</span>
+                   <img src={images[index]} key={index} alt={item.name} />
+                  
+                 
+                  </div>
+                  
+               ))}
               </div>
               )}
        </div>
