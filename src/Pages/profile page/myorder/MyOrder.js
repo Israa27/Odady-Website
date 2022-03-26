@@ -14,7 +14,7 @@ export default function MyOrder() {
  
   
   return<div className='order-content'>
-    {order.length===0 || order.error === 404?(
+    {order.orderlist.length===0 || order.error === 404?(
       <div className='order-empty'>
         <img src={img} alt=''/>
       </div>

@@ -255,7 +255,7 @@ export const orderSlice = createSlice({
 },
 [getOrders.fulfilled]: (state, action) => {
     state.isLoading=false
-    state.orderlist=action.payload
+    state.orderlist=[...action.payload]
     state.status = "success"
     state.error=''
 },
