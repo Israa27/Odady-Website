@@ -12,7 +12,7 @@ export default function () {
   },[dispatch])
   return (
     <div>
-        {order===undefined ?(
+        {order===undefined || order.length ===0 ?(
             <div>
                 <SpinnerLoading/>
             </div>
