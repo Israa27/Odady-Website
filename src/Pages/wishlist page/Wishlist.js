@@ -20,12 +20,12 @@ export default function Wishlist() {
  //add item 
   const addItem=(id)=>{
     dispatch(dispatch(addToCart(id)))
-    dispatch(getWishListItems())
+    
   }
   //remove item 
   const removeItem=(id)=>{
     dispatch(removeFromWishList(id))
-    dispatch(getWishListItems())
+   
     
   }
     return (
