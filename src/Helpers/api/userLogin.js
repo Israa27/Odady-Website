@@ -187,9 +187,9 @@ export const getUser=() => {
           Authorization: `Bearer ${token}`,
         }
       });
-
+      localStorage.setItem("user",JSON.stringify(res.data))
       resolve(res.data);
-      localStorage.setItem("user",JSON.stringify(res.data));
+      
     } catch (error) {
       console.log(error);
       reject(error.message);
