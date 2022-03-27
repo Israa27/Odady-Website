@@ -10,11 +10,16 @@ export default function TotalPrice() {
   const dispatch=useDispatch()
   const[value,setValue]=useState('');
   const getcart=useSelector((state)=> state.cart);
-  const cart= getcart?.cartItems || []
+  const cart= getcart?.cartItems || '';
   const totalPrice=cart.reduce((price,item)=>price+ item.item_qty * item.product.price,0) 
   const coupon=useSelector(state => state.order) 
   const discount= coupon.coupon[0] ?.discount_value || ''
   
+  useEffect(()=>{
+    dispatch(getCartItems())
+
+
+},[dispatch]);
  //create order   
 const handleSubmite=()=>{
    const id = coupon.coupon[0]?.id || []
