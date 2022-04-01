@@ -66,7 +66,7 @@ export const getCartItems = createAsyncThunk(
     )  
     
     
-     return response.data
+    return response.data
     
   } catch (error) {
     return rejectWithValue(error.response.status)
@@ -147,7 +147,7 @@ export const cartSlice = createSlice({
 },
   [getCartItems.fulfilled]: (state, action) => {
       state.isLoading=false
-      state.cartItems=action.payload
+      state.cartItems=[...action.payload]
       state.status = "success"
       state.error=''
 },

@@ -13,3 +13,6 @@
       cursor: pointer;
       
   }
+  @media (max-width:913px){
+  .carousel-inner {height: 300px !important;}
+  }

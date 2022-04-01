@@ -173,7 +173,8 @@ export const CheckOut = createAsyncThunk(
       
       }
      
-    )  
+      )
+   
     Swal.fire({
       icon: 'success',
       title:'تم ارسال الطلب',
@@ -184,7 +185,7 @@ export const CheckOut = createAsyncThunk(
       window.location = "/";
     })
      
-     return response.data
+     
     
   } catch (error) {
     const Toast = Swal.mixin({
@@ -201,7 +202,7 @@ export const CheckOut = createAsyncThunk(
     
     Toast.fire({
       icon: 'error',
-      title: 'الرمز غير صالح '
+      title: 'حدث خطأ  '
     })
   }}
 );

@@ -4,7 +4,7 @@ import { CheckOut } from '../../../redux/order/orderSlice';
 export default function () {
     const dispatch=useDispatch()
     const[value,setValue]=useState('');
-    console.log(String(value))
+  
     const handleSubmit=()=>{
         dispatch(CheckOut(JSON.parse(value)))
     }

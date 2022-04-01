@@ -27,3 +27,24 @@
     flex-wrap: wrap;
     justify-content: flex-start;
 }
+@media (max-width:1280px){
+    .card {width: 250px;}
+}
+@media (max-width:1024px){
+    .products-list {margin-right: 9px; }
+    
+}
+@media (max-width:913px){
+.card { width: 240px;}
+.card .card-span {font-size: 14px;}
+}
+@media (max-width:820px) {
+    .card {width: 200px;}
+    .card .card-span {font-size: 11px;}
+    .card .card-add-to-btn {width: 185px;}
+}
+@media (max-width:540px){
+   
+}
+@media(max-width: 415px){
+}

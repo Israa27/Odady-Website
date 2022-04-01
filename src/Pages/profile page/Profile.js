@@ -38,7 +38,7 @@ export default function Profile() {
   
     <Container className='profile-cart'>
        
-       <div className='nav-right' >
+       <div className='nav-right'style={{width:isOpen? '200px':'50px'}} >
            <div className='meun'style={{width:isOpen? '200px':'50px'}}>
                <ul>
                <li><i onClick={toggle}  className="fas fa-align-justify"></i><Link to =''className={isOpen ?'show':'hade'}>  ملف الشخصي </Link></li>

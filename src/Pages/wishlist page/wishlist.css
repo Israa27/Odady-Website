@@ -118,52 +118,31 @@
     margin-top: 10px;
     color: #555;
 }
-@media (max-width:1024px) {
-img-item img {
-    width: 70%;
-    height: 70%;
-}
-}
 
+@media (max-width:1280px){
+}
+@media (max-width:1024px){
+    .item-del {width: 100%;}
+    .qty-price { margin-left: 0px}
+    .item-del .btn-wishlist button {width: 181px;font-size: 12px;}
+    .item-del .text p{margin-bottom: 0px;}
+}
 @media (max-width:821px) {
-    .wishlist-contents {flex-direction: column ;justify-content: center;align-items: center;}
-    .wishlist-cart-items{width: 600px !important;margin-bottom: 30px}
-    .price {margin-bottom: 88px;}
-    .item-del .btn-wishlist button {margin-top: 60px;}
-    .total-amount-price {width: 590px ;}
+    .wishlist-cart-items {width: 90% !important;margin-right: 92px;}
+    .item-del .btn-wishlist button {width: 130px;font-size: 11px;}
 }
 @media (max-width:540px){
-
+    .content-wishlist {margin-right: -70px;}
+    .wishlist-carts{flex-direction: column;}
+    .item-del {flex-direction: column;align-items: center;}
+    .text {flex-direction: column;}
+    .item-del .btn-wishlist button {width: 145px;font-size: 12px;}
+    .item-del .text p {width: 100%;; margin-bottom: 10px;}
+    .qty-price {margin: 20px;align-self: self-start;}
 }
 @media(max-width: 415px){
-    .content-wishlist {justify-content: flex-end;}
-    .wishlist-carts {
-        width: 225px;
-        border-radius: 5px;
-        margin-top: 65px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center
-    }
-    .item-del {
-        display: flex !important;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    .img-item{height: 100px;margin-top: 60px;}
-    .img-item img{width: 88px;align-self: flex-end; margin-top: 60px;}
-    .text {display: flex;flex-direction: column;align-items: center;}
-    .wishlist-cart-empty h5 {font-size: 10px;}
+    .item-del .btn-wishlist {margin-right: 20px;}
+    .item-del .btn-wishlist button { width: 135px;}
     
-    .item-del .text p {font-size: smaller;width: fit-content;}
-    .btn-wishlist{display: flex;}
-    .btn-wishlist {display: flex;flex-direction: column;align-items: flex-start}
-
-    .item-del .btn-wishlist button {font-size: 12px;margin-top: 10px}
-
-    .qty-price {display: flex;flex-direction: column;align-items: stretch;margin-top: 18px;}
-    .qty { margin-top: 15px;}
-    .price {margin-top: 10px;}
-    .wishlist-carts::after {width: 80%;}
+    
 }

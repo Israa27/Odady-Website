@@ -8,7 +8,7 @@ export default function Coupon() {
   const[input,setInput]=useState('');
   const handleSubmit=(e)=>{
     e.preventDefault()
-    dispatch(PostCoupon(input))
+    dispatch(PostCoupon((input)))
     
   }
   return <Container>

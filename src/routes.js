@@ -1,6 +1,7 @@
 import React, {lazy} from 'react';
 
   const layouts=lazy(() => import('./layouts/Layouts'))
+  const checkout=lazy(()=>import('./Pages/checkout page/Checkout'))
   const profile=lazy(() => import('./Pages/profile page/Profile'))
   const NotFound=lazy(() => import('./Pages/not found page/NotFound'))
   export const routes = [
@@ -39,7 +40,7 @@ import React, {lazy} from 'react';
     {
       exact: true,
       path: '/checkout',
-      element:layouts
+      element:checkout
     },
     {
       exact: true,

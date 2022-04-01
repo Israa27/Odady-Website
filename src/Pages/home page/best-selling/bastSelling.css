@@ -37,7 +37,7 @@
     justify-content: center;
 }
 @media (max-width:913px){
-    .best-selling {    margin-bottom: 500px}
+    .best-selling {   margin-bottom: 673px;}
     .products{display: grid !important;grid-template-columns: 1fr 1fr;justify-items: center;;}
     .category-card {  width: 212px;}
     .category-card:nth-child(1){width: 665px;}
@@ -46,7 +46,7 @@
 @media(max-width: 415px){
     .header h5{font-size: 13px;}
     .header button {margin-top: 38px !important;}
-    .best-selling {margin-bottom: 1200px;}
+    .best-selling { margin-bottom: 1467px;}
     .products {grid-template-columns: 1fr;}
 
 }

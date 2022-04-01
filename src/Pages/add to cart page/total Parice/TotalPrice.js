@@ -24,7 +24,7 @@ export default function TotalPrice() {
 const handleSubmite=()=>{
    const id = coupon.coupon[0]?.id || []
    if(!id){
-    dispatch(CreateOrder())
+    dispatch(CreateOrder());
     navigate('/checkout')
    }
    else{

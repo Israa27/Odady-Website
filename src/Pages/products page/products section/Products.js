@@ -14,7 +14,7 @@ export default function ({currentProducts,filters}) {
      </div>
    ):(
     <div className='list-items'>
-       {filters.length===0 ?(
+       {filters.length===0 || filters.length===[]?(
             <div className='product-empty'>
               <img src={img} alt="card-empty"/>
               <h5>لا يوجد منتجات </h5 >

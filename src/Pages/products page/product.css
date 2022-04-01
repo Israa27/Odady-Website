@@ -6,7 +6,7 @@
     .list-items{justify-content: flex-start;}
 }
 @media (max-width:1024px){
-    .card {width: 290px !important;}
+    .flex-content{margin: 0px;}
 }
 @media (max-width:912px){
 }

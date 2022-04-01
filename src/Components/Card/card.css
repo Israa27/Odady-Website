@@ -64,10 +64,14 @@
     background-color: hsl(24, 100%, 68%);
 
 }
+@media (max-width:1280px){
+.card img {width: 220px;height: 170px;}
+.card .card-add-to-btn {width: 226px;}
+}
 @media (max-width:1024px){
   
     .card {width: 290px ;}
-    .card img{width: 100px;}
+    .card img{ width: 180px;;}
     .card .card-add-to-btn{width: 200px;}
 }
 
