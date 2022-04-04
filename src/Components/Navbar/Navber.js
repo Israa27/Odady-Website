@@ -60,7 +60,7 @@ const getUser=()=>{
     e.preventDefault();
     dispatch(searchProducts(keyword))
     navigate('/products')
-    //setKeyWord('')
+    setKeyWord('')
    
   }
   

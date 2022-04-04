@@ -1,7 +1,7 @@
 import React from 'react'
 import Lottie from 'react-lottie';
 import * as loading from './lf30_editor_iomxr4yy.json';
-
+import './spinner.css'
 const defaultOptions = {
   loop: true,
   autoplay: true,
