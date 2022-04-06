@@ -46,7 +46,7 @@ export default function Layouts() {
   const error=useSelector(state=> state.product);
 
   return<div>
-     {error.error=== 404 || error.status==="rejected" ?(
+     {error.error=== 404  ?(
      
         <NotFound />
      

@@ -1,9 +1,9 @@
 .category-content{
-    margin: -10px 176px 65px 159px;
+    margin: 50px 10%;
 }
 .carousal{
     cursor: grab;
-    overflow: hidden;
+    overflow: auto;
    
 }
 
@@ -11,10 +11,16 @@
     display: flex;
     justify-content: center;
 }
+.carousal::-webkit-scrollbar{
+  width: 0;
+}
+
+
 .carousal-item{
+    
     background-color: #ffffff;
     min-width: 230px;
-    height: 250px;
+    min-height: 250px;
     border-radius: 5px;
     margin: 8px;
     display: flex;
@@ -41,8 +47,8 @@
 
 
 .carousal-item img {
-    width: 81%;
-    height: 81%;
+    width:70%;
+    height: 70%;
     pointer-events: none;
 }
 .carousal-item button{
