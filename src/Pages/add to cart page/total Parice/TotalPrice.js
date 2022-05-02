@@ -1,5 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import './total.css';
+import Swal from 'sweetalert2'
 import { useSelector,useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { getCartItems } from '../../../redux/cartSlice';
@@ -14,7 +15,7 @@ export default function TotalPrice() {
   const totalPrice=cart.reduce((price,item)=>price+ item.item_qty * item.product.price,0) 
   const coupon=useSelector(state => state.order) 
   const discount= coupon.coupon[0] ?.discount_value || ''
-  
+  const orderEerror=useSelector((state)=> state.order.error);
   useEffect(()=>{
     dispatch(getCartItems())
 
@@ -23,14 +24,24 @@ export default function TotalPrice() {
  //create order   
 const handleSubmite=()=>{
    const id = coupon.coupon[0]?.id || []
-   if(!id){
+   if(orderEerror.status===404 ||orderEerror.status===500){
+    Swal.fire({
+      icon: 'error',
+      title: 'عذرا لا يمكن اكمال الطلب',
+      text: '  يرجى اضافة منتجات الى السلة قبل اكمال الطلب   ',
+      footer: '<a href="/">هل تريد الرجوع الى صفحة الرئيسة?</a>'
+      
+      }).then(function() {
+      window.location = "/";
+    })
+  
+  }
+  else{
     dispatch(CreateOrder());
-    navigate('/checkout')
-   }
-   else{
-    dispatch(CreateOrder(id))
-    navigate('/checkout')
-   }
+     navigate('/checkout')
+   
+  
+  }
 }
 
   useEffect(()=>{  

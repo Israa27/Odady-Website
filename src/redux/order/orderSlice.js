@@ -11,6 +11,7 @@ const initialState ={
   orderlist:[],
   orderInfo:localStorage.getItem('productInfo')?JSON.parse(localStorage.getItem('productInfo')):[],
   isLoading:false,
+  error:''
   
 
 }
@@ -69,7 +70,7 @@ export const PostCoupon = createAsyncThunk(
 // create order
 export const CreateOrder = createAsyncThunk(
   "order/create_order",
-  async (id)=> {
+  async (id,{ rejectWithValue })=> {
     
     try {
       const response = await axios.post(id ?`${BASE_URL}/orders/create-order`:`${BASE_URL}/orders/create-order?coupon_id=${id}`,{
@@ -95,7 +96,7 @@ export const CreateOrder = createAsyncThunk(
      return response.data
     
   } catch (error) {
-      console.log(error)
+    return rejectWithValue(error.response)
   }}
 );
 // get order 
@@ -246,7 +247,7 @@ export const orderSlice = createSlice({
 [CreateOrder.rejected]: (state, action) => {
     state.status = "rejected";
     state.isLoading=false
-    state.error='error'
+    state.error= action.payload
 },
 // get order list
 [getOrders.pending]: (state, action) => {
