@@ -1,5 +1,7 @@
 # odady-website
 
+An e-commerce site to display and sell electrical products from international companies. Users are allowed to add products to the shopping cart or delete them, as well as display all products, and a discount coupon can be used to complete the purchase process
+
 ## Technologies
 * I used Html,CSS,react for creating a website 
 * React-Router to navigate between pages
